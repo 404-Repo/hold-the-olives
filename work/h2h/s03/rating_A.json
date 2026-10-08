@@ -1,0 +1,22 @@
+{
+  "label": "Game A",
+  "persona": "indie",
+  "play_seconds": 541.9,
+  "fun": 7,
+  "nuance": 7,
+  "nuance_found": "Hold the Olives is a lane tower defense, but it has real trade-offs. Topping prices on a tower escalate (first topping 45, second 80, then 120), so spreading one topping across many towers beats stacking, and that changed how I bought between stage 1 and stage 2. I also lost stage 2 on the Jar boss because I hoarded 500+ coins while the boss ate my sandwich. On the retry I spent as I went, called waves early for the bonus, and won. The three active verbs are different and each fits specific enemies. Swat is a cooldown tap that builds combo. Flame lights a fixed burner on the lane where I time it for clusters or the boss. Rinse pushes a lane back. Stage 3 adds armoured Martini Knights that toothpicks bounce off, and the wave banner hints at a counter (Cheese Grater, locked until stage 4). That pushes me toward splash, pepper cloud and mustard slow. Calling a wave early earns bonus coins but risks overlap. 'Orders' like 'win with 6 towers or fewer' pull against spamming towers. Most of it is still the genre template, and the main loop of build, upgrade, wait is mild.",
+  "pace": 7,
+  "pace_word": "right",
+  "feedback_juice": 8,
+  "looks": 9,
+  "audio": "Looping stage music tracks that cut out and swap between waves, with a lot of sfx (thwip, pop, cannon, place, wave ding), a victory sting, and rising-pitch kill sounds on combos.",
+  "would_replay": "yes",
+  "would_quit_at_s": null,
+  "understood_goal_by_s": 12,
+  "furthest_progress": "Stage 3 (The Sink), wave 7 of 10, 17 of 20 bites left. Stage 1 cleared with 3 stars (12,640). Stage 2 (Stovetop) lost once to the Jar boss, then cleared with 3 stars (35,710, Jar beaten). Did not reach the Cheese Grater.",
+  "used_movement_assist": "not offered",
+  "control_trouble": "Tapping towers: the build panel sometimes opened late or dimmed the scene black, so some of my chained taps bought toppings I did not mean to. That is mostly my chained-act style, but the black dim while the panel opens looks like a rendering glitch.",
+  "best_moment": "Flaming the burner under a packed lane of kalamatas for a x35 combo, then watching the Jar boss lose its lid in phase two.",
+  "worst_moment": "Losing stage 2 to the Jar because nothing told me to spend my banked coins, then waiting through several slow 1x wave starts.",
+  "verdict": "This is a finished, good-looking tower defense with more systems than most jam games: escalating topping costs, three different active verbs, armoured enemies that need specific counters, a boss with a phase change, and orders that pull against each other. I changed my play after losing once, which is the thing I look for. It is still a genre template. Past the first stage I was mostly making small economic choices, and the end-of-wave idle time is a bit long at 1x. I'd keep it and replay it this week, but I'd stop short of a 9 for novelty."
+}

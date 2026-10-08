@@ -527,7 +527,7 @@ export class Game {
     if (this.state === 'running') {
       this.waveT += dt;
       while (this.spawnQ.length && this.spawnQ[0].t <= this.waveT) this.spawn(this.spawnQ.shift().type);
-      if (!this.spawnQ.length && this.countdown < 0 && this.wave < this.waveTotal) this.countdown = this.endless ? 12 : 14;
+      if (!this.spawnQ.length && this.countdown < 0 && this.wave < this.waveTotal) this.countdown = this.endless ? 10 : 11;
       if (!this.spawnQ.length && this.wave >= this.waveTotal && !this.enemies.some((e) => e.alive)) this.finish(true);
     }
     if (this.countdown > 0) {
@@ -537,6 +537,11 @@ export class Game {
     }
     for (const k in this.gcd) if (this.gcd[k] > 0) this.gcd[k] = Math.max(0, this.gcd[k] - dt);
     this.comboT -= dt; this.quipT -= dt;
+    this.spendT = (this.spendT || 0) - dt;
+    if (this.spendT <= 0 && this.crumbs >= 160 && !this.selected && this.state === 'running') {
+      this.spendT = 25;
+      this.ui.hint(this.towers.some((t) => t.layers.length < 3) ? `${this.crumbs} crumbs banked: tap a tower to stack a layer` : `${this.crumbs} crumbs banked: build another sandwich`, 3500);
+    }
     // slicks age
     for (const s of this.slicks) s.t -= dt;
     this.slicks = this.slicks.filter((s) => s.t > 0);
@@ -554,6 +559,7 @@ export class Game {
       if (e.shredT > 0) e.shredT -= dt;
       if (e.slowT > 0) e.slowT -= dt; else e.slowF = 1;
       let sp = e.speed * (e.slowT > 0 ? e.slowF : 1);
+      if (this.wave === 1 && e.d < this.length * 0.35) sp *= 1.8;   // testers: the first 15 s of walking olives was dead time
       if (e.stunT > 0) { e.stunT -= dt; sp = 0; }
       if (e.frozenT > 0) { e.frozenT -= dt; sp = 0; }
       for (const s of this.slicks) if (Math.abs(s.d - e.d) < 0.7 && !e.def.slick) { sp *= 1.4; break; }
@@ -570,6 +576,7 @@ export class Game {
           this.audio.sfx('lid'); e.spit = 0.8;
         }
       }
+      if (e.def.bites >= 3 && !e.warned && e.d > this.length - 7) { e.warned = true; this.ui.toast(`${e.def.name.toUpperCase()} is nearly at the sandwich! SWAT it!`, 2200); this.audio.sfx('nope'); this.fx.ring(e.pos.x, e.pos.z, 1.2, 0xff5040); }
       if (e.d >= this.length) this.leak(e);
     }
     this.enemies = this.enemies.filter((e) => e.alive);

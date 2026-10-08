@@ -1,0 +1,22 @@
+{
+  "label": "Game A",
+  "persona": "competitive",
+  "play_seconds": 541.2,
+  "fun": 6,
+  "nuance": 6,
+  "nuance_found": "Drift chains build an unbanked multiplier (x1.0 to x2.0, +822 NICE) that is only banked if you straighten out; a crash wiped 1,472 points. Smashing roadside props at speed (bollards, lights, trees) chains a SMASH multiplier that pays more than clean driving, and banked points add minutes to the night clock. So the real line is high speed, hold a drift as long as you dare, bank before a wall.",
+  "pace": 6,
+  "pace_word": "a bit slow",
+  "feedback_juice": 8,
+  "looks": 8,
+  "audio": "A generated ambience loop with sequenced music under everything, engine tone, impact noise and phone vibration on crashes; constant but never punchy.",
+  "would_replay": "maybe",
+  "would_quit_at_s": 130,
+  "understood_goal_by_s": 126,
+  "furthest_progress": "Score 10,988 at 541 s, 41 mi, in-game clock past 01:36 (night into rain), best drift payout +822 at x2.0, one 1,472-point crash loss.",
+  "used_movement_assist": "not offered",
+  "control_trouble": "Steering by a slider with 0.5 s looks meant I kept going off at the same right-hand bend; a real thumb would correct earlier. Respawn drops you at speed zero then the same bend again, which I count partly against the game.",
+  "best_moment": "Handbrake drift through a bend with a +563 then +822 multiplier flying and tyre smoke, just before it all got wiped.",
+  "worst_moment": "Wedged against a tree for 5 s of dead time, then the magnet reset (Back to the road countdown) over and over: the penalty is waiting, not skill.",
+  "verdict": "Looks great and sounds alive, and once I found the drift-bank-or-lose loop there is a real score game in it. But it hid that for 2 minutes (no clear goal until a text box at 126 s), the car is slow to build speed, and crashing means 5 to 8 seconds of dead waiting under a magnet. Fun when I am sliding at 80 mph, boring when I am stuck. Maybe I come back for the score; I would not tell friends yet."
+}

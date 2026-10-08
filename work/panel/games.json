@@ -38,18 +38,11 @@
   "src": "~/astrocade-game3/proto v9.3",
   "min": 540
  },
- "bloomfire": {
-  "url": "http://localhost:8799/",
-  "w": 844,
-  "h": 390,
-  "src": "~/astrocade-game5-snap (git worktree, frozen commit)",
-  "min": 540
- },
- "bloomfire2": {
-  "url": "http://localhost:8798/",
-  "w": 844,
-  "h": 390,
-  "src": "~/astrocade-game5-snap2 (worktree at the lens-choice commit)",
+ "olives": {
+  "url": "http://localhost:8814/",
+  "w": 390,
+  "h": 844,
+  "src": "~/astrocade-game6-snap (git worktree at ee4783e, frozen)",
   "min": 540
  }
 }
