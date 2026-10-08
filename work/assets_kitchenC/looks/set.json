@@ -1,0 +1,13 @@
+{ "size": 640, "scenes": [
+ { "title": "lunch", "el": 40, "az": 25, "dist": 26, "target": [0, 1.5, 0], "items": [
+   {"src":"game/assets/roast_chicken.js","x":0,"z":0},{"src":"game/assets/bread_basket.js","x":-6,"z":-3},{"src":"game/assets/salad_bowl.js","x":5,"z":-3},
+   {"src":"game/assets/wine_glass.js","x":-3,"z":-6},{"src":"game/assets/wine_glass.js","x":3,"z":-6.5},{"src":"game/assets/water_jug.js","x":7,"z":-7},{"src":"game/assets/flower_vase.js","x":0,"z":-8},
+   {"src":"game/assets/candle_holder.js","x":-7,"z":-8},{"src":"game/assets/fork.js","x":-6,"z":4},{"src":"game/assets/table_knife.js","x":-5,"z":4},{"src":"game/assets/napkin_folded.js","x":-8,"z":4},
+   {"src":"game/assets/head_pickle.js","x":3,"z":4},{"src":"game/assets/saucepan.js","x":7,"z":3},{"src":"game/assets/dining_chair.js","x":0,"z":-14} ]},
+ { "title": "bar", "el": 35, "az": -20, "dist": 26, "target": [0, 3, -2], "items": [
+   {"src":"game/assets/bar_shelf.js","x":0,"z":-9},{"src":"game/assets/table_lamp.js","x":-7,"z":-4},{"src":"game/assets/cocktail_shaker.js","x":-2,"z":-3},{"src":"game/assets/ice_bucket.js","x":1,"z":-3},
+   {"src":"game/assets/liquor_bottle.js","x":4,"z":-3.5},{"src":"game/assets/coupe_glass.js","x":-1,"z":1},{"src":"game/assets/cocktail_napkin.js","x":-1,"z":1},{"src":"game/assets/olive_bowl.js","x":2,"z":1.5},
+   {"src":"game/assets/head_pickle.js","x":5,"z":2},{"src":"game/assets/saucepan.js","x":-5,"z":2} ]},
+ { "title": "close", "el": 45, "az": 30, "dist": 9, "target": [0, 0.8, 0], "items": [
+   {"src":"game/assets/olive_bowl.js","x":-1.5,"z":0},{"src":"game/assets/coupe_glass.js","x":0.8,"z":-0.5},{"src":"game/assets/cocktail_napkin.js","x":0.8,"z":-0.5},{"src":"game/assets/head_pickle.js","x":2.5,"z":1},
+   {"src":"game/assets/fork.js","x":-3,"z":1},{"src":"game/assets/table_knife.js","x":-3.6,"z":1},{"src":"game/assets/wine_glass.js","x":-0.5,"z":-3},{"src":"game/assets/liquor_bottle.js","x":2.5,"z":-3} ]} ]}

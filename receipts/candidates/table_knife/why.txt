@@ -1,0 +1,1 @@
+pick table_knife_a: curved blade outline with a round tip and a chunky bevelled handle (edges rounded after first look). b plain box blade, c BROKEN: blade extruded back into the handle (shape y maps to -z), 148% over height.

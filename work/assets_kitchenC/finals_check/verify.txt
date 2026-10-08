@@ -1,0 +1,23 @@
+ok    bar_shelf               10012 tris  91 meshes  12x16x3m  [flat by declaration: back]
+ok    bread_basket             5004 tris  27 meshes  3.744x1.2x3.139m
+ok    candle_holder            2196 tris  8 meshes  2x3.4x2m
+ok    cocktail_napkin          1372 tris  2 meshes  1.494x0.05x1.494m
+ok    cocktail_shaker          1560 tris  5 meshes  1.66x3x1.66m
+ok    coupe_glass              2144 tris  3 meshes  1.633x1.8x1.601m
+ok    dining_chair             3464 tris  21 meshes  4.472x10x4.984m
+ok    flower_vase              4918 tris  48 meshes  2.825x4.2x2.985m
+ok    fork                     1440 tris  7 meshes  0.341x0.117x2m
+ok    ice_bucket               2180 tris  26 meshes  2.373x2.6x2.101m
+ok    liquor_bottle            1984 tris  4 meshes  2.32x4.4x2.32m
+ok    napkin_folded            1560 tris  5 meshes  1.071x0.5x1.643m
+ok    olive_bowl               2524 tris  23 meshes  0.946x0.7x0.946m
+ok    roast_chicken            5176 tris  94 meshes  5.244x2.6x7.416m
+ok    salad_bowl               3820 tris  51 meshes  2.286x1.2x2.286m
+ok    table_knife               664 tris  3 meshes  0.337x0.125x2.3m
+ok    table_lamp               1724 tris  9 meshes  5.086x9x5.086m
+ok    water_jug                2848 tris  33 meshes  3.034x3x2.357m
+ok    wine_glass               1568 tris  2 meshes  1.317x2.2x1.317m
+
+19/19 clean
+sheet:  /Users/atlas/astrocade-game6/work/assets_kitchenC/finals_check/_verify/sheet.png
+report: /Users/atlas/astrocade-game6/work/assets_kitchenC/finals_check/_verify/report.json
