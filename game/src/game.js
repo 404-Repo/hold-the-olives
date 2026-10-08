@@ -277,8 +277,9 @@ export class Game {
       return o;
     };
     put('layer_bread');
+    if (!t.layers.length) put('layer_lettuce', false);   // a sandwich from the first crumb: the critic read bread plus crossbow as a placeholder
     t.layers.forEach((l, i) => put(LAYERS[l].model, dropped === i));
-    if (t.layers.length) put('layer_bread', dropped !== null);
+    put('layer_bread', t.layers.length > 0 && dropped !== null);
     t.head = put(WEAPONS[t.weapon].head, false);
     t.headY = t.head.position.y;
     t.height = y * TS;

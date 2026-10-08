@@ -240,7 +240,7 @@ export const QUIPS = {
   bottle: ['Extra virgin RAGE!', 'Cold pressed. Hot tempered.', 'Slick moves!'],
   martini: ['I am the garnish now.', 'Last call, sandwich!', 'Stirred. Very stirred.'],
 };
-export const NEXT_NAMES = { green: 'green', kalamata: 'kalamata', stuffed: 'stuffed', pimento: 'pimento', ring: 'ring', knight: 'knight', brute: 'brute', greaser: 'greaser', jar: 'THE JAR', bottle: 'THE BOTTLE', martini: 'THE MARTINI' };
+export const NEXT_NAMES = { green: 'green olives', kalamata: 'kalamatas', stuffed: 'stuffed olives', pimento: 'pimentos', ring: 'olive rings', knight: 'knights', brute: 'brutes', greaser: 'greasers', jar: 'THE JAR', bottle: 'THE BOTTLE', martini: 'THE MARTINI' };
 
 // Orders: three optional challenges per stage, the reason to replay a cleared stage.
 // Each checks the end-of-stage result r (and the counters it carries).

@@ -40,8 +40,8 @@ function surfMat(name, repeat, opts = {}) {
 // Light and colour for each time of day.
 export const LOOKS = {
   morning:   { bg: 0x3a2a1e, sky: 0xffe8c8, gnd: 0x6b4a30, hemi: 0.62, sun: 0xffd090, sunI: 4.2, sunDir: [-0.9, 0.95, -0.45], exp: 0.92, fog: 0x3a2a1e, window: 0xfff3d6 },
-  stove:     { bg: 0x2e2620, sky: 0xffe6c4, gnd: 0x5a4030, hemi: 0.6, sun: 0xffd29a, sunI: 4.0, sunDir: [-0.8, 1.0, 0.3], exp: 0.95, fog: 0x2e2620, window: 0xfff6e0 },
-  noon:      { bg: 0x2c302e, sky: 0xf4f8ff, gnd: 0x5a5448, hemi: 0.62, sun: 0xfff0d8, sunI: 3.8, sunDir: [-0.6, 1.2, -0.5], exp: 0.92, fog: 0x2c302e, window: 0xffffff },
+  stove:     { bg: 0x2e2620, sky: 0xffdcb0, gnd: 0x5a4030, hemi: 0.58, sun: 0xffc880, sunI: 4.3, sunDir: [-0.8, 0.95, 0.3], exp: 0.95, fog: 0x2e2620, window: 0xfff0d6 },
+  noon:      { bg: 0x2c2a26, sky: 0xffe8c8, gnd: 0x5a4a38, hemi: 0.6, sun: 0xffd8a0, sunI: 4.2, sunDir: [-0.7, 1.0, -0.5], exp: 0.92, fog: 0x2c2a26, window: 0xfff4e0 },
   afternoon: { bg: 0x3a2618, sky: 0xffe0b0, gnd: 0x5a3a24, hemi: 0.55, sun: 0xffbf78, sunI: 4.4, sunDir: [1.0, 0.85, -0.6], exp: 0.92, fog: 0x3a2618, window: 0xffe2b0 },
   evening:   { bg: 0x2a1c22, sky: 0x8a6a90, gnd: 0x3a2418, hemi: 0.55, sun: 0xffb070, sunI: 1.3, sunDir: [0.8, 1.2, 0.6], exp: 1.15, fog: 0x2a1c22, window: 0x5a4a8a, lamps: true },
   night:     { bg: 0x0d1220, sky: 0x5a74b0, gnd: 0x1a1410, hemi: 0.22, sun: 0x9fb8ff, sunI: 0.9, sunDir: [1.0, 0.9, 0.9], exp: 1.1, fog: 0x0d1220, window: 0x1d2a4a, fridge: true },
@@ -132,7 +132,7 @@ function flourTexture(style) {
   const W = 256, H = 512;
   const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
   const c = cv.getContext('2d');
-  const col = { flour: [250, 244, 230], runner: [242, 236, 222], wet: [150, 190, 210], sugar: [252, 250, 246], oil: [214, 150, 40] }[style] || [250, 244, 230];
+  const col = { shadow: [40, 26, 14], flour: [250, 244, 230], runner: [242, 236, 222], wet: [150, 190, 210], sugar: [252, 250, 246], oil: [214, 150, 40] }[style] || [250, 244, 230];
   const img = c.createImageData(W, H);
   let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
   const n1 = new Float32Array(H); for (let y = 0; y < H; y++) n1[y] = Math.sin(y * 0.05) * 0.06 + Math.sin(y * 0.13 + 1) * 0.04;
@@ -140,14 +140,16 @@ function flourTexture(style) {
     const u = x / W;
     let edge = Math.min(u, 1 - u) * 2;          // 0 at edges, 1 centre
     edge += n1[y] + (rnd() - 0.5) * 0.22;
-    let a = Math.max(0, Math.min(1, (edge - 0.12) / 0.35));
+    let a = Math.max(0, Math.min(1, (edge - 0.1) / 0.12));   // a crisp poured edge, not an airbrushed one
+    const rim = edge > 0.1 && edge < 0.3 ? 1 : 0;
     if (style === 'runner') a = edge > 0.1 ? 1 : 0;
-    const g = (rnd() - 0.5) * 18;
+    const g = (rnd() - 0.5) * 18 - (style !== 'runner' && style !== 'shadow' && rim ? 14 : 0);   // flour heaps at the edges and catches shadow
     const i = (y * W + x) * 4;
-    img.data[i] = col[0] + g; img.data[i + 1] = col[1] + g; img.data[i + 2] = col[2] + g; img.data[i + 3] = a * (style === 'wet' ? 150 : style === 'oil' ? 200 : 235);
+    img.data[i] = col[0] + g; img.data[i + 1] = col[1] + g; img.data[i + 2] = col[2] + g; img.data[i + 3] = style === 'shadow' ? Math.max(0, Math.min(1, edge * 1.6)) * 70 : a * (style === 'wet' ? 150 : style === 'oil' ? 200 : 235);
   }
   c.putImageData(img, 0, 0);
-  if (style === 'runner') {
+  if (style === 'shadow') { /* just the soft dark band */ }
+  else if (style === 'runner') {
     // a woven linen runner: two sage stripes near each edge
     c.fillStyle = 'rgba(80,140,120,0.85)'; c.fillRect(W * 0.12, 0, W * 0.05, H); c.fillRect(W * 0.83, 0, W * 0.05, H);
     c.fillStyle = 'rgba(200,80,60,0.6)'; c.fillRect(W * 0.2, 0, W * 0.02, H); c.fillRect(W * 0.78, 0, W * 0.02, H);
@@ -307,7 +309,8 @@ export async function buildWorld(scene, stage, renderer) {
   const curve = new THREE.CatmullRomCurve3(pts, false, 'centripetal', 0.5);
   const length = curve.getLength();
   const style = isTable ? 'runner' : isSink ? 'wet' : isBar ? 'sugar' : isStove ? 'oil' : 'flour';
-  root.add(pathRibbon(stage, curve, length, isTable ? 1.7 : 1.5, style));
+  const shadowRib = pathRibbon(stage, curve, length, isTable ? 1.95 : 1.8, 'shadow'); shadowRib.position.y -= 0.004; shadowRib.renderOrder = 0; root.add(shadowRib);
+  const rib = pathRibbon(stage, curve, length, isTable ? 1.7 : 1.5, style); rib.renderOrder = 2; root.add(rib);
 
   // dressing: every object is a 404 asset; anything not made yet is skipped
   const dressing = new THREE.Group();
