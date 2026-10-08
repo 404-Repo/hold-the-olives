@@ -36,7 +36,7 @@ export const OLIVES = {
   knight:  { name: 'Martini Knight',model: 'olive_knight',   hp: 70,  speed: 0.8,  bites: 2, reward: 10, h: 0.9,  armor: 0.5 },
   brute:   { name: 'Castelvetrano', model: 'olive_brute',    hp: 240, speed: 0.55, bites: 3, reward: 18, h: 0.55 },
   greaser: { name: 'Greaser',       model: 'olive_greaser',  hp: 48,  speed: 0.95, bites: 1, reward: 6,  h: 0.36, slick: true },
-  jar:     { name: 'THE JAR',       model: 'boss_jar',       hp: 1700, speed: 0.32, bites: 8, reward: 150, h: 2.4, boss: true, spawn: 'green', spawnEvery: 3.5 },
+  jar:     { name: 'THE JAR',       model: 'boss_jar',       hp: 1300, speed: 0.3, bites: 6, reward: 150, h: 2.4, boss: true, spawn: 'green', spawnEvery: 4.5 },
   bottle:  { name: 'THE OIL BOTTLE',model: 'boss_oil_bottle',hp: 2300, speed: 0.3,  bites: 8, reward: 220, h: 3.2, boss: true, slick: true, spawn: 'greaser', spawnEvery: 5 },
   martini: { name: 'THE MARTINI',   model: 'boss_martini',   hp: 4200, speed: 0.28, bites: 15, reward: 400, h: 3.6, boss: true, spawn: 'knight', spawnEvery: 4.5 },
 };
