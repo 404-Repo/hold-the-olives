@@ -1,7 +1,7 @@
 import { createServer } from 'http'; import fs from 'fs'; import path from 'path'; import { createRequire } from 'module';
 const puppeteer = createRequire('/Users/atlas/404-game-recipe/package.json')('puppeteer');
 const ROOT = '/Users/atlas/astrocade-game6/game';
-const html = `<!doctype html><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"}}</script>
+const html = `<!doctype html><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
 <script type="module">import * as THREE from 'three'; import { ASSET } from '/assetlib.js';
 const s = await ASSET('./assets/club_sandwich.js', { height: 3.0, keepHierarchy: true });
 const L = s.userData.layers || {}; const keys = Object.keys(L).sort();

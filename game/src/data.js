@@ -33,12 +33,12 @@ export const OLIVES = {
   stuffed: { name: 'Stuffed Olive', model: 'olive_stuffed',  hp: 42,  speed: 0.9,  bites: 1, reward: 5,  h: 0.36, split: 'pimento' },
   pimento: { name: 'Pimento',       model: 'pimento_runner', hp: 12,  speed: 1.8,  bites: 1, reward: 2,  h: 0.18 },
   ring:    { name: 'Olive Ring',    model: 'olive_ring',     hp: 22,  speed: 2.1,  bites: 1, reward: 4,  h: 0.32, roll: true, dodge: 0.25 },
-  knight:  { name: 'Martini Knight',model: 'olive_knight',   hp: 70,  speed: 0.8,  bites: 2, reward: 9,  h: 0.9,  armor: 0.6 },
+  knight:  { name: 'Martini Knight',model: 'olive_knight',   hp: 70,  speed: 0.8,  bites: 2, reward: 10, h: 0.9,  armor: 0.5 },
   brute:   { name: 'Castelvetrano', model: 'olive_brute',    hp: 240, speed: 0.55, bites: 3, reward: 18, h: 0.55 },
   greaser: { name: 'Greaser',       model: 'olive_greaser',  hp: 48,  speed: 0.95, bites: 1, reward: 6,  h: 0.36, slick: true },
-  jar:     { name: 'THE JAR',       model: 'boss_jar',       hp: 2200, speed: 0.32, bites: 12, reward: 150, h: 2.4, boss: true, spawn: 'green', spawnEvery: 3.5 },
-  bottle:  { name: 'THE OIL BOTTLE',model: 'boss_oil_bottle',hp: 3600, speed: 0.3,  bites: 14, reward: 220, h: 3.2, boss: true, slick: true, spawn: 'greaser', spawnEvery: 5 },
-  martini: { name: 'THE MARTINI',   model: 'boss_martini',   hp: 5200, speed: 0.28, bites: 20, reward: 400, h: 3.6, boss: true, spawn: 'knight', spawnEvery: 4.5 },
+  jar:     { name: 'THE JAR',       model: 'boss_jar',       hp: 1700, speed: 0.32, bites: 8, reward: 150, h: 2.4, boss: true, spawn: 'green', spawnEvery: 3.5 },
+  bottle:  { name: 'THE OIL BOTTLE',model: 'boss_oil_bottle',hp: 2800, speed: 0.3,  bites: 10, reward: 220, h: 3.2, boss: true, slick: true, spawn: 'greaser', spawnEvery: 5 },
+  martini: { name: 'THE MARTINI',   model: 'boss_martini',   hp: 4200, speed: 0.28, bites: 15, reward: 400, h: 3.6, boss: true, spawn: 'knight', spawnEvery: 4.5 },
 };
 
 // First time an olive type appears, the game introduces it.
@@ -89,7 +89,7 @@ export const STAGES = [
     burners: [[0.2, -16.4], [3.9, -8.4], [-3.7, -3.2]],
     pads: [[2.2, -18.8], [-2.0, -17.6], [-1.6, -13.2], [-2.4, -11.6], [1.6, -12.4], [0.8, -8.0], [6.0, -11.0], [2.2, -7.2], [-1.2, -7.0], [-1.6, -2.4], [-5.8, -7.4], [1.0, -2.4], [-5.4, -0.2], [2.6, -14.8]],
     sandwich: [0.4, 2.0],
-    start: 200, lives: 20,
+    start: 230, lives: 20,
     gadget: 'burner',
     waves: [
       [W('green', 12, 1.0)],
@@ -114,7 +114,7 @@ export const STAGES = [
     tap: [0.4, -10.8],
     pads: [[-2.4, -18.0], [-0.4, -16.6], [0.0, -11.4], [2.0, -11.4], [6.0, -11.0], [2.0, -5.6], [-1.0, -5.6], [-0.6, -10.2], [-5.8, -9.4], [0.4, -1.2], [-1.4, -0.8], [5.6, -3.6], [2.6, -17.0], [-2.4, -11.0]],
     sandwich: [0.4, 2.0],
-    start: 220, lives: 20,
+    start: 270, lives: 20,
     gadget: 'tap',
     waves: [
       [W('green', 14, 0.8)],
@@ -224,7 +224,7 @@ for (const k in WEAPONS) WEAPONS[k].range *= 0.9;
 
 export function hpScale(stageNum, wave) {
   if (typeof stageNum !== 'number') return 1 + 0.085 * wave + 0.002 * wave * wave;   // endless: keeps climbing
-  return (1 + 0.2 * (stageNum - 1)) * (1 + 0.09 * wave);
+  return (1 + 0.13 * (stageNum - 1)) * (1 + 0.085 * wave);
 }
 
 // Things olives say. Humour is a feature.

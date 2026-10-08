@@ -246,7 +246,11 @@ export async function buildWorld(scene, stage, renderer) {
     win.rotation.y = Math.PI / 2; win.position.set(-7.36, 3.3, -9.6); root.add(win);
     // upper cabinets: cream boxes on the wall, 5 m up
     const cab = new THREE.MeshStandardMaterial({ color: 0xf2ead8, roughness: 0.55 });
-    for (const [z0, z1] of [[-25.4, -15.0]]) {
+    if (hasAsset('upper_cabinet')) {
+      for (let z = -23.4; z <= -15.5; z += 4) { const c = await model('upper_cabinet', { height: 7 }); c.rotation.y = Math.PI / 2; c.position.set(-7.4 + 1.6, 5.4, z); root.add(c); }
+    }
+    if (hasAsset('window_frame')) { const w = await model('window_frame', { height: 5 }); w.rotation.y = Math.PI / 2; w.position.set(-7.4 + 0.3, 0.85, -9.6); w.traverse((m) => { if (m.isMesh) m.castShadow = true; }); root.add(w); }
+    for (const [z0, z1] of hasAsset('upper_cabinet') ? [] : [[-25.4, -15.0]]) {
       const b = new THREE.Mesh(new RoundedBoxGeometry(3.2, 7, z1 - z0, 2, 0.12), cab);
       b.position.set(-5.8, 9.5, (z0 + z1) / 2); root.add(b);
       for (let z = z0 + 2.6; z < z1 - 1; z += 2.6) { const hnd = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.9, 8), new THREE.MeshStandardMaterial({ color: 0xc8773e, metalness: 0.7, roughness: 0.35 })); hnd.position.set(-4.15, 6.6, z); root.add(hnd); }
