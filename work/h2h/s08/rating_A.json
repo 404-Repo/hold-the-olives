@@ -1,0 +1,22 @@
+{
+ "label": "Game A",
+ "persona": "indie",
+ "play_seconds": 541.7,
+ "fun": 7,
+ "nuance": 7,
+ "nuance_found": "One verb (the tide lantern) with real opposing demands: the causeway needs low sea, the well and boat-floating need high sea, crossing deep water drowns you, the Needles need a narrow band that shifts per arch (too low hits reefs, too high hits the arch with the mast), crabs own the sand at low water. The Undertow boss is a three-phase tide pattern (lure high, strand low, slam high, shine) that gets warier each round. Tam and Nell shout the hints, so the system is taught by feedback, not guessed.",
+ "pace": 7,
+ "pace_word": "right",
+ "feedback_juice": 7,
+ "looks": 8,
+ "audio": "Looping wind/ambience, a harbour/flats/boss music change per zone, a tide-creak tone on every sea move, thumps when scraping, rising chimes on objectives.",
+ "would_replay": "yes",
+ "would_quit_at_s": null,
+ "understood_goal_by_s": 25,
+ "furthest_progress": "Completed the full main line at ~530 s: harbour, well shard, Tam's boat, Shellflats wreck lens, Needles by boat, stepping stones to the Stack, beat the Undertow in 3 phases, lit the lamp, got the end card (9 min, 82 m of sea moved, 11 knocks, 0 of 5 lost things found). Never found Marta's pots.",
+ "used_movement_assist": "yes, about 20 times",
+ "control_trouble": "Needles minigame needed lantern held with a finger and small moves; camera occluded by a plank at the lighthouse door; several long black screens I could not read.",
+ "best_moment": "The Undertow: luring the giant hermit crab in on high water, stranding it, then slamming the sea back to lift its boat shell.",
+ "worst_moment": "Hero respawn at 34,-40 got stuck in a drown loop with a black screen for about a minute when I raised the sea too high at the wreck, and the side-quest pots never pointed me anywhere.",
+ "verdict": "This is the first one in a while where the one verb has teeth. Every place asks the tide to be somewhere different, and the lantern is also your fail state, so I was constantly trading reach against safety. The Needles and the Undertow actually changed how I played, and the NPCs teach it without a tutorial wall. It looks and sounds finished on a phone. Faults: black frames on transitions, a drown-respawn soft-lock, the pots side quest invisible, and the main line is short (about 9 min). I would play it again and show friends."
+}

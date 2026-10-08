@@ -155,7 +155,11 @@ export class UI {
       }
       const pr = { first: 'FIRST', strong: 'STRONGEST', close: 'CLOSEST' };
       mk('', null, `Aim: ${pr[t.priority]}`, 'tap to change', null, () => { t.priority = t.priority === 'first' ? 'strong' : t.priority === 'strong' ? 'close' : 'first'; this.renderMenu(g, pad); });
-      mk('sell', null, 'Sell', 'eat it', `+${Math.floor(t.spent * SELL_BACK)}`, () => g.sell(t));
+      const armed = this._sellArm === t;
+      mk('sell', null, armed ? 'Sure?' : 'Sell', armed ? 'tap again to eat it' : 'eat it', `+${Math.floor(t.spent * SELL_BACK)}`, () => {
+        if (this._sellArm === t) { this._sellArm = null; g.sell(t); }
+        else { this._sellArm = t; this.renderMenu(g, pad); clearTimeout(this._sellT); this._sellT = setTimeout(() => { this._sellArm = null; if (this.menuPad === pad) this.renderMenu(g, pad, true); }, 2500); }
+      });
     }
   }
 }
