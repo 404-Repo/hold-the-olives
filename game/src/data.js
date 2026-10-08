@@ -226,3 +226,48 @@ export function hpScale(stageNum, wave) {
   const s = typeof stageNum === 'number' ? stageNum : 3;
   return (1 + 0.22 * (s - 1)) * (1 + 0.075 * wave);
 }
+
+// Things olives say. Humour is a feature.
+export const QUIPS = {
+  spawn: ['LUNCH!', 'Charge!', 'For the jar!', 'Smells like bacon...', 'Pit stop!', 'Brine time!', 'Olive got this', 'Is that turkey?', 'Onward, brothers!', 'No pits, no glory'],
+  kalamata: ['Too quick!', 'Zoom', 'Catch me!'],
+  knight: ['En garde!', 'Have at thee!', 'My pick is mightier'],
+  brute: ['MOVE.', 'Hungry.', 'Big olive coming through'],
+  pimento: ['I am FREE!', 'Eek!', 'Run!'],
+  bite: ['Nom!', 'Crunchy!', 'Needs mustard', 'Mmm, turkey', 'Toasty!'],
+  pop: ['Pitted!', 'Oof', 'Not the face!', 'Tapenade...', 'Avenge me!'],
+  jar: ['WHO OPENED ME?', 'Brine and punishment!', 'Back in the jar? NEVER!'],
+  bottle: ['Extra virgin RAGE!', 'Cold pressed. Hot tempered.', 'Slick moves!'],
+  martini: ['I am the garnish now.', 'Last call, sandwich!', 'Stirred. Very stirred.'],
+};
+export const NEXT_NAMES = { green: 'green', kalamata: 'kalamata', stuffed: 'stuffed', pimento: 'pimento', ring: 'ring', knight: 'knight', brute: 'brute', greaser: 'greaser', jar: 'THE JAR', bottle: 'THE BOTTLE', martini: 'THE MARTINI' };
+
+// Orders: three optional challenges per stage, the reason to replay a cleared stage.
+// Each checks the end-of-stage result r (and the counters it carries).
+export const ORDERS = {
+  board: [
+    { id: 'club', text: 'Build a CLUB sandwich', ok: (r) => r.clubs >= 1 },
+    { id: 'combo15', text: 'Pop a combo of 15', ok: (r) => r.combo >= 15 },
+    { id: 'early3', text: 'Call 3 waves early', ok: (r) => r.earlyCalls >= 3 },
+  ],
+  stove: [
+    { id: 'roast', text: 'Roast 15 olives on a burner', ok: (r) => (r.by.fire || 0) >= 15 },
+    { id: 'jar', text: 'Beat THE JAR', ok: (r) => r.bosses >= 1 },
+    { id: 'lean', text: 'Win with 6 towers or fewer', ok: (r) => r.won && r.maxTowers <= 6 },
+  ],
+  sink: [
+    { id: 'swat', text: 'Swat 20 olives', ok: (r) => (r.by.swat || 0) >= 20 },
+    { id: 'knights', text: 'Shred and pop 15 knights', ok: (r) => (r.kinds.knight || 0) >= 15 },
+    { id: 'clean', text: 'Lose no bites', ok: (r) => r.won && r.lives === r.maxLives },
+  ],
+  lunch: [
+    { id: 'clubs3', text: 'Build 3 CLUBs', ok: (r) => r.clubs >= 3 },
+    { id: 'bottle', text: 'Beat THE OIL BOTTLE', ok: (r) => r.bosses >= 1 },
+    { id: 'burn', text: 'Pop 40 olives with bacon burn', ok: (r) => (r.by.burn || 0) >= 40 },
+  ],
+  bar: [
+    { id: 'martini', text: 'Beat THE MARTINI', ok: (r) => r.bosses >= 2 },
+    { id: 'toast', text: 'Pop 60 olives with toast', ok: (r) => (r.by.toast || 0) >= 60 },
+    { id: 'score', text: 'Score 60,000', ok: (r) => r.score >= 60000 },
+  ],
+};

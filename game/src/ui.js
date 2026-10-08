@@ -35,8 +35,8 @@ export class UI {
     const b = $('b-next'), small = $('next-bonus');
     let label = 'NEXT WAVE', sub = '';
     if (g.over) { label = '...'; }
-    else if (g.state === 'prep') { label = g.wave === 0 ? 'START' : 'NEXT WAVE'; sub = 'olives are waiting'; }
-    else if (g.countdown > 0) { label = `WAVE ${g.wave + 1} IN ${Math.ceil(g.countdown)}`; sub = `tap now: +${Math.ceil(g.countdown * 1.5)} crumbs`; }
+    else if (g.state === 'prep') { label = g.wave === 0 ? 'START' : 'NEXT WAVE'; sub = g.nextPreview(); }
+    else if (g.countdown > 0) { label = `WAVE ${g.wave + 1} IN ${Math.ceil(g.countdown)}`; sub = `now: +${Math.ceil(g.countdown * 1.5)} crumbs | ${g.nextPreview()}`; }
     else if (g.wave >= g.waveTotal) { label = g.endless ? 'HOLD ON' : 'LAST WAVE'; sub = `${g.enemies.length} olives left`; }
     else { label = `WAVE ${g.wave}`; sub = `${g.enemies.length + g.spawnQ.length} olives`; }
     if (b.dataset.l !== label) { b.firstChild.nodeValue = label; b.dataset.l = label; }

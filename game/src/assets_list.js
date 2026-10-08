@@ -9,6 +9,7 @@ export const TEX = [
   'table_linen',
   'tile_floor',
   'walnut',
+  'window_view',
 ];
 export const AUDIO = [
   'music_boss',

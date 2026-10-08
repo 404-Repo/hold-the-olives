@@ -5,13 +5,13 @@ import { UI } from './ui.js';
 import { Audio } from './audio.js';
 import { FX } from './fx.js';
 import { model, snapshot, hasAsset } from './models.js';
-import { STAGES, ENDLESS, WEAPONS, WEAPON_ORDER, LAYERS, LAYER_ORDER } from './data.js';
+import { STAGES, ENDLESS, WEAPONS, WEAPON_ORDER, LAYERS, LAYER_ORDER, ORDERS } from './data.js';
 
 const $ = (id) => document.getElementById(id);
 
 // ---------- save
 const SAVE_KEY = 'hold-the-olives-v1';
-let save = { stars: {}, best: {}, reached: 1, seen: [], sound: true, endless: { wave: 0, score: 0 } };
+let save = { stars: {}, best: {}, reached: 1, seen: [], sound: true, endless: { wave: 0, score: 0 }, orders: {} };
 try { const s = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); if (s) save = { ...save, ...s }; } catch {}
 const persist = () => { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch {} };
 
@@ -116,13 +116,20 @@ function onEnd(r) {
     }
     if (r.score > (save.best[id] || 0)) { best = !!save.best[id] || r.won; save.best[id] = r.score; }
   }
+  // orders
+  const ord = endless ? [] : (ORDERS[id] || []);
+  const doneBefore = new Set(save.orders[id] || []);
+  const doneNow = ord.filter((o) => { try { return o.ok(r); } catch { return false; } }).map((o) => o.id);
+  save.orders[id] = [...new Set([...doneBefore, ...doneNow])];
   persist();
   ui.show('hud', false); game.deselect();
   $('end-title').textContent = endless ? `LASTED ${r.wave - (r.won ? 0 : 1)} WAVES` : r.won ? (r.stars === 3 ? 'NOT ONE OLIVE GOT A BITE' : 'LUNCH IS SAVED') : 'LUNCH WAS EATEN';
   const st = $('end-stars'); st.innerHTML = '';
   if (!endless) for (let i = 0; i < 3; i++) { const s = document.createElement('span'); s.textContent = '★'; if (i >= r.stars) s.className = 'off'; st.append(s); }
   const mm = Math.floor(r.time / 60), ss = Math.floor(r.time % 60).toString().padStart(2, '0');
-  $('end-stats').innerHTML = `score <b>${r.score.toLocaleString('en-US')}</b><br>olives popped <b>${r.kills}</b> &nbsp; bites left <b>${r.lives}</b><br>clubs built <b>${r.clubs}</b> &nbsp; early bonus <b>${r.early}</b> &nbsp; time <b>${mm}:${ss}</b>`;
+  $('end-stats').innerHTML = `score <b>${r.score.toLocaleString('en-US')}</b><br>olives popped <b>${r.kills}</b> &nbsp; bites left <b>${r.lives}</b><br>best combo <b>x${r.combo}</b> &nbsp; clubs built <b>${r.clubs}</b> &nbsp; early bonus <b>${r.early}</b> &nbsp; time <b>${mm}:${ss}</b>`;
+  const ordHtml = ord.map((o) => { const now = doneNow.includes(o.id), before = doneBefore.has(o.id); return `<div class="ord ${now || before ? 'done' : ''}">${now || before ? '\u2714' : '\u25cb'} ${o.text}${now && !before ? ' <b>NEW!</b>' : ''}</div>`; }).join('');
+  $('end-stats').innerHTML += ord.length ? `<div class="orders"><div class="oh">ORDERS</div>${ordHtml}</div>` : '';
   $('end-best').textContent = best ? 'NEW BEST!' : endless ? `best: wave ${save.endless.wave}, ${save.endless.score.toLocaleString('en-US')}` : save.best[id] ? `best ${save.best[id].toLocaleString('en-US')}` : '';
   const next = !endless && r.won && STAGES[stage.num];
   $('b-endnext').textContent = next ? `NEXT: ${next.name.toUpperCase()}` : r.won && !endless && stage.num === 5 ? 'MIDNIGHT SNACK' : 'TRY AGAIN';
@@ -143,7 +150,8 @@ function showSelect() {
     b.innerHTML = `<div class="num">${endless ? '∞' : st.num}</div><div><div class="nm"></div><div class="ds"></div><div class="bs"></div></div><div class="sr"></div>`;
     b.querySelector('.nm').textContent = st.name;
     b.querySelector('.ds').textContent = locked ? (endless ? 'Clear the Cutting Board to unlock' : 'Clear the stage before it') : `${st.time}. ${st.blurb}`;
-    b.querySelector('.bs').textContent = best;
+    const od = endless ? 0 : (save.orders[id] || []).length;
+    b.querySelector('.bs').textContent = [best, endless ? '' : `orders ${od}/3`].filter(Boolean).join('  |  ');
     if (!endless) b.querySelector('.sr').innerHTML = [0, 1, 2].map((i) => `<span class="${i < stars ? '' : 'off'}">★</span>`).join('');
     b.onclick = () => { if (locked) { audio.sfx('nope'); return; } audio.sfx('tick'); startStage(st, endless); };
     box.append(b);

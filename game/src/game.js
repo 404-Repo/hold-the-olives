@@ -3,7 +3,8 @@
 import * as THREE from 'three';
 import { model, Pool } from './models.js';
 import { buildWorld, heightAt } from './world.js';
-import { WEAPONS, WEAPON_ORDER, LAYERS, LAYER_ORDER, LAYER_COST, CLUB_BONUS, SELL_BACK, OLIVES, INTRO, GADGETS, ENEMY_SCALE, hpScale, endlessWave } from './data.js';
+import { WEAPONS, WEAPON_ORDER, LAYERS, LAYER_ORDER, LAYER_COST, CLUB_BONUS, SELL_BACK, OLIVES, INTRO, GADGETS, ENEMY_SCALE, hpScale, endlessWave, QUIPS, NEXT_NAMES } from './data.js';
+const pick = (a) => a[Math.floor(Math.random() * a.length)];
 
 const V = new THREE.Vector3(), V2 = new THREE.Vector3(), Q = new THREE.Quaternion(), E = new THREE.Euler(), S = new THREE.Vector3(), M = new THREE.Matrix4();
 const COL = new THREE.Color();
@@ -24,6 +25,8 @@ export class Game {
     this.seen = new Set(this.save.seen || []);
     this.bossActive = null;
     this.stats = { built: 0, layers: 0, clubs: 0 };
+    this.combo = 0; this.comboT = 0; this.bestCombo = 0; this.quipT = 2;
+    this.by = {}; this.kinds = {}; this.bosses = 0; this.earlyCalls = 0; this.maxTowers = 0;
   }
 
   async init() {
@@ -167,7 +170,7 @@ export class Game {
   startWave() {
     if (this.over || this.wave >= this.waveTotal) return;
     let bonus = 0;
-    if (this.countdown > 0 && this.wave > 0) { bonus = Math.ceil(this.countdown * 1.5); this.crumbs += bonus; this.score += bonus * 10; this.earlyBonus += bonus; this.fx.text3(this.sandPos.x, 3.2, this.sandPos.z, `+${bonus} early!`, '#ffe066'); }
+    if (this.countdown > 0 && this.wave > 0) { this.earlyCalls++; bonus = Math.ceil(this.countdown * 1.5); this.crumbs += bonus; this.score += bonus * 10; this.earlyBonus += bonus; this.fx.text3(this.sandPos.x, 3.2, this.sandPos.z, `+${bonus} early!`, '#ffe066'); }
     const groups = this.endless ? endlessWave(this.wave + 1) : this.stage.waves[this.wave];
     this.wave++;
     this.spawnQ = [];
@@ -213,7 +216,22 @@ export class Game {
       ]);
     }
     this.enemies.push(e);
+    if (def.boss) setTimeout(() => this.say(e, pick(QUIPS[type] || ['...']), '#ffd0c0', 1.4), 3700);
+    else if (this.quipT <= 0 && Math.random() < 0.35) { this.quipT = 3.5; setTimeout(() => this.say(e, pick(QUIPS[type] || QUIPS.spawn)), 700); }
     return e;
+  }
+
+  say(e, text, color = '#ffffff', scale = 0.85) {
+    if (!e.alive) return;
+    this.fx.text3(e.pos.x, e.pos.y + e.h + 0.5, e.pos.z, text, color, scale);
+  }
+
+  /** What the next wave holds, for the button. */
+  nextPreview() {
+    const groups = this.endless ? endlessWave(this.wave + 1) : this.stage.waves[this.wave];
+    if (!groups) return '';
+    const n = {}; for (const g of groups) n[g.t] = (n[g.t] || 0) + g.n;
+    return Object.entries(n).map(([t, c]) => OLIVES[t].boss ? NEXT_NAMES[t] : `${c} ${NEXT_NAMES[t]}`).join(', ');
   }
 
   // ----- towers
@@ -234,7 +252,7 @@ export class Game {
     pad.tower = t; pad.ring.visible = false;
     t.group.position.set(pad.x, pad.y + 0.09, pad.z);
     this.group.add(t.group);
-    this.towers.push(t);
+    this.towers.push(t); this.maxTowers = Math.max(this.maxTowers, this.towers.length);
     this.layout(t, null);
     this.stats.built++;
     this.audio.sfx('build');
@@ -408,7 +426,7 @@ export class Game {
     let k = dmg * (1 - a);
     if (e.shredT > 0) k *= 1.3;
     if (a > 0.3 && src === 'bolt' && Math.random() < 0.5) this.fx.ping(e.pos.x, e.pos.y + e.h, e.pos.z);
-    e.hp -= k; e.flash = 0.12;
+    e.hp -= k; e.flash = 0.12; e.src = src === 'lob' && w ? w : src;
     if (e.boss) this.ui.boss(e.def.name, Math.max(0, e.hp / e.maxHp));
     if (e.hp <= 0) this.kill(e);
   }
@@ -417,6 +435,16 @@ export class Game {
     e.alive = false; this.kills++;
     const r = e.def.reward;
     this.crumbs += r; this.score += r * 10;
+    // chain pops within a second and a half: small wins on top of small wins
+    this.by[e.src] = (this.by[e.src] || 0) + 1; this.kinds[e.type] = (this.kinds[e.type] || 0) + 1; if (e.boss) this.bosses++;
+    this.combo = this.comboT > 0 ? this.combo + 1 : 1; this.comboT = 0.9;
+    if (this.combo > this.bestCombo) this.bestCombo = this.combo;
+    if (this.combo >= 5 && this.combo % 5 === 0) {
+      const bonus = this.combo / 5 * 2; this.crumbs += bonus; this.score += this.combo * 20;
+      this.fx.text3(e.pos.x, e.pos.y + e.h + 0.9, e.pos.z, `COMBO x${this.combo}  +${bonus}`, '#ffd24d', 1.15);
+      this.audio.sfx('club', 0.5);
+    }
+    if (!e.boss && this.quipT <= 0 && Math.random() < 0.08) { this.quipT = 3; this.fx.text3(e.pos.x, e.pos.y + e.h + 0.6, e.pos.z, pick(QUIPS.pop), '#ffffff', 0.8); }
     const col = { green: 0x8aa52e, kalamata: 0x5a2a4e, stuffed: 0x8aa52e, pimento: 0xe03a2a, ring: 0x221c22, knight: 0x8aa52e, brute: 0xa6c93a, greaser: 0xd9b23a }[e.type] || 0x8aa52e;
     this.fx.splat(e.pos.x, e.pos.y, e.pos.z, col, e.boss ? 3 : e.type === 'brute' ? 1.4 : 0.8);
     this.fx.burst(e.pos.x, e.pos.y + e.h * 0.5, e.pos.z, col, e.boss ? 60 : 10, e.boss ? 6 : 2.6);
@@ -442,7 +470,7 @@ export class Game {
     this.lives = Math.max(0, this.lives - b); this.leaked += b;
     this.audio.sfx('chomp'); this.rig.shake(0.35, 0.25);
     this.fx.burst(this.sandPos.x, 2.0, this.sandPos.z, 0xf3ddb0, 16, 3);
-    this.fx.text3(this.sandPos.x, 3.4, this.sandPos.z, b > 1 ? `-${b} bites!` : 'CHOMP', '#ff7a6a');
+    this.fx.text3(this.sandPos.x, 3.4, this.sandPos.z, b > 1 ? `-${b} bites!` : pick(['CHOMP', ...QUIPS.bite]), '#ff7a6a');
     this.ui.flash();
     this.updateSandwich();
     if (this.lives <= 0) this.finish(false);
@@ -461,7 +489,7 @@ export class Game {
     this.over = true; this.state = 'over';
     const stars = won ? (this.lives >= this.maxLives * 0.9 ? 3 : this.lives >= this.maxLives * 0.5 ? 2 : 1) : 0;
     if (won) this.score += this.lives * 100;
-    this.result = { won, stars, score: this.score, kills: this.kills, lives: this.lives, wave: this.wave, early: this.earlyBonus, clubs: this.stats.clubs, time: this.time };
+    this.result = { won, stars, score: this.score, combo: this.bestCombo, by: this.by, kinds: this.kinds, bosses: this.bosses, earlyCalls: this.earlyCalls, maxTowers: this.maxTowers, maxLives: this.maxLives, kills: this.kills, lives: this.lives, wave: this.wave, early: this.earlyBonus, clubs: this.stats.clubs, time: this.time };
     this.audio.sfx(won ? 'win' : 'lose');
     this.audio.music(won ? 'victory' : null);
     if (won) this.fx.confetti(this.sandPos.x, this.sandPos.z);
@@ -490,6 +518,7 @@ export class Game {
       if (this.countdown <= 0) this.startWave();
     }
     for (const k in this.gcd) if (this.gcd[k] > 0) this.gcd[k] = Math.max(0, this.gcd[k] - dt);
+    this.comboT -= dt; this.quipT -= dt;
     // slicks age
     for (const s of this.slicks) s.t -= dt;
     this.slicks = this.slicks.filter((s) => s.t > 0);
@@ -618,7 +647,7 @@ export class Game {
       if (d > R + (e.boss ? 1 : 0.15)) continue;
       n++;
       if (w.kind === 'cone') { e.slowT = w.slowT; e.slowF = Math.min(e.slowF, w.slow); }
-      this.hurt(e, p.dmg * (d < R * 0.5 ? 1 : 0.7), 'lob');
+      this.hurt(e, p.dmg * (d < R * 0.5 ? 1 : 0.7), 'lob', p.w.proj === 'proj_toast' ? 'toast' : p.w.proj === 'proj_mustard' ? 'mustard' : 'pickle');
       if (s.burn && e.alive) { e.burnT = 2; e.burnDps = p.dmg * s.burn / 2; }
     }
     const col = w.kind === 'cone' ? 0xf2b705 : p.w.proj === 'proj_toast' ? 0xdca55a : 0x7c9c2c;

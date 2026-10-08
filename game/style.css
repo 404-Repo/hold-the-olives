@@ -125,3 +125,9 @@ h2 { margin: 0 0 6px; font-size: 30px; color: #ffe9a8; letter-spacing: 2px; }
   .mi img { width: 46px; height: 46px; }
   #banner { top: 16%; }
 }
+
+.orders { margin-top: 10px; text-align: left; display: inline-block; background: rgba(255,244,220,.08); border: 1px solid rgba(255,244,220,.25); border-radius: 12px; padding: 8px 12px; }
+.orders .oh { font-size: 12px; letter-spacing: 3px; color: #ffe9a8; margin-bottom: 2px; }
+.ord { font-size: 14px; opacity: .65; }
+.ord.done { opacity: 1; color: #c9ea7a; }
+.ord b { color: #ffd24d; }

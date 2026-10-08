@@ -241,7 +241,8 @@ export async function buildWorld(scene, stage, renderer) {
     const f2 = new THREE.Mesh(new THREE.PlaneGeometry(40, 30), plaster); f2.position.set(10, 21, -25.4); root.add(f2);
     const f3 = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), plaster); f3.position.set(10, 10, -25.5); root.add(f3);
     // the window: a bright opening with the morning outside
-    const win = new THREE.Mesh(new THREE.PlaneGeometry(9, 4.2), new THREE.MeshBasicMaterial({ color: look.window }));
+    const wt = tex('window_view', 1); if (wt) { wt.wrapS = wt.wrapT = THREE.ClampToEdgeWrapping; wt.repeat.set(1, 1); }
+    const win = new THREE.Mesh(new THREE.PlaneGeometry(9, 4.2), new THREE.MeshBasicMaterial({ color: wt ? (look.fridge ? 0x223355 : look.lamps ? 0x553a5a : 0xffffff) : look.window, map: wt }));
     win.rotation.y = Math.PI / 2; win.position.set(-7.36, 3.3, -9.6); root.add(win);
     // upper cabinets: cream boxes on the wall, 5 m up
     const cab = new THREE.MeshStandardMaterial({ color: 0xf2ead8, roughness: 0.55 });
