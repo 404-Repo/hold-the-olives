@@ -1,0 +1,27 @@
+{
+ "pair_01": {
+  "A": "p1.png",
+  "B": "f4.png",
+  "mine": "A"
+ },
+ "pair_02": {
+  "A": "p10.png",
+  "B": "f5.png",
+  "mine": "A"
+ },
+ "pair_03": {
+  "A": "f3.png",
+  "B": "p3.png",
+  "mine": "B"
+ },
+ "pair_04": {
+  "A": "p5.png",
+  "B": "f1.png",
+  "mine": "A"
+ },
+ "pair_05": {
+  "A": "f6.png",
+  "B": "p7.png",
+  "mine": "B"
+ }
+}

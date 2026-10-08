@@ -1,0 +1,32 @@
+{
+ "pair_01.png": {
+  "build": "left",
+  "build_file": "l1.png",
+  "ref_file": "01_cutting_board.png"
+ },
+ "pair_02.png": {
+  "build": "right",
+  "build_file": "l2.png",
+  "ref_file": "02_stovetop.png"
+ },
+ "pair_03.png": {
+  "build": "right",
+  "build_file": "l3.png",
+  "ref_file": "03_sink.png"
+ },
+ "pair_04.png": {
+  "build": "right",
+  "build_file": "l4.png",
+  "ref_file": "04_sunday_lunch.png"
+ },
+ "pair_05.png": {
+  "build": "left",
+  "build_file": "l5.png",
+  "ref_file": "05_cocktail_hour.png"
+ },
+ "pair_06.png": {
+  "build": "right",
+  "build_file": "02_built.jpg",
+  "ref_file": "06_boss_jar.png"
+ }
+}

@@ -135,3 +135,7 @@ h2 { margin: 0 0 6px; font-size: 30px; color: #ffe9a8; letter-spacing: 2px; }
 .ord b { color: #ffd24d; }
 
 #vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 85% 75% at 50% 48%, transparent 55%, rgba(60,30,10,.32) 100%); }
+
+/* tilt-shift: the far end of the counter falls out of focus, the way a miniature photographs */
+#tiltshift { position: absolute; inset: 0; pointer-events: none; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.6) 12%, transparent 27%, transparent 88%, rgba(0,0,0,.5) 100%); mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.6) 12%, transparent 27%, transparent 88%, rgba(0,0,0,.5) 100%); }
+

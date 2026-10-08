@@ -50,7 +50,7 @@ try {
       const built = g.pads.filter((p) => p[2] && p[3] < 3 && p[1] > 70 && p[1] < H - 300);
       if (built.length && g.crumbs > 60) { const p = built[i % built.length]; await page.touchscreen.tap(p[0], p[1]); await sleep(300); const items = await page.$$('#menu-items .mi:not(.no):not(.sell)'); if (items.length) { const r = await items[i % Math.min(4, items.length)].boundingBox(); await page.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); } await sleep(200); await tapSel('#menu-close').catch(() => {}); }
       else if (g.crumbs > 100) await build(i + 7);
-      if (g.countdown > 0 || g.state === 'prep') await tapSel('#b-next').catch(() => {});
+      if (g.countdown > 0 || g.state === 'prep') { await tapSel('#b-next').catch(() => {}); await sleep(2600); }
       await page.screenshot({ path: `${OUT}/1${i}_play.jpg`, quality: 80 });
     }
   } else { await sleep(SECS * 1000); await page.screenshot({ path: OUT + '/02_idle.jpg', quality: 80 }); }
