@@ -1,0 +1,21 @@
+{
+  "label": "Game A",
+  "persona": "competitive",
+  "play_seconds": 543.6,
+  "fun": 7,
+  "nuance": 6,
+  "nuance_found": "Tower mix per path bend (ballista for single targets, pickle cannon for splash on clumps, mustard to slow, pepper mill near the base), one topping per tower (tomato/cheese/bacon), and timing the burner/rinse/swat abilities on boss and knight clumps. Gold piled up unused after about level 2 so the economy barely forced trade-offs; level 3 knights leaked bites and was the first time placement mattered.",
+  "pace": 7,
+  "pace_word": "right",
+  "feedback_juice": 8,
+  "looks": 9,
+  "audio": "Looping kitchen music that swaps between two tracks, thwip, pop and cannon samples on every shot and kill, a wave ding, and a victory jingle on level clear.",
+  "would_replay": "yes",
+  "would_quit_at_s": null,
+  "understood_goal_by_s": 25,
+  "furthest_progress": "Cleared level 1 The Cutting Board (3 stars, 10,740), level 2 The Stovetop incl. THE JAR boss (3 stars, 31,200, combo x36), level 3 The Sink (2 stars, 24,400, 15 bites left); reached wave 5/12 of level 4 Sunday Lunch (score 1,900).",
+  "used_movement_assist": "not offered",
+  "control_trouble": "Tapping towers/slots needed pixel-accurate coordinates and the camera pans on level start, so I mis-tapped a few times; I also forgot to press START once on level 3 and lost about 40 s.",
+  "best_moment": "THE JAR boss lumbering down the stovetop path into a wall of cannon splash and a lit burner, with a x36 combo.",
+  "worst_moment": "Level 1 and 2 are nearly impossible to lose and hundreds of gold sat unspent, so there was no risk-for-reward until the sink."
+}

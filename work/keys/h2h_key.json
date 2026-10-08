@@ -43,5 +43,32 @@
    "A": 8858,
    "B": 8859
   }
+ },
+ "s06": {
+  "A": "farseek",
+  "B": "olives",
+  "persona": "indie",
+  "ports": {
+   "A": 8860,
+   "B": 8861
+  }
+ },
+ "s07": {
+  "A": "olives",
+  "B": "moonpull",
+  "persona": "casual",
+  "ports": {
+   "A": 8862,
+   "B": 8863
+  }
+ },
+ "s08": {
+  "A": "moonpull",
+  "B": "olives",
+  "persona": "indie",
+  "ports": {
+   "A": 8864,
+   "B": 8865
+  }
  }
 }

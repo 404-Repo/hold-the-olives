@@ -1,0 +1,22 @@
+{
+  "label": "Game A",
+  "persona": "indie",
+  "play_seconds": 541,
+  "fun": 5,
+  "nuance": 6,
+  "nuance_found": "Mirror relay: light from a fixed sunbeam goes mirror to mirror to dark stelae, and a stela only wakes when hit head-on, so the mirror's position matters, not just its angle. Mirrors are single-sided (back to the sun gives no beam), the stone block has to be pulled out of the beam first, and the body or scenery can block a beam. Stela 1 and 2 were solved through that chain. It is a real spatial puzzle, but I never saw two systems feed each other beyond that.",
+  "pace": 3,
+  "pace_word": "too slow",
+  "feedback_juice": 6,
+  "looks": 8,
+  "audio": "A generated wind/drone loop with sparse sequenced notes under everything from the title on; no sound effects at all when pushing blocks, turning mirrors or lighting a stela.",
+  "would_replay": "maybe",
+  "would_quit_at_s": 300,
+  "understood_goal_by_s": 35,
+  "furthest_progress": "Level 1 The Sunken Court: 2 of 3 stelae lit (glyphs 1 and 3), block pulled out of the beam, mirror 2 relaying; stela 3 hit but not woken; mirror 3 reached by hang-and-climb but the camera jammed against my character on the island. Level 2 locked.",
+  "used_movement_assist": "yes, about 25 times",
+  "control_trouble": "Holding Use on a mirror while steering with the stick needed a release-and-re-press dance, I walked away from the mirror several times, and beam angles were hard to judge with 0.5 s frames. Some of that is the harness. Camera drag with a third finger helped a lot. Frames sometimes came back black right after an act.",
+  "best_moment": "Swinging the first mirror until the beam snapped onto the stela crystal and the glyph lit up in the HUD.",
+  "worst_moment": "Mirror 2 to mirror 3 to stela 3: no readable feedback on why a hit beam did not count, the beam vanished behind the mirror body or character, and then the camera jammed on the island.",
+  "verdict": "Looks like a finished game, genuinely: lit ruins, a character with a rope on her pack, a title with chapter list, good hint cards. The core verb, aiming a sunbeam off bronze mirrors into stelae, is a proper jam-quality idea and the relay rule plus single-sided mirrors give it some bite. But in 9 minutes I got two glyphs and spent most of it fiddling: the mirror turns fast and fine alignment is fussy, nothing tells you why a hit does not count (head-on requirement), a beam to the north is blocked by scenery you cannot see, and there is no sound on any interaction. Pace is slow; loading alone was 17 s. A great-looking puzzle prototype that has not yet taught me how it wants to be solved. I would give it one more session, not a week."
+}

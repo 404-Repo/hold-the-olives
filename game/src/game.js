@@ -374,10 +374,14 @@ export class Game {
     // nearest pad on screen, forgiving for thumbs
     let best = null, bd = 1e9;
     for (const pad of this.pads) {
-      V.set(pad.x, pad.y + 0.4, pad.z).project(this.rig.cam);
-      const x = (V.x + 1) / 2 * innerWidth, y = (1 - V.y) / 2 * innerHeight;
-      const d = Math.hypot(x - sx, y - sy);
-      if (d < bd) { bd = d; best = pad; }
+      // a built tower is tapped on its body, not its coaster: test points up the stack (tester s07: taps missed)
+      const top = pad.tower ? pad.tower.height : 0.4;
+      for (const h of pad.tower ? [0.3, top * 0.5, top * 0.9] : [0.4]) {
+        V.set(pad.x, pad.y + h, pad.z).project(this.rig.cam);
+        const x = (V.x + 1) / 2 * innerWidth, y = (1 - V.y) / 2 * innerHeight;
+        const d = Math.hypot(x - sx, y - sy);
+        if (d < bd) { bd = d; best = pad; }
+      }
     }
     const reach = Math.max(38, Math.min(70, innerHeight * 0.055));
     if (best && bd < reach) { this.audio.sfx('tick'); this.select(best); }

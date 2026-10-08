@@ -1,0 +1,22 @@
+{
+  "label": "Game B",
+  "persona": "indie",
+  "play_seconds": 540.5,
+  "fun": 6,
+  "nuance": 5,
+  "nuance_found": "The core verb is catch a gust, carry it in the bell, release it into a mechanism. Chains of it (seed wheel, grille, windmill, pipe wheel) set up small spatial puzzles. One real wrinkle: a valve has to be turned so a pipe leads to the mill, and a gust spent on the wrong pipe drifts back. The Hollow guardian boss has the only real decision I found: its heart colour changes, the breath only turns the vane matching the current colour, and a wrong or late feed knocks the progress back (I got to 3/3 once and fell to 2/3). Mostly it is a fetch-and-deliver chain with one obvious next step, and the 'goto' assist did most of the walking, so I never had to plan a route.",
+  "pace": 5,
+  "pace_word": "a bit slow",
+  "feedback_juice": 7,
+  "looks": 8,
+  "audio": "A procedural wind and drone ambience loop, soft chimes and chords on each gust catch and release, and a swirl whoosh. No real melodic music that I noticed.",
+  "would_replay": "maybe",
+  "would_quit_at_s": 330,
+  "understood_goal_by_s": 25,
+  "furthest_progress": "The Hollow guardian boss fight, vane feed 2/3 (reached 3/3 once, then lost progress). Before it: prologue, ring the morning bell, loft, Wake the three windmills 3/3 (Sails, Pipes, Ladders), sky bridge complete, two carvings in the gallery.",
+  "used_movement_assist": "yes, about 70 times",
+  "control_trouble": "The camera clipped into the boss bell and a tree trunk, so I could not see where I was walking. Manual stick dodging in the boss fight was hard at 0.5 s sampling and I lost pips by standing still. The goto assist hung the whole harness once (carving) and sent me back down to the terrace once.",
+  "best_moment": "The Hollow reveal of the giant guardian bell with the carved arms, and the painted village prologue.",
+  "worst_moment": "Repeating the same catch, walk, release, deliver cycle for minutes, then the camera clipping into the boss so I could not read the fight.",
+  "verdict": "It is a good-looking, atmospheric adventure with real direction behind it. The prologue art, the villagers and the guardian reveal feel like a small finished game. But the play is a fetch chain with a prompt button at every step, objective text that sometimes does not match what I am holding, and a camera that clips into things. The boss colour-matching vane puzzle is the first thing that makes me decide anything, and a wrong feed costs progress with little explanation. I would look at it again for the art, but I would not play it back-to-back with the other one."
+}

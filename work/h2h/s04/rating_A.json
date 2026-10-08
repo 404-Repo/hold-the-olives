@@ -1,0 +1,22 @@
+{
+  "label": "Game A",
+  "persona": "casual",
+  "play_seconds": 544,
+  "fun": 5,
+  "nuance": 6,
+  "nuance_found": "Gust-chain puzzles with real routing choices: turn the pipe valve before powering the pipe wheel or the gust drifts back; a shutter that creeps shut so you must fill the grille before the ring empties; a bell guardian where you dodge sweeps by jumping, catch the spent breath and feed the vane it names (gold, teal, rose). Mostly one obvious action per step, but the valve and the boss vane order made me think.",
+  "pace": 5,
+  "pace_word": "a bit slow",
+  "feedback_juice": 7,
+  "looks": 9,
+  "audio": "Ambient wind drone with a soft sequenced music loop under everything, plus chimes and whooshes on catching a gust, ringing the bell, turning the mill and finishing steps.",
+  "would_replay": "maybe",
+  "would_quit_at_s": 190,
+  "understood_goal_by_s": 25,
+  "furthest_progress": "Woke all 3 windmills (Sails, Pipes, Ladders), crossed the sky bridge into the Hollow, carved the two channels, then beat the bell guardian (3/3 vanes) and reached 'Ride the grilles back up to the bells' (final ascent) at about 450 s.",
+  "used_movement_assist": "yes, about 85 times",
+  "control_trouble": "Climbing the updraft ledges by hand dropped me back to the start twice; boss dodge and finding vanes behind a pillar where the camera was blocked cost me three tries; some assist walks hung without moving. The assist did the ride-up fine.",
+  "best_moment": "Third windmill turning and the sky bridge completing, then dropping into the dark Hollow with the giant carved bell guardian.",
+  "worst_moment": "The bell boss: floor warnings I could not read at half-second glances, a camera that got blocked by pillars, and getting swept back to the start of the fight with no hint where the vanes were.",
+  "verdict": "It looks gorgeous, like a real finished adventure, and the first ten minutes teach themselves because a button always tells me what to do next. But it is a lot of walking to a button, tapping it, walking to the next button. The fun parts are the valve trick and the boss, and the boss was confusing: I could not tell which warnings were deadly or where the colored vanes were. If I got stuck on the ledge climb on a real phone I would have deleted it around the three minute mark. A real thumb would do better than me, but I would keep it for one more session only for the pretty world."
+}
