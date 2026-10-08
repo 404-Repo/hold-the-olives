@@ -89,3 +89,66 @@ Honest gaps:
   jar where olives come from...) does not exist yet, so stage 1 is the barest stage right now.
 - The dining and bar kit agent is running. Music takes are 13 to 41 s, chained with crossfades; nobody has listened.
 - No critic round yet. That is next.
+
+## Milestone 3: content complete (2026-10-08)
+
+The whole game exists and plays from the title to every end card. Serving at **:8798**.
+
+**Content**
+- **Five stages and an endless mode**, each its own authored place and light: The Cutting Board (morning, by the
+  window), The Stovetop (dark range, amber oil trail, four burners), The Sink (green marble, dish rack, rinse water),
+  Sunday Lunch (the dining table on a gingham cloth, a linen runner for a road, a roast chicken at the head), Cocktail
+  Hour (walnut bar cart under lamps), and Midnight Snack (the first counter by fridge light, endless, a boss every
+  tenth wave).
+- **Eight olive kinds** (green, kalamata, stuffed that splits into a running pimento, rolling olive ring, armoured
+  martini knight, castelvetrano brute, oil-slicking greaser) and **three bosses** with entrance shots, minion spawns
+  and a 40% enrage: THE JAR (stage 2 and stage 5), THE OIL BOTTLE (stage 4), THE MARTINI (stage 5).
+- **Six weapons x four layers**: toothpick ballista, pickle cannon, mustard squeezer (slow), pepper mill (area),
+  cheese grater (shreds armour), toaster (big splash); lettuce, tomato, cheese, bacon; CLUB at three different layers.
+  Aim priority per tower, sell for 70%.
+- **Gadgets**: the spatula swat everywhere, plus a burner, the rinse, a pepper storm or the ice bucket per stage.
+- **Stickiness**: 8 to 12 waves per stage, early-call crumbs, combos, three stars, a best score per stage, **15 orders**
+  (three optional challenges per stage, e.g. "Roast 15 olives on a burner", "Beat THE MARTINI"), unlocks by stage,
+  the endless best wave and score. Olive quips in speech bubbles ("For the jar!", "Extra virgin RAGE!").
+- **82 asset modules** through the 404 loop (3 candidates each, verify sheet, pick by eye, receipts in
+  `receipts/candidates/`), loader regression **PASS on all 82** (100% triangle retention merged and with hierarchy),
+  `harness/ship.mjs`: 95 modules parse, nothing leaves the folder. Game folder 4.9 MB. 19 commits.
+- Atlas: 3,319 credits at max hold over 68 calls, 6 failed (ledger `atlas_calls.jsonl`).
+
+**Every stage played to its end by my touch bot** (real taps; no gadgets; balance tuned between runs):
+
+| stage | last run | bites left | popped | bosses |
+|---|---|---|---|---|
+| 1 Cutting Board | win, 3 stars | 20 | 200 | none |
+| 2 Stovetop | win, 3 stars | 19 | 447 | THE JAR beaten |
+| 3 Sink | win, 2 stars | 13 | 339 | none |
+| 4 Sunday Lunch | win, 3 stars (lost at the boss before tuning) | 20 | 501 | THE OIL BOTTLE beaten |
+| 5 Cocktail Hour | win, 2 stars | 16 | 820 | THE MARTINI beaten |
+| Endless | lost at wave 4 before retuning; not re-run | | | |
+
+Runs of the same stage vary a lot (stage 2 has given 1 and 3 stars), so read this as "every stage is winnable and
+loseable", not as a measured difficulty curve. Stage 1 still never costs the bot a bite; a human with no plan will
+lose some, but the first stage is gentle on purpose.
+
+**Critic rounds** (a fresh harsh critic each round, blind pairs, keys moved out before judging; in-motion frames):
+
+| round | vs podium (8) | vs floor | vs concept frames | property named first | what I changed |
+|---|---|---|---|---|---|
+| 1 | 2 won, 6 lost | 6 of 6 | 0 of 6 | bleached cream, marble and gingham boards flatten everything | mid-value surfaces, directional light, Neutral tone mapping, fewer coasters, 1.45x stacks, solid banner |
+| 2 | 4 won, 4 lost (2 clear, 2 slight) | 5 of 5 | 0 of 6 | the high camera and tiny pieces | towers start as sandwiches, crisp poured flour with a shadow, warmer stove and sink light, HUD text fixes |
+| 3 | 5 won, 3 lost (clear, clear, slight; all to SUNDRIFT) | 4 of 4 | 0 of 5 | flat, engine-default light | one key light pool per level, a grade and vignette, speech-bubble quips, props moved off the camera |
+
+The concept-frame column lost every pair in every round, and two critics in a row named the same cause: the
+illustrations are low three-quarter shots with the sandwich at 40% of the frame, and a tower defense needs the whole
+field in view (Ben's note, TIMBER's lesson). By GAME.md's stopping rule that is the format, not execution, so I kept
+the overview default and put the low view in the tilt gesture, the opening shot and the boss entrances.
+
+Also fixed along the way: the endless stage was lit like morning (lights 8x too strong for their distance), the path
+ribbon faced down and shaded black, a capture artifact (my tool screenshotted every banner mid fade-in) that a critic
+read as a bug, and an inverted lathe plate.
+
+Honest gaps:
+- Two asset agents hung (a shell call that never returned); I made both sets of picks from their verified candidates.
+- Music: Atlas returned 13 to 41 s takes; five requests for longer or extra takes died with connection resets.
+  Each cue is a crossfaded playlist of the takes we have. Nobody has listened to any of it.
+- No human has played it; no real phone.
