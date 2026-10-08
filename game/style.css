@@ -131,3 +131,5 @@ h2 { margin: 0 0 6px; font-size: 30px; color: #ffe9a8; letter-spacing: 2px; }
 .ord { font-size: 14px; opacity: .65; }
 .ord.done { opacity: 1; color: #c9ea7a; }
 .ord b { color: #ffd24d; }
+
+#vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 85% 75% at 50% 48%, transparent 55%, rgba(60,30,10,.32) 100%); }

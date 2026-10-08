@@ -81,8 +81,9 @@ export class CounterCam {
     const z = 1 - (g.dist - this.minD) / Math.max(1, this.maxD - this.minD);
     const [x0, z0, x1, z1] = this.bounds;
     const fx = this.fitTz ?? (z0 + z1) / 2;
-    g.tx = clamp(g.tx, x0 * z, x1 * z);
-    g.tz = clamp(g.tz, fx + (z0 - fx) * z, fx + (z1 - fx) * z);
+    const sl = 2.2;   // some give even at full zoom-out, so a drag always answers
+    g.tx = clamp(g.tx, x0 * z - sl, x1 * z + sl);
+    g.tz = clamp(g.tz, fx + (z0 - fx) * z - sl * 1.4, fx + (z1 - fx) * z + sl);
     this.tx += (g.tx - this.tx) * k; this.tz += (g.tz - this.tz) * k;
     this.dist += (g.dist - this.dist) * k; this.pitch += (g.pitch - this.pitch) * k;
     if (this.cine) {
