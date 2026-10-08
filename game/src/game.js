@@ -217,14 +217,14 @@ export class Game {
       ]);
     }
     this.enemies.push(e);
-    if (def.boss) setTimeout(() => this.say(e, pick(QUIPS[type] || ['...']), '#ffd0c0', 1.4), 3700);
+    if (def.boss) setTimeout(() => this.say(e, pick(QUIPS[type] || ['...'])), 3700);
     else if (this.quipT <= 0 && Math.random() < 0.35) { this.quipT = 3.5; setTimeout(() => this.say(e, pick(QUIPS[type] || QUIPS.spawn)), 700); }
     return e;
   }
 
-  say(e, text, color = '#ffffff', scale = 0.85) {
+  say(e, text) {
     if (!e.alive) return;
-    this.fx.text3(e.pos.x, e.pos.y + e.h + 0.5, e.pos.z, text, color, scale);
+    this.fx.bubble(e.pos.x, e.pos.y + e.h + 0.5, e.pos.z, text);
   }
 
   /** What the next wave holds, for the button. */
@@ -462,7 +462,7 @@ export class Game {
       this.fx.text3(e.pos.x, e.pos.y + e.h + 0.9, e.pos.z, `COMBO x${this.combo}  +${bonus}`, '#ffd24d', 1.15);
       this.audio.sfx('club', 0.5);
     }
-    if (!e.boss && this.quipT <= 0 && Math.random() < 0.08) { this.quipT = 3; this.fx.text3(e.pos.x, e.pos.y + e.h + 0.6, e.pos.z, pick(QUIPS.pop), '#ffffff', 0.8); }
+    if (!e.boss && this.quipT <= 0 && Math.random() < 0.08) { this.quipT = 3; this.fx.bubble(e.pos.x, e.pos.y + e.h + 0.6, e.pos.z, pick(QUIPS.pop)); }
     const col = { green: 0x8aa52e, kalamata: 0x5a2a4e, stuffed: 0x8aa52e, pimento: 0xe03a2a, ring: 0x221c22, knight: 0x8aa52e, brute: 0xa6c93a, greaser: 0xd9b23a }[e.type] || 0x8aa52e;
     this.fx.splat(e.pos.x, e.pos.y, e.pos.z, col, e.boss ? 3 : e.type === 'brute' ? 1.4 : 0.8);
     this.fx.burst(e.pos.x, e.pos.y + e.h * 0.5, e.pos.z, col, e.boss ? 60 : 10, e.boss ? 6 : 2.6);

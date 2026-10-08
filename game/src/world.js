@@ -39,12 +39,12 @@ function surfMat(name, repeat, opts = {}) {
 
 // Light and colour for each time of day.
 export const LOOKS = {
-  morning:   { bg: 0x3a2a1e, sky: 0xffe8c8, gnd: 0x6b4a30, hemi: 0.62, sun: 0xffd090, sunI: 4.2, sunDir: [-0.9, 0.95, -0.45], exp: 0.92, fog: 0x3a2a1e, window: 0xfff3d6 },
-  stove:     { bg: 0x2e2620, sky: 0xffdcb0, gnd: 0x5a4030, hemi: 0.58, sun: 0xffc880, sunI: 4.3, sunDir: [-0.8, 0.95, 0.3], exp: 0.95, fog: 0x2e2620, window: 0xfff0d6 },
-  noon:      { bg: 0x2c2a26, sky: 0xffe8c8, gnd: 0x5a4a38, hemi: 0.6, sun: 0xffd8a0, sunI: 4.2, sunDir: [-0.7, 1.0, -0.5], exp: 0.92, fog: 0x2c2a26, window: 0xfff4e0 },
-  afternoon: { bg: 0x3a2618, sky: 0xffe0b0, gnd: 0x5a3a24, hemi: 0.55, sun: 0xffbf78, sunI: 4.4, sunDir: [1.0, 0.85, -0.6], exp: 0.92, fog: 0x3a2618, window: 0xffe2b0 },
-  evening:   { bg: 0x2a1c22, sky: 0x8a6a90, gnd: 0x3a2418, hemi: 0.55, sun: 0xffb070, sunI: 1.3, sunDir: [0.8, 1.2, 0.6], exp: 1.15, fog: 0x2a1c22, window: 0x5a4a8a, lamps: true },
-  night:     { bg: 0x0d1220, sky: 0x5a74b0, gnd: 0x1a1410, hemi: 0.22, sun: 0x9fb8ff, sunI: 0.9, sunDir: [1.0, 0.9, 0.9], exp: 1.1, fog: 0x0d1220, window: 0x1d2a4a, fridge: true },
+  morning:   { bg: 0x3a2a1e, sky: 0xffe8c8, gnd: 0x6b4a30, hemi: 0.62, sun: 0xffd090, sunI: 4.2, sunDir: [-0.9, 0.95, -0.45], exp: 0.92, fog: 0x3a2a1e, window: 0xfff3d6, key: { pos: [-6.8, 9, -11], target: [0.6, 0, -8], color: 0xffc878, i: 360 }, grade: 'saturate(1.12) contrast(1.08) sepia(0.06)', vig: 'rgba(70,30,8,.55)' },
+  stove:     { bg: 0x2e2620, sky: 0xffdcb0, gnd: 0x5a4030, hemi: 0.58, sun: 0xffc880, sunI: 4.3, sunDir: [-0.8, 0.95, 0.3], exp: 0.95, fog: 0x2e2620, window: 0xfff0d6, key: { pos: [-6.5, 9, -9], target: [0.4, 0, -7], color: 0xffbf70, i: 520 }, grade: 'saturate(1.1) contrast(1.1) sepia(0.05)', vig: 'rgba(40,20,10,.6)' },
+  noon:      { bg: 0x2c2a26, sky: 0xffe8c8, gnd: 0x5a4a38, hemi: 0.6, sun: 0xffd8a0, sunI: 4.2, sunDir: [-0.7, 1.0, -0.5], exp: 0.92, fog: 0x2c2a26, window: 0xfff4e0, key: { pos: [-6.5, 10, -10], target: [0.6, 0, -8], color: 0xffe2b0, i: 480 }, grade: 'saturate(1.08) contrast(1.1)', vig: 'rgba(30,30,24,.55)' },
+  afternoon: { bg: 0x3a2618, sky: 0xffe0b0, gnd: 0x5a3a24, hemi: 0.55, sun: 0xffbf78, sunI: 4.4, sunDir: [1.0, 0.85, -0.6], exp: 0.92, fog: 0x3a2618, window: 0xffe2b0, key: { pos: [8, 9, -12], target: [-0.4, 0, -8], color: 0xffb060, i: 560 }, grade: 'saturate(1.12) contrast(1.08) sepia(0.08)', vig: 'rgba(80,34,8,.55)' },
+  evening:   { bg: 0x2a1c22, sky: 0x8a6a90, gnd: 0x3a2418, hemi: 0.55, sun: 0xffb070, sunI: 1.3, sunDir: [0.8, 1.2, 0.6], exp: 1.15, fog: 0x2a1c22, window: 0x5a4a8a, lamps: true, key: { pos: [4.5, 8.5, -11], target: [0, 0, -8], color: 0xffa050, i: 470 }, grade: 'saturate(1.18) contrast(1.12)', vig: 'rgba(20,8,12,.7)' },
+  night:     { bg: 0x0d1220, sky: 0x5a74b0, gnd: 0x1a1410, hemi: 0.22, sun: 0x9fb8ff, sunI: 0.9, sunDir: [1.0, 0.9, 0.9], exp: 1.1, fog: 0x0d1220, window: 0x1d2a4a, fridge: true, key: { pos: [12, 7, -7], target: [-0.5, 0, -8], color: 0xc8dcff, i: 420 }, grade: 'saturate(1.05) contrast(1.12) hue-rotate(-6deg)', vig: 'rgba(4,8,20,.72)' },
 };
 
 // Dressing per stage: [asset, x, z, rotY, height, y?]. Heights are world metres (10x).
@@ -78,7 +78,7 @@ const DRESS = {
     ['oven_mitt', 1.0, -19.6, 0.4, 0.3],
     ['salt_shaker', -6.2, -10.6, 0, 0.9], ['pepper_shaker', -6.2, -9.4, 0, 0.9],
     ['range_hood', 0, -24.2, 0, 7.0, 9.0],
-    ['stove_knob', -4.0, 3.0, 0, 0.35], ['stove_knob', -1.4, 3.0, 0, 0.35], ['stove_knob', 1.4, 3.0, 0, 0.35], ['stove_knob', 4.0, 3.0, 0, 0.35],
+    ['stove_knob', -4.0, -24.0, 0, 0.35], ['stove_knob', -1.4, -24.0, 0, 0.35], ['stove_knob', 1.4, -24.0, 0, 0.35], ['stove_knob', 4.0, -24.0, 0, 0.35],
   ],
   sink: [
     ['olive_jar_spill', -4.6, -22.4, 0.2, 1.5],
@@ -95,7 +95,7 @@ const DRESS = {
   lunch: [
     ['olive_jar_spill', 0.0, -22.6, 0, 1.5],
     ['dinner_plate', 0.0, -8.8, 0, 0.25], ['dinner_plate', 6.6, -16.2, 0, 0.25], ['dinner_plate', -6.4, -9.0, 0, 0.25],
-    ['wine_glass', 2.2, -16.4, 0, 2.2], ['wine_glass', -6.0, -12.0, 0, 2.2], ['water_jug', 6.2, -0.6, 0, 3.0],
+    ['wine_glass', 2.2, -16.4, 0, 2.2], ['wine_glass', -6.0, -12.0, 0, 2.2], ['water_jug', -6.4, -16.5, 0, 3.0],
     ['candle_holder', -2.0, -11.6, 0, 3.4], ['bread_basket', 2.0, -4.6, 0.4, 1.2],
     ['fork', -2.0, -0.8, 1.5708, 0.12], ['table_knife', 2.0, -20.0, 1.2, 0.12],
     ['salad_bowl', -6.0, -18.2, 0, 1.2], ['napkin_folded', -1.8, -6.6, 0.3, 0.5],
@@ -209,7 +209,16 @@ export async function buildWorld(scene, stage, renderer) {
   const sc = sun.shadow.camera; sc.left = -16; sc.right = 16; sc.top = 20; sc.bottom = -20; sc.near = 1; sc.far = 110;
   sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.03; sun.shadow.radius = 3;
   root.add(sun, sun.target);
-  const fill = new THREE.DirectionalLight(0xfff0e0, look.hemi * 0.35); fill.position.set(10, 12, 20); root.add(fill);
+  const fill = new THREE.DirectionalLight(0xfff0e0, look.hemi * 0.2); fill.position.set(10, 12, 20); root.add(fill);
+  // critic round 3: one motivated key light per level, a pool with real falloff (window light, a lamp, the fridge)
+  if (look.key) {
+    sun.intensity = look.sunI * 0.55;
+    const k = new THREE.SpotLight(look.key.color, look.key.i, 40, 0.62, 0.95, 1.6);
+    k.position.set(...look.key.pos); k.target.position.set(...look.key.target); root.add(k, k.target);
+  }
+  // and a grade and vignette per level, on the canvas
+  const cv = renderer.domElement; cv.style.filter = look.grade || '';
+  const vg = document.getElementById('vignette'); if (vg) vg.style.background = `radial-gradient(ellipse 80% 72% at 50% 52%, transparent 42%, ${look.vig || 'rgba(60,30,10,.32)'} 100%)`;
 
   // --- surfaces
   const isTable = stage.id === 'lunch', isBar = stage.id === 'bar', isStove = stage.id === 'stove', isSink = stage.id === 'sink';
@@ -219,7 +228,7 @@ export async function buildWorld(scene, stage, renderer) {
   const tint = { stove_enamel: 0x5d6168, marble: 0x8c9a94, table_linen: 0xc9b89c, walnut: 0xffffff, butcher_block: 0xe0c4a0 }[topName];
   if (tint && top.material.map) top.material.color.set(tint);
   top.position.set(-0.4, -0.25, -8.5); top.receiveShadow = true; root.add(top);
-  const topMap = top.material.map; if (topMap) topMap.repeat.set(isTable ? 4 : 2.2, isTable ? 9 : 5);
+  const topMap = top.material.map; if (topMap) topMap.repeat.set(isTable ? 2.6 : 2.2, isTable ? 5.8 : 5);
   // the drop: cabinet fronts below the counter edge, the floor far below
   if (!isTable && !isBar) {
     const front = new THREE.Mesh(new THREE.BoxGeometry(0.4, 9, 34), new THREE.MeshStandardMaterial({ color: 0xf2ead8, roughness: 0.5 }));

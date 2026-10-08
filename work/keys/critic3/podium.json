@@ -1,0 +1,42 @@
+{
+ "pair_01": {
+  "A": "p1.png",
+  "B": "podium_farseek_2.png",
+  "mine": "A"
+ },
+ "pair_02": {
+  "A": "p2.png",
+  "B": "podium_sundrift_1.png",
+  "mine": "A"
+ },
+ "pair_03": {
+  "A": "p3.png",
+  "B": "podium_bellkeeper_3.png",
+  "mine": "A"
+ },
+ "pair_04": {
+  "A": "podium_bellkeeper_2.png",
+  "B": "p4.png",
+  "mine": "B"
+ },
+ "pair_05": {
+  "A": "p5.png",
+  "B": "podium_sundrift_2.png",
+  "mine": "A"
+ },
+ "pair_06": {
+  "A": "podium_sundrift_3.png",
+  "B": "p6.png",
+  "mine": "B"
+ },
+ "pair_07": {
+  "A": "podium_farseek_1.png",
+  "B": "p7.png",
+  "mine": "B"
+ },
+ "pair_08": {
+  "A": "p8.png",
+  "B": "podium_bellkeeper_1.png",
+  "mine": "A"
+ }
+}

@@ -115,6 +115,12 @@ export class FX {
     };
     step();
   }
+  bubble(x, y, z, str) {
+    const el = document.createElement('div'); el.textContent = str;
+    Object.assign(el.style, { position: 'absolute', left: '0', top: '0', font: '900 13px "Arial Rounded MT Bold", Nunito, system-ui, sans-serif', color: '#2a1d14', background: '#fffaf0', padding: '3px 8px 4px', borderRadius: '10px', border: '2px solid #2a1d14', whiteSpace: 'nowrap', boxShadow: '0 2px 0 rgba(0,0,0,.25)' });
+    this.layer.appendChild(el);
+    this.texts.push({ el, p: new THREE.Vector3(x, y, z), t: 0, life: 1.4, bubble: true });
+  }
   text3(x, y, z, str, color = '#fff', scale = 1) {
     const el = document.createElement('div');
     el.textContent = str;
@@ -167,9 +173,9 @@ export class FX {
     const w = innerWidth, h = innerHeight;
     for (const t of this.texts) {
       t.t += dt;
-      P.copy(t.p); P.y += t.t * 1.2; P.project(cam);
+      P.copy(t.p); P.y += t.bubble ? 0.3 : t.t * 1.2; P.project(cam);
       const x = (P.x + 1) / 2 * w, y = (1 - P.y) / 2 * h;
-      const a = 1 - Math.max(0, (t.t - t.life * 0.5) / (t.life * 0.5));
+      const a = t.bubble ? (t.t > t.life - 0.2 ? (t.life - t.t) / 0.2 : 1) : 1 - Math.max(0, (t.t - t.life * 0.5) / (t.life * 0.5));
       t.el.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) scale(${0.8 + Math.min(1, t.t * 8) * 0.3})`;
       t.el.style.opacity = a;
       if (t.t > t.life) t.el.remove();

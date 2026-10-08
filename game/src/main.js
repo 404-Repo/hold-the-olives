@@ -44,7 +44,7 @@ function resize() {
   // landscape: look across the counter at the backsplash, the long field running across the screen
   rig.yaw = w > h * 1.1 ? Math.PI / 2 : 0;
   rig.g.pitch = w > h * 1.1 ? 0.8 : 0.96;
-  if (game) { rig.home(false); }
+  if (game) { rig.home(false); if (game.sandwich) game.sandwich.rotation.y = rig.yaw - 0.5; }
 }
 addEventListener('resize', resize);
 
@@ -90,6 +90,7 @@ function startStage(stage, endless = false) {
     rig.setBounds(stage.bounds);
     resize();
     rig.home(true);
+    if (g.sandwich) g.sandwich.rotation.y = rig.yaw - 0.5;
     ui.show('hud', true);
     $('b-speed').textContent = '1x'; g.speedMul = 1;
     ui.hud(g); ui.setGadgets(stage.gadget);
