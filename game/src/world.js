@@ -176,7 +176,10 @@ function pathRibbon(stage, curve, length, width, style) {
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
   g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
-  g.setIndex(idx); g.computeVertexNormals();
+  g.setIndex(idx);
+  // straight-up normals: on a tight bend the inner edge folds over itself, and computed normals there point down and shade black
+  const nrm = new Float32Array(pos.length); for (let i = 1; i < nrm.length; i += 3) nrm[i] = 1;
+  g.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
   const m = new THREE.MeshStandardMaterial({ map: flourTexture(style), transparent: true, side: THREE.DoubleSide, roughness: style === 'wet' ? 0.15 : 0.95, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
   const mesh = new THREE.Mesh(g, m); mesh.receiveShadow = true; mesh.renderOrder = 1;
   return mesh;
@@ -255,8 +258,9 @@ export async function buildWorld(scene, stage, renderer) {
 
   // platforms (a cutting board, a drainboard): rounded slabs
   for (const [x0, z0, x1, z1, h] of stage.plat || []) {
-    const m = surfMat(stage.id === 'sink' ? 'marble' : 'cutting_board', 1, { roughness: 0.6 });
-    if (m.map) m.map.repeat.set((x1 - x0) / 5, (z1 - z0) / 5);
+    const m = surfMat(stage.id === 'sink' ? 'marble' : 'butcher_block', 1, { roughness: 0.6 });
+    if (m.map) { m.map = m.map.clone(); m.map.needsUpdate = true; m.map.rotation = Math.PI / 2; m.map.repeat.set((x1 - x0) / 7, (z1 - z0) / 7); }
+    if (stage.id !== 'sink') m.color.set(0xffe2c0);
     const b = new THREE.Mesh(new RoundedBoxGeometry(x1 - x0, h, z1 - z0, 3, Math.min(0.12, h / 2.2)), m);
     b.position.set((x0 + x1) / 2, h / 2, (z0 + z1) / 2); b.receiveShadow = true; b.castShadow = true; root.add(b);
   }
@@ -295,5 +299,7 @@ export async function buildWorld(scene, stage, renderer) {
   baked.traverse((m) => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; } });
   root.add(baked);
 
-  return { root, curve, length, sun, look };
+  // footprints of the props inside the field, so coasters keep clear of them
+  const props = list.filter(([n, x, z]) => hasAsset(n) && Math.abs(x) < 6 && z > -21.5).map(([n, x, z, ry, h]) => [x * FIELD, z * FIELD, Math.min(1.4, 0.35 + h * 0.35)]);
+  return { root, curve, length, sun, look, props };
 }

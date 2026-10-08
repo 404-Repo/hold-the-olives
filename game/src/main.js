@@ -159,6 +159,8 @@ function showSelect() {
 $('startb').addEventListener('click', () => {
   audio.unlock();
   if (!window.__READY__) return;
+  const dev = new URLSearchParams(location.search).get('dev_stage');   // dev only: jump to a stage
+  if (dev) { startStage(dev === 'E' ? ENDLESS : STAGES[+dev - 1], dev === 'E'); return; }
   const returning = (save.reached || 1) > 1 || Object.keys(save.stars).length;
   if (returning) showSelect(); else startStage(STAGES[0]);
 });

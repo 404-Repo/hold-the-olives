@@ -83,7 +83,7 @@ export class Game {
     this.pads = [];
     const ringG = new THREE.RingGeometry(0.62, 0.74, 40); ringG.rotateX(-Math.PI / 2);
     this.padRingMat = new THREE.MeshBasicMaterial({ color: 0xfff2c0, transparent: true, opacity: 0.7, depthWrite: false });
-    for (const [x, z] of st.pads) {
+    for (const [x, z] of this.placePads(st)) {
       const y = heightAt(st, x, z);
       const pad = this.parts.pad_coaster.clone(); pad.position.set(x, y, z); pad.rotation.y = rand(0, 6);
       pad.traverse((m) => { if (m.isMesh) m.receiveShadow = true; });
@@ -115,6 +115,41 @@ export class Game {
     this.spawnPos = new THREE.Vector3(this.px[0], 0, this.pz[0]);
     this.ui.setGadgets(this.stage.gadget);
     this.refreshHud();
+  }
+
+  /**
+   * Where the coasters go. Greedy: each pick is the free spot that covers the
+   * most path within a typical tower's reach, a thumb's width from the flour
+   * and from other coasters, off the board's edge and clear of the props.
+   */
+  placePads(st) {
+    const want = st.pads.length;
+    const [x0, z0, x1, z1] = st.bounds;
+    const props = (this.world.props || []);
+    const near = (x, z) => { let m = 1e9; for (let i = 0; i <= this.ns; i += 2) { const d = (this.px[i] - x) ** 2 + (this.pz[i] - z) ** 2; if (d < m) m = d; } return Math.sqrt(m); };
+    const cands = [];
+    for (let x = x0 + 0.8; x <= x1 - 0.8; x += 0.35) for (let z = z0 + 1.5; z <= z1 - 0.6; z += 0.35) {
+      const d = near(x, z);
+      if (d < 1.25 || d > 2.6) continue;
+      if (Math.hypot(x - st.sandwich[0], z - st.sandwich[1]) < 2.6) continue;
+      if (props.some((p) => Math.hypot(p[0] - x, p[1] - z) < p[2] + 0.75)) continue;
+      let edge = false;
+      for (const [a, b, c, e] of st.plat || []) { const inX = x > a - 0.7 && x < c + 0.7, inZ = z > b - 0.7 && z < e + 0.7; const deep = x > a + 0.7 && x < c - 0.7 && z > b + 0.7 && z < e - 0.7; if (inX && inZ && !deep) edge = true; }
+      if (edge) continue;
+      let cover = 0;
+      for (let i = 0; i <= this.ns; i += 3) if ((this.px[i] - x) ** 2 + (this.pz[i] - z) ** 2 < 9) cover++;
+      cands.push({ x, z, cover });
+    }
+    const out = [];
+    while (out.length < want && cands.length) {
+      cands.sort((a, b) => b.cover - a.cover);
+      const c = cands.shift();
+      out.push([+c.x.toFixed(2), +c.z.toFixed(2)]);
+      for (let i = cands.length - 1; i >= 0; i--) if (Math.hypot(cands[i].x - c.x, cands[i].z - c.z) < 1.75) cands.splice(i, 1);
+      // diminishing returns: spread along the route rather than stacking at one bend
+      for (const k of cands) if (Math.hypot(k.x - c.x, k.z - c.z) < 3.4) k.cover *= 0.72;
+    }
+    return out;
   }
 
   // ----- path helpers
@@ -688,7 +723,7 @@ export class Game {
 
   telemetry() {
     return {
-      wave: this.wave, waves: this.waveTotal === Infinity ? -1 : this.waveTotal, crumbs: this.crumbs, lives: this.lives,
+      wave: this.wave, waves: this.waveTotal === Infinity ? -1 : this.waveTotal, crumbs: this.crumbs, lives: this.lives, countdown: +this.countdown.toFixed(1),
       enemies: this.enemies.length, towers: this.towers.length, kills: this.kills, state: this.state,
       layers: this.towers.reduce((a, t) => a + t.layers.length, 0), clubs: this.stats.clubs,
       pads: this.pads.map((p) => { V.set(p.x, p.y + 0.4, p.z).project(this.rig.cam); return [Math.round((V.x + 1) / 2 * innerWidth), Math.round((1 - V.y) / 2 * innerHeight), p.tower ? p.tower.weapon : '', p.tower ? p.tower.layers.length : 0]; }),

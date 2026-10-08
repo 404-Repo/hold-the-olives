@@ -103,7 +103,7 @@ export class UI {
     $('bossfill').style.width = (frac * 100).toFixed(1) + '%';
   }
 
-  openMenu(g, pad) { this.menuPad = pad; this.renderMenu(g, pad); this.show('menu', true); }
+  openMenu(g, pad) { this.menuPad = pad; this.renderMenu(g, pad); this.show('menu', true); this.hint(''); }
   closeMenu() { this.menuPad = null; this.show('menu', false); }
 
   renderMenu(g, pad, quiet) {
