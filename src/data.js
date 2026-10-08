@@ -89,7 +89,7 @@ export const STAGES = [
     burners: [[0.2, -16.4], [3.9, -8.4], [-3.7, -3.2]],
     pads: [[2.2, -18.8], [-2.0, -17.6], [-1.6, -13.2], [-2.4, -11.6], [1.6, -12.4], [0.8, -8.0], [6.0, -11.0], [2.2, -7.2], [-1.2, -7.0], [-1.6, -2.4]],
     sandwich: [0.4, 2.0],
-    start: 230, lives: 20,
+    start: 275, lives: 20,   // 230 until the reward trim; +45 put the bot back at the pre-trim curve (PROGRESS balance note)
     gadget: 'burner',
     waves: [
       [W('green', 12, 1.0)],
