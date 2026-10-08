@@ -14,10 +14,18 @@ export class UI {
     $('b-speed').addEventListener('click', () => { const g = this.game; if (!g) return; g.speedMul = g.speedMul === 1 ? 2 : g.speedMul === 2 ? 3 : 1; $('b-speed').textContent = g.speedMul + 'x'; this.audio.sfx('tick'); });
     $('b-gadget1').addEventListener('click', () => this.game && this.game.arm(1));
     $('b-gadget2').addEventListener('click', () => this.game && this.game.arm(2));
-    $('menu-close').addEventListener('click', () => this.game && this.game.deselect());
+    $('menu-close').addEventListener('click', (e) => this.menuTap(e) && this.game && this.game.deselect());
     // keep taps on the HUD from reaching the counter
     for (const id of ['bottombar', 'menu', 'topbar']) $(id).addEventListener('pointerdown', (e) => e.stopPropagation());
+    // Ghost-click guard: a tap on a coaster opens the menu on pointerup, and the browser's click from that same
+    // tap then lands on whatever menu item now sits under the finger, building a tower nobody chose. A menu
+    // click counts only if its press started on the menu (capture phase, so it runs before any stopPropagation).
+    this._downInMenu = false;
+    addEventListener('pointerdown', (e) => { this._downInMenu = $('menu').contains(e.target); }, true);
   }
+
+  // a real press on the menu, or a keyboard / scripted click (detail 0); not the click left over from the tap that opened it
+  menuTap(e) { return e.detail === 0 || this._downInMenu; }
 
   show(id, on = true) { $(id).classList.toggle('hidden', !on); }
 
@@ -115,7 +123,7 @@ export class UI {
       const nn = document.createElement('div'); nn.className = 'n'; nn.textContent = n; b.append(nn);
       if (d) { const dd = document.createElement('div'); dd.className = 'd'; dd.textContent = d; b.append(dd); }
       if (c !== null) { const cc = document.createElement('div'); cc.className = 'c'; cc.textContent = c; b.append(cc); }
-      b.addEventListener('click', (e) => { e.stopPropagation(); on && on(); });
+      b.addEventListener('click', (e) => { e.stopPropagation(); if (this.menuTap(e)) on && on(); });
       items.append(b);
       return b;
     };
