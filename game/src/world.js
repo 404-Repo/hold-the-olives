@@ -279,6 +279,17 @@ export async function buildWorld(scene, stage, renderer) {
     const strip = new THREE.PointLight(0xffc27a, 40, 18, 1.5); strip.position.set(-5.5, 5.2, -10); root.add(strip);
   }
 
+  // dust motes in the light: the air of a sunny kitchen
+  {
+    const N = look.fridge ? 60 : 160, pos = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) { pos[i * 3] = -6 + Math.random() * 12; pos[i * 3 + 1] = 0.5 + Math.random() * 7; pos[i * 3 + 2] = -22 + Math.random() * 26; }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const cv = document.createElement('canvas'); cv.width = cv.height = 32; const c2 = cv.getContext('2d');
+    const gr = c2.createRadialGradient(16, 16, 0, 16, 16, 16); gr.addColorStop(0, 'rgba(255,240,200,1)'); gr.addColorStop(1, 'rgba(255,240,200,0)'); c2.fillStyle = gr; c2.fillRect(0, 0, 32, 32);
+    const motes = new THREE.Points(g, new THREE.PointsMaterial({ size: 0.12, map: new THREE.CanvasTexture(cv), transparent: true, opacity: look.lamps || look.fridge ? 0.35 : 0.7, depthWrite: false, blending: THREE.AdditiveBlending, color: look.fridge ? 0xbcd4ff : 0xfff0c8 }));
+    motes.onBeforeRender = () => { const t = performance.now() / 1000; const a = g.attributes.position; for (let i = 0; i < N; i++) { a.array[i * 3 + 1] += Math.sin(t * 0.3 + i) * 0.0015; a.array[i * 3] += Math.cos(t * 0.2 + i * 1.3) * 0.0012; } a.needsUpdate = true; };
+    root.add(motes);
+  }
   scene.add(root);
 
   // the olives' road

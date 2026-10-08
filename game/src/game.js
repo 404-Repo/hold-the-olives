@@ -437,7 +437,14 @@ export class Game {
     if (e.shredT > 0) k *= 1.3;
     if (a > 0.3 && src === 'bolt' && Math.random() < 0.5) this.fx.ping(e.pos.x, e.pos.y + e.h, e.pos.z);
     e.hp -= k; e.flash = 0.12; e.src = src === 'lob' && w ? w : src;
-    if (e.boss) this.ui.boss(e.def.name, Math.max(0, e.hp / e.maxHp));
+    if (e.boss) {
+      this.ui.boss(e.def.name, Math.max(0, e.hp / e.maxHp));
+      if (!e.enraged && e.hp < e.maxHp * 0.4 && e.hp > 0) {
+        e.enraged = true; e.speed *= 1.3; e.spawnEvery = (e.def.spawnEvery || 4) * 0.6;
+        const lines = { jar: 'THE JAR has lost its lid!', bottle: 'THE OIL BOTTLE is boiling!', martini: 'THE MARTINI is SHAKEN!' };
+        this.ui.banner(lines[e.type] || 'ENRAGED', 'hit it with everything', 1800); this.rig.shake(0.5, 0.5); this.audio.sfx('lid');
+      }
+    }
     if (e.hp <= 0) this.kill(e);
   }
 
@@ -557,7 +564,7 @@ export class Game {
       if (e.boss && e.def.spawn) {
         e.spawnT -= dt;
         if (e.spawnT <= 0) {
-          e.spawnT = e.def.spawnEvery;
+          e.spawnT = e.spawnEvery || e.def.spawnEvery;
           for (let i = 0; i < 3; i++) this.spawn(e.def.spawn, Math.max(0, e.d - 0.6 - i * 0.3), rand(-0.4, 0.4));
           this.audio.sfx('lid'); e.spit = 0.8;
         }
