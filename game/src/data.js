@@ -2,7 +2,7 @@
 // (one world metre is 10 cm of kitchen). The counter top is y = 0; the camera
 // looks along -Z, so olives come from far (negative z) toward the sandwich.
 
-export const ENEMY_SCALE = 1.55;  // jumbo olives: read at phone size
+export const ENEMY_SCALE = 1.85;  // jumbo olives: read at phone size
 export const FIELD = 0.82;        // the authored layouts below are compacted by this so the whole field fits a phone
 
 export const WEAPONS = {

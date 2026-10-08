@@ -720,7 +720,7 @@ export class Game {
       }
       // health bar
       if (e.hp < e.maxHp && nb < 300 && !e.boss) {
-        const w = Math.max(0.42, e.h * 0.9), f = Math.max(0, e.hp / e.maxHp);
+        const w = Math.max(0.32, e.h * 0.62), f = Math.max(0, e.hp / e.maxHp);
         V.set(e.pos.x, e.pos.y + e.h + 0.22, e.pos.z);
         M.compose(V, cq, S.set(w + 0.06, 0.11, 1)); this.barBg.setMatrixAt(nb, M);
         V2.set(-(1 - f) * w / 2, 0, 0).applyQuaternion(cq); V.add(V2);
