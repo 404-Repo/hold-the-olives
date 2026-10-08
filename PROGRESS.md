@@ -252,3 +252,12 @@ opponent. Keys: `work/keys/h2h_key.json`; sessions: `work/h2h/sNN/`.
   Nobody has listened to the audio. The spatula slap is synthesized.
 - Atlas spend: about 3,400 credits at max hold (ledger `atlas_calls.jsonl`, includes failed calls).
 - No human play, no real phone, no iOS audio check.
+
+### Late note: the hung agents came back
+
+After the final gate, both "hung" asset agents resumed and wrote their own picks over 25 shipped assets (olives,
+bosses, projectiles and part of the counter kit). That output was never gated, critiqued or played, so main stays on
+the tested assets and their work is parked on branch `late-agent-assets` for a later round. Their notes: the olive
+agent spent 184 credits; three olives are over the 2k budget (knight 2938, greaser 2502, ring 2248); boss eyes sit on
+upright bands and shrink from steep angles. Diagnosis correction: they were not stuck on a dead shell call; one
+olive-agent run took about 6.3 hours in total.
