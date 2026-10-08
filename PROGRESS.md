@@ -261,3 +261,27 @@ the tested assets and their work is parked on branch `late-agent-assets` for a l
 agent spent 184 credits; three olives are over the 2k budget (knight 2938, greaser 2502, ring 2248); boss eyes sit on
 upright bands and shrink from steep angles. Diagnosis correction: they were not stuck on a dead shell call; one
 olive-agent run took about 6.3 hours in total.
+
+### Balance note: stage 2 after the economy trim (2026-10-08)
+
+The trim (7c56ed0) cut kill rewards by about 17% on every stage but added opening crumbs only on stages 3 to 5.
+Stage 2 kept 230 and lost about 60 crumbs by wave 5 (534 to 476, kills plus start), plus a smaller early-call bonus,
+so the bot reached its 5th and 6th towers a wave late and the wave 6 to 7 rush ate the sandwich. Fix: stage 2 opens
+with **275** crumbs (was 230). Nothing else changed; stage 1 stays as trimmed.
+
+Bot (`tools/bot.mjs`, now with `--seed` and `--url`), stage 2, wins of runs and bites left in the wins:
+
+| build | rush, 6 towers | rush, 8 towers | no early calls, 8 towers |
+|---|---|---|---|
+| ee4783e (testers) | 1 of 2 (7) | 3 of 3 (5, 14, 4) | 2 of 3 |
+| 689b925 (before trim) | 4 of 5 (10 to 14) | 3 of 3 (9 to 16) | 3 of 3 (18 to 20) |
+| bf7af2b (trim) | 0 of 5 | 1 of 3 (1) | 2 of 3 |
+| start 260 | 3 of 5 (1 to 10) | 5 of 5 (7 to 13) | 3 of 3 |
+| **start 275** | **5 of 5 (6 to 18)** | **5 of 5 (15 to 20)** | **3 of 3 (20)** |
+| start 290 | 5 of 5 (13 to 20) | 5 of 5 (17 to 20) | 3 of 3 (20) |
+
+Landscape 844x390, rush, 6 towers: trim 0 of 3, start 275 3 of 3. 0 console errors in every fix run; jam gate PASS.
+Total crumbs from kills on stage 2 stay 17% below the tester build, so the "economy floods" fix holds late in the stage.
+Stage 1 after the trim: patient play still takes no bites, rushing now costs 0 to 12 (it never did before the trim).
+Not caused by the trim: the bot loses stage 3 in every build (tester build too) at waves 5 to 8 with no layers;
+stages 4 and 5 are coin flips for it in every build. Not checked with a human.

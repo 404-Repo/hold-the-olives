@@ -1,9 +1,11 @@
 // Plays a whole stage with real touch taps, like a decent player. Logs telemetry, shoots frames, reports the end card.
-//   node tools/bot.mjs [--stage=1] [--speed=3] [--towers=6] [--out=dir] [--w=390 --h=844] [--max=600] [--early=1]
+//   node tools/bot.mjs [--stage=1] [--speed=3] [--towers=6] [--out=dir] [--w=390 --h=844] [--max=600] [--early=1] [--url=http://localhost:8798/] [--seed=N]
+//   --seed replaces Math.random with a seeded generator (dodges, quips, fx), so runs differ only by frame timing.
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 const arg = (k, d) => { const a = process.argv.find((x) => x.startsWith(`--${k}=`)); return a ? a.split('=').slice(1).join('=') : d; };
 const W = +arg('w', 390), H = +arg('h', 844), OUT = arg('out', '/Users/atlas/astrocade-game6/work/lead/bot'), STAGE = arg('stage', '1');
+const BASE = arg('url', 'http://localhost:8798/'), SEED = arg('seed', '');
 const MAXT = +arg('max', 600), TOWERS = +arg('towers', 6), SPEED = +arg('speed', 3), EARLY = arg('early', '1') === '1';
 fs.mkdirSync(OUT, { recursive: true });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -13,7 +15,8 @@ try {
   const p = await b.newPage(); await p.setViewport({ width: W, height: H, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
   p.on('pageerror', (e) => errs.push('pageerror ' + e.message)); p.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()); });
   p.on('response', (r) => { if (r.status() >= 400) errs.push(r.status() + ' ' + r.url()); });
-  await p.goto('http://localhost:8798/?dev_stage=' + STAGE); await p.waitForFunction('window.__READY__', { timeout: 60000 });
+  if (SEED) await p.evaluateOnNewDocument((sd) => { let a = sd >>> 0; Math.random = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }, +SEED);
+  await p.goto(BASE + '?dev_stage=' + STAGE); await p.waitForFunction('window.__READY__', { timeout: 60000 });
   const box = async (sel) => { const e = await p.$(sel); if (!e) return null; const r = await e.boundingBox(); return r && r.width ? r : null; };
   const tapSel = async (sel) => { const r = await box(sel); if (r) await p.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); return !!r; };
   const G = () => p.evaluate(() => window.__GAME__);
@@ -21,7 +24,7 @@ try {
   for (let i = 1; i < SPEED; i++) { await tapSel('#b-speed'); await sleep(80); }
   const W8 = { 1: ['pick', 'pickle'], 2: ['pick', 'pickle', 'mustard'], 3: ['pick', 'pickle', 'mustard', 'pepper'], 4: ['pick', 'pickle', 'mustard', 'pepper', 'grater'], 5: ['pick', 'pickle', 'mustard', 'pepper', 'grater', 'toaster'], E: ['pick', 'pickle', 'mustard', 'pepper', 'grater', 'toaster'] }[STAGE];
   const t0 = Date.now(); let n = 0, lastShot = 0, built = 0;
-  const menuItem = async (pred) => { const items = await p.$$('#menu-items .mi'); for (const it of items) { const txt = await it.evaluate((e) => e.textContent + '|' + e.className); if (pred(txt)) { const r = await it.boundingBox(); await p.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); return true; } } return false; };
+  const menuItem = async (pred) => { const items = await p.$$('#menu-items .mi'); for (const it of items) { const txt = await it.evaluate((e) => e.textContent + '|' + e.className); if (pred(txt)) { const r = await it.boundingBox(); if (!r) return false; await p.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2); return true; } } return false; };
   while ((Date.now() - t0) / 1000 < MAXT) {
     const g = await G(); if (!g) break;
     if (g.over) break;
