@@ -152,3 +152,103 @@ Honest gaps:
 - Music: Atlas returned 13 to 41 s takes; five requests for longer or extra takes died with connection resets.
   Each cue is a crossfaded playlist of the takes we have. Nobody has listened to any of it.
 - No human has played it; no real phone.
+
+## Milestone 4: jam gate PASS and blind comparisons (2026-10-08)
+
+Final build: commit **7c56ed0** (main). Serving at **http://localhost:8798/**; cloudflared quick tunnel
+`https://modes-too-paragraphs-grand.trycloudflare.com/` (ephemeral; `work/tunnel.log`). No GitHub repo was created.
+
+### Jam gate (recipe @ 4effad3; 390x844 @3x, real touch, 4G, CPU 2x slower)
+
+| | tunnel, 7c56ed0 | tunnel, ee4783e (panel build) | localhost, ee4783e |
+|---|---|---|---|
+| ready | 3.3 s (budget 20) | 4.2 s | 4.0 s |
+| weight | 4.6 MB (budget 10) | 4.6 MB | 4.6 MB |
+| started / moved | real tap / 3.3 m | real tap / 3.3 m | real tap / 3.3 m |
+| peak draws / tris | 235 / 78k | 235 / 78k | 235 / 78k |
+| errors / 404s / outside folder | 0 / 0 / none | 0 / 0 / none | 0 / 0 / none |
+| RESULT | **PASS** | **PASS** | **PASS** |
+
+Verdict blocks: `work/jam_verdict_final_tunnel.txt`, `work/jam_verdict_tunnel.txt`, `work/jam_verdict_local.txt`.
+`harness/ship.mjs`: 95 modules parse, no path leaves the folder. `harness/live.mjs` on the tunnel: ready 1.7 s, moved
+3.3 m. The gate samples only the first seconds; in full play my bot measured peaks of 420 draws and 0.2 M triangles.
+The 60 fps is an M4 Metal GPU, not a phone. "Moved" is the camera's focus panned by a real finger on `#look`: a tower
+defense has no avatar, so `__GAME__.pos` is the view.
+
+### Blind look critic, four rounds (fresh harsh critic each; keys moved out before judging; in-motion frames)
+
+| round | vs podium (8) | vs floor | vs concept frames | property named first |
+|---|---|---|---|---|
+| 1 | 2 won, 6 lost | 6 of 6 | 0 of 6 | bleached boards flatten everything |
+| 2 | 4 won, 4 lost (2 clear, 2 slight) | 5 of 5 | 0 of 6 | high camera, tiny pieces |
+| 3 | 5 won, 3 lost (clear, clear, slight) | 4 of 4 | 0 of 5 | flat, engine-default light |
+| 4 | 5 won, 3 lost (clear, decisive, clear) | 4 of 4 | 0 of 5 | camera and character scale |
+
+- Every podium loss in rounds 3 and 4 was to SUNDRIFT (one committed look, a big hero car in frame).
+- The concept column never moved. Three critics named the same structural cause: the concept illustrations are low
+  three-quarter shots where the sandwich is 40% of the frame, and this game's default is the whole-field overview a
+  tower defense needs. I stopped look rounds after round 4 by GAME.md's rule and my own limit of four. After round 4 I
+  made the olives 1.85x (from 1.55x) and thinned the health bars; that change has not been judged by a critic.
+- Caveats: 8 pairs is coarse; the podium frames come from another team's harness (frame choice and HUDs differ);
+  critics guessed which game was ours every time, so "blind" means they did not know which side won, not which game.
+
+### Blind head-to-head play, 8 sessions (fresh Sonnet testers, the MOONPULL/BLOOMFIRE panel harness)
+
+Each tester played two games ("Game A", "Game B") for at least 540 s each on an emulated 390x844 phone with real touch
+on a virtual clock, then made a forced choice. Our game was served from a frozen worktree at **ee4783e**, so later
+edits could not leak into a session. **Order balanced**: ours first in four sessions, second in four, one of each per
+opponent. Keys: `work/keys/h2h_key.json`; sessions: `work/h2h/sNN/`.
+
+| # | persona | opponent | ours played | keep playing | better made | ours fun / nuance / looks | opponent fun / looks |
+|---|---|---|---|---|---|---|---|
+| s01 | casual | SUNDRIFT | 1st | **ours, clear** | **ours, slight** | 7 / 7 / 9 | 5 / 9 |
+| s02 | competitive | SUNDRIFT | 2nd | **ours, clear** | **ours, clear** | 7 / 8 / 9 | 6 / 8 |
+| s03 | indie | Bellkeeper | 1st | **ours, clear** | **ours, clear** | 7 / 7 / 9 | 6 / 8 |
+| s04 | casual | Bellkeeper | 2nd | **ours, decisive** | **ours, clear** | 8 / 7 / 8 | 5 / 9 |
+| s05 | competitive | Farseek | 1st | **ours, decisive** | **ours, slight** | 7 / 6 / 9 | 4 / 9 |
+| s06 | indie | Farseek | 2nd | **ours, clear** | **ours, clear** | 7 / 7 / 8 | 5 / 8 |
+| s07 | casual | MOONPULL | 1st | MOONPULL, clear | MOONPULL, slight | 6 / 5 / 8 | 6 / 8 |
+| s08 | indie | MOONPULL | 2nd | MOONPULL, clear | MOONPULL, slight | 5 / 5 / 8 | 7 / 8 |
+
+- **Against the podium: keep playing 6 of 6, better made 6 of 6**, and it holds in both orders (3 of 3 first, 3 of 3
+  second). Every tester who played ours against a podium game said "would replay: yes" and none would have quit.
+- **Against MOONPULL: 0 of 2 on both.** Both testers said MOONPULL's one tide verb kept reframing itself, while ours
+  "never made me decide anything I had not seen in a hundred tower defenses"; the indie tester added "its economy
+  flooded me", the casual one "stage 1 was a walkover and most of the time I waited for olives to walk".
+- What testers praised (their words): "money came in with every pop", "each new enemy type changed how I built",
+  "lost the boss stage by hoarding coins, then changed how I spent", "a decision every minute", the CLUB pop-up, combo
+  chains (x33 to x86), THE JAR losing its lid, "no stuck states in 9 minutes".
+- What they held against it, and what I changed after the panel (main tree, **not tester-verified**): a slow first
+  15 s (the first wave now marches in 1.8x faster and the gaps between waves are 11 s, not 14), THE JAR beat two
+  testers (softer: 1,300 HP, 6 bites, slower minions), no warning before a brute bites (a warning toast and ring),
+  banked crumbs unspent (a nudge), taps on tall towers missed (towers now answer taps anywhere up the stack), an
+  accidental sale (Sell asks twice), the economy floods (rewards about 15% lower, a smaller early-call bonus, more
+  opening crumbs on stages 3 to 5), music felt thin (it plays continuously per the harness log; raised in the mix).
+- **Caveats, read before using these numbers.** The panel's own calibration failed (PANEL.md): it does not reproduce
+  Ben's ranking of the jam winners, and agent testers struggle in 3D navigation games even with a movement assist,
+  which favours a tap-only tower defense against all three podium games. s01's tester hit an image-read limit early
+  in our game and rated it partly from the sound log (it is the session where ours was played first against SUNDRIFT;
+  dropping it leaves 5 of 5). s04 to s08 were told to read contact sheets sparingly; s01 to s03 were not. Title
+  screens name the games. Eight agents are not people: one round of a human on a real phone is still owed.
+
+### Where this leaves the game against the bar
+
+- **Jam rubric guess** [inferred, not measured by a judge]: look sits around the podium (5 of 8 blind pairs, losses to
+  SUNDRIFT); play beats the podium per the panel; "what nobody else tried" is the sandwich stack as the upgrade tree
+  (no jam 001 entry is a tower defense); receipts are in the repo (82 assets x 3 candidates, 4 critic rounds, 8 tester
+  sessions) but there is no public repo, which cost MOONPULL 7 of 10 receipt points.
+- **Against MOONPULL it loses on novelty**, not polish or stickiness: testers called it the cleaner, more replayable
+  game and still preferred the fresher verb. The stack is our find, and it does not read as new enough in nine minutes.
+  Ideas not built: stacks that interact (neighbouring CLUBs sharing layers), olives that steal a layer, a bite that
+  takes a layer off the nearest tower instead of the sandwich.
+
+### Process notes and honest gaps
+
+- Two asset agents hung on a shell call that never returned (no file writes for hours, no process). I could not stop
+  them from this session; I made both sets of picks myself from their verified candidates. While they hung, they
+  nominally counted as running, so for part of the critic and panel phase three working agents ran alongside two dead
+  ones.
+- Music: Atlas returned 13 to 41 s takes; five longer requests failed with connection resets (logged at max hold).
+  Nobody has listened to the audio. The spatula slap is synthesized.
+- Atlas spend: about 3,400 credits at max hold (ledger `atlas_calls.jsonl`, includes failed calls).
+- No human play, no real phone, no iOS audio check.
