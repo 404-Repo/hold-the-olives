@@ -20,7 +20,7 @@ const MUSIC = {
 export class Audio {
   constructor() {
     this.ctx = null; this.buf = {}; this.on = true; this.cue = null; this.last = {};
-    this.musicVol = 0.42; this.sfxVol = 0.8;
+    this.musicVol = 0.6; this.sfxVol = 0.75;
   }
 
   unlock() {

@@ -25,5 +25,23 @@
    "A": 8854,
    "B": 8855
   }
+ },
+ "s04": {
+  "A": "bellkeeper",
+  "B": "olives",
+  "persona": "casual",
+  "ports": {
+   "A": 8856,
+   "B": 8857
+  }
+ },
+ "s05": {
+  "A": "olives",
+  "B": "farseek",
+  "persona": "competitive",
+  "ports": {
+   "A": 8858,
+   "B": 8859
+  }
  }
 }
