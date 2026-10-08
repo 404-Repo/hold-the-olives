@@ -1,0 +1,9 @@
+node_modules/
+work/**/*.png
+work/**/*.jpg
+work/**/*.webm
+work/**/*.mp4
+work/server.log
+work/tunnel.log
+.DS_Store
+_verify/
