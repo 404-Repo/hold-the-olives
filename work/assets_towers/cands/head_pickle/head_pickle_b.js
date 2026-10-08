@@ -128,6 +128,8 @@ export default function (THREE) {
   function fitH(body, H) { const b = bounds(g); body.scale.y *= H / (b.max.y - b.min.y); }
   // scale a group uniformly so the whole asset is H tall
   function fitAll(body, H) { const b = bounds(g); body.scale.multiplyScalar(H / (b.max.y - b.min.y)); }
+  // scale a group uniformly so the whole asset is L long in z
+  function fitD(body, L) { const b = bounds(g); body.scale.multiplyScalar(L / (b.max.z - b.min.z)); }
 
   // ---- this object ----
   // PROFILES: a lathe pickle with sin-noise warts and a slight banana bend, crimped lathe caps, a cork carriage as an extruded stepped side profile
@@ -143,7 +145,12 @@ export default function (THREE) {
     v.x *= bump; v.z *= bump; v.x += 0.06 * Math.cos(v.y * 3.6) ;
   });
   const P = grp(body, [0, 0.43, 0.0], null, [-0.45, 0, 0]);
-  add(pg, skin, [0, 0, 0], P, [PI / 2, 0, 0]);
+  const PL = grp(P, [0, 0, 0], null, [PI / 2, 0, 0]);
+  add(pg, skin, [0, 0, 0], PL);
+  // warts spread evenly over the skin (golden-angle spiral, height and angle decorrelated)
+  const wartM = M(C.pickle, { r: 0.3 }), wg = new THREE.SphereGeometry(0.034, 5, 3);
+  for (let i = 0; i < 34; i++) { const t = 0.1 + 0.8 * (i + 0.5) / 34, y = -L / 2 + L * t, r = 0.17 * Math.pow(Math.sin(PI * t), 0.45) * 0.97, th = i * 2.39996;
+    add(wg, wartM, [r * Math.cos(th) + 0.06 * Math.cos(y * 3.6), y, r * Math.sin(th)], PL, null, [1, 1.3, 1]); }
   add(new THREE.CylinderGeometry(0.135, 0.135, 0.012, 18), flesh, [0.062, 0, L / 2 + 0.004], P, [PI / 2, 0, 0]);
   for (let i = 0; i < 6; i++) { const a = i / 6 * TAU; add(new THREE.SphereGeometry(0.02, 6, 4), seedm, [0.062 + Math.cos(a) * 0.065, Math.sin(a) * 0.065, L / 2 + 0.01], P, null, [1, 1, 0.4]); }
   // carriage side profile (x = world z, y = world y), stepped like a cannon cheek

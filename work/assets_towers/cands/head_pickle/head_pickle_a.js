@@ -128,6 +128,8 @@ export default function (THREE) {
   function fitH(body, H) { const b = bounds(g); body.scale.y *= H / (b.max.y - b.min.y); }
   // scale a group uniformly so the whole asset is H tall
   function fitAll(body, H) { const b = bounds(g); body.scale.multiplyScalar(H / (b.max.y - b.min.y)); }
+  // scale a group uniformly so the whole asset is L long in z
+  function fitD(body, L) { const b = bounds(g); body.scale.multiplyScalar(L / (b.max.z - b.min.z)); }
 
   // ---- this object ----
   // PRIMITIVES: a capsule pickle studded with sphere warts, pale cut face at the muzzle, cork box carriage, four bottle-cap wheels

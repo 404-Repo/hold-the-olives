@@ -334,6 +334,12 @@ export class Game {
       this.rangeRing.visible = this.rangeFill.visible = true;
     } else this.rangeRing.visible = this.rangeFill.visible = false;
     this.ui.openMenu(this, pad);
+    // keep the coaster you tapped in view above the menu
+    const top = document.getElementById('menu').getBoundingClientRect().top;
+    V.set(pad.x, pad.y + 0.5, pad.z).project(this.rig.cam);
+    const y = (1 - V.y) / 2 * innerHeight;
+    if (y > top - 70) this._preNudge = this._preNudge || { tx: this.rig.g.tx, tz: this.rig.g.tz };
+    if (y > top - 70) this.rig.pan(0, -(y - (top - 110)) * (this.rig.dist * 1.6 / innerHeight) / Math.max(0.5, Math.sin(this.rig.pitch)));
   }
   previewRange(pad, r) {
     if (!r) { if (!pad.tower) this.rangeRing.visible = this.rangeFill.visible = false; return; }
@@ -341,7 +347,10 @@ export class Game {
     this.rangeRing.position.set(pad.x, pad.y + 0.06, pad.z); this.rangeFill.position.copy(this.rangeRing.position);
     this.rangeRing.visible = this.rangeFill.visible = true;
   }
-  deselect() { this.selected = null; this.rangeRing.visible = this.rangeFill.visible = false; this.ui.closeMenu(); }
+  deselect() {
+    this.selected = null; this.rangeRing.visible = this.rangeFill.visible = false; this.ui.closeMenu();
+    if (this._preNudge) { this.rig.g.tx = this._preNudge.tx; this.rig.g.tz = this._preNudge.tz; this._preNudge = null; }
+  }
 
   // ----- input
   groundAt(sx, sy) {

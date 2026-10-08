@@ -7,10 +7,10 @@ const HERE = path.dirname(new URL(import.meta.url).pathname);
 const lib = fs.readFileSync(path.join(HERE, 'src/lib.js'), 'utf8');
 export const EXPECT = {
   layer_bread: { width: 1.1, height: 0.16, depth: 1.1, tolerance: 0.08 },
-  layer_lettuce: { width: 1.2, height: 0.12, tolerance: 0.12 },
-  layer_tomato: { height: 0.12, width: 1.05, tolerance: 0.15 },
+  layer_lettuce: { width: 1.4, height: 0.12, tolerance: 0.12 },
+  layer_tomato: { height: 0.12, width: 1.3, tolerance: 0.12 },
   layer_cheese: { height: 0.07, width: 1.55, tolerance: 0.12 },
-  layer_bacon: { height: 0.09, width: 1.1, tolerance: 0.15 },
+  layer_bacon: { height: 0.09, width: 1.35, tolerance: 0.12 },
   head_ballista: { height: 0.75, tolerance: 0.06 },
   head_pickle: { height: 0.8, tolerance: 0.06 },
   head_mustard: { height: 1.0, tolerance: 0.06 },

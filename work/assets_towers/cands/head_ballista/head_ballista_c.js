@@ -128,6 +128,8 @@ export default function (THREE) {
   function fitH(body, H) { const b = bounds(g); body.scale.y *= H / (b.max.y - b.min.y); }
   // scale a group uniformly so the whole asset is H tall
   function fitAll(body, H) { const b = bounds(g); body.scale.multiplyScalar(H / (b.max.y - b.min.y)); }
+  // scale a group uniformly so the whole asset is L long in z
+  function fitD(body, L) { const b = bounds(g); body.scale.multiplyScalar(L / (b.max.z - b.min.z)); }
 
   // ---- this object ----
   // DIFFERENT READING: a Roman torsion ballista built of toothpicks: a square pick frame with two rope skeins, two pick arms, a trough and a big bolt

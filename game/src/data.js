@@ -195,8 +195,8 @@ export function endlessWave(n) {
   const groups = 1 + Math.min(3, Math.floor(n / 3));
   for (let g = 0; g < groups; g++) {
     const t = avail[(n * 7 + g * 3) % avail.length];
-    const base = t === 'brute' ? 2 : t === 'knight' ? 6 : 12;
-    out.push(W(t, Math.round(base + n * (t === 'brute' ? 0.25 : 1.1)), Math.max(0.2, 1.0 - n * 0.03), g * 4));
+    const base = t === 'brute' ? 1 : t === 'knight' ? 4 : 8;
+    out.push(W(t, Math.round(base + n * (t === 'brute' ? 0.2 : 0.8)), Math.max(0.22, 1.0 - n * 0.025), g * 5));
   }
   return out;
 }
@@ -223,8 +223,8 @@ ENDLESS.burners = ENDLESS.burners.map((p) => [p[0] * FIELD, p[1] * FIELD]);
 for (const k in WEAPONS) WEAPONS[k].range *= 0.9;
 
 export function hpScale(stageNum, wave) {
-  const s = typeof stageNum === 'number' ? stageNum : 3;
-  return (1 + 0.22 * (s - 1)) * (1 + 0.075 * wave);
+  if (typeof stageNum !== 'number') return 1 + 0.085 * wave + 0.002 * wave * wave;   // endless: keeps climbing
+  return (1 + 0.2 * (stageNum - 1)) * (1 + 0.09 * wave);
 }
 
 // Things olives say. Humour is a feature.

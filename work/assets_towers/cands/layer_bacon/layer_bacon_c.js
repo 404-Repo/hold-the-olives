@@ -128,6 +128,8 @@ export default function (THREE) {
   function fitH(body, H) { const b = bounds(g); body.scale.y *= H / (b.max.y - b.min.y); }
   // scale a group uniformly so the whole asset is H tall
   function fitAll(body, H) { const b = bounds(g); body.scale.multiplyScalar(H / (b.max.y - b.min.y)); }
+  // scale a group uniformly so the whole asset is L long in z
+  function fitD(body, L) { const b = bounds(g); body.scale.multiplyScalar(L / (b.max.z - b.min.z)); }
 
   // ---- this object ----
   // DIFFERENT READING: crisp-fried strips, a subdivided slab rippled lengthwise AND crinkled at the edges, darker crisp rims, fat ribbons
@@ -136,11 +138,11 @@ export default function (THREE) {
   const rip = (ph) => (v) => { v.y += 0.024 * Math.sin(12 * v.x + ph) + 0.01 * Math.sin(30 * v.x + ph * 2) * (Math.abs(v.z) / 0.14); };
   const strip = (z, ph, yaw) => {
     const o = grp(body, [0, 0.04, z], null, [0, yaw, 0]);
-    add(deform(new THREE.BoxGeometry(1.12, 0.026, 0.27, 24, 1, 2), rip(ph)), lean, [0, 0, 0], o);
-    for (const s of [-1, 1]) add(deform(new THREE.BoxGeometry(1.1, 0.03, 0.03, 24, 1, 1).translate(0, 0, s * 0.125), rip(ph)), crisp, [0, 0, 0], o);
-    for (const zz of [-0.06, 0.055]) add(deform(new THREE.BoxGeometry(1.08, 0.031, 0.04, 24, 1, 1).translate(0, 0, zz), rip(ph)), fat, [0, 0.001, 0], o);
+    add(deform(new THREE.BoxGeometry(1.36, 0.026, 0.28, 18, 1, 2), rip(ph)), lean, [0, 0, 0], o);
+    for (const s of [-1, 1]) add(deform(new THREE.BoxGeometry(1.34, 0.03, 0.03, 18, 1, 1).translate(0, 0, s * 0.125), rip(ph)), crisp, [0, 0, 0], o);
+    for (const zz of [-0.06, 0.055]) add(deform(new THREE.BoxGeometry(1.32, 0.031, 0.04, 18, 1, 1).translate(0, 0, zz), rip(ph)), fat, [0, 0.001, 0], o);
   };
-  strip(-0.32, 0, 0.06); strip(0, 1.9, -0.05); strip(0.32, 3.7, 0.03);
+  strip(-0.36, 0, 0.07); strip(0, 1.9, -0.06); strip(0.36, 3.7, 0.04);
   fitH(body, 0.09);
 
   placeOnGround();

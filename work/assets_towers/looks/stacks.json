@@ -1,0 +1,35 @@
+{"size": 600, "scenes": [
+ {"title": "stack1 45deg", "items": [
+   {"src": "game/assets/pad_coaster.js", "height": 0.09, "stack": true},
+   {"src": "game/assets/layer_bread.js", "height": 0.16, "stack": true, "rotY": 0.1},
+   {"src": "game/assets/layer_lettuce.js", "height": 0.12, "stack": true, "rotY": -0.2},
+   {"src": "game/assets/layer_tomato.js", "height": 0.12, "stack": true, "rotY": 0.15},
+   {"src": "game/assets/layer_cheese.js", "height": 0.07, "stack": true, "rotY": -0.1},
+   {"src": "game/assets/layer_bread.js", "height": 0.16, "stack": true, "rotY": 0.2},
+   {"src": "game/assets/head_pickle.js", "height": 0.8, "stack": true, "rotY": 0.6}],
+  "el": 45, "az": 30, "dist": 7, "target": [0, 0.6, 0]},
+ {"title": "stack2 45deg", "items": [
+   {"src": "game/assets/pad_coaster.js", "height": 0.09, "stack": true},
+   {"src": "game/assets/layer_bread.js", "height": 0.16, "stack": true, "rotY": -0.1},
+   {"src": "game/assets/layer_bacon.js", "height": 0.09, "stack": true, "rotY": 0.2},
+   {"src": "game/assets/layer_lettuce.js", "height": 0.12, "stack": true, "rotY": 0.1},
+   {"src": "game/assets/layer_tomato.js", "height": 0.12, "stack": true, "rotY": -0.2},
+   {"src": "game/assets/layer_bread.js", "height": 0.16, "stack": true, "rotY": 0.05},
+   {"src": "game/assets/head_ballista.js", "height": 0.75, "stack": true, "rotY": -0.5},
+   {"src": "game/assets/flag_club.js", "height": 0.9, "x": 0.38, "y": 0.45, "z": -0.3}],
+  "el": 45, "az": -30, "dist": 7, "target": [0, 0.6, 0]},
+ {"title": "game camera, 12m 55deg", "items": [
+   {"src": "game/assets/pad_coaster.js", "height": 0.09, "x": -1.6, "stack": true},
+   {"src": "game/assets/layer_bread.js", "height": 0.16, "x": -1.6, "stack": true},
+   {"src": "game/assets/layer_lettuce.js", "height": 0.12, "x": -1.6, "stack": true},
+   {"src": "game/assets/layer_tomato.js", "height": 0.12, "x": -1.6, "stack": true},
+   {"src": "game/assets/layer_cheese.js", "height": 0.07, "x": -1.6, "stack": true},
+   {"src": "game/assets/layer_bread.js", "height": 0.16, "x": -1.6, "stack": true},
+   {"src": "game/assets/head_pickle.js", "height": 0.8, "x": -1.6, "stack": true, "rotY": 0.5},
+   {"src": "game/assets/pad_coaster.js", "height": 0.09, "x": 1.6, "y": 0},
+   {"src": "game/assets/layer_bread.js", "height": 0.16, "x": 1.6, "y": 0.083},
+   {"src": "game/assets/head_toaster.js", "height": 0.95, "x": 1.6, "y": 0.23},
+   {"src": "game/assets/dinner_plate.js", "height": 0.36, "x": 0, "z": -3.5},
+   {"src": "game/assets/club_sandwich.js", "height": 3.0, "x": 0, "y": 0.2, "z": -3.5, "rotY": -0.5}],
+  "el": 55, "az": 20, "dist": 13, "target": [0, 0.5, -1.4], "fov": 40}
+]}

@@ -171,7 +171,7 @@ function pathRibbon(stage, curve, length, width, style) {
       pos.push(x, heightAt(stage, x, z) + 0.015, z);
       uv.push(s < 0 ? 0 : 1, (u * length) / (width * 2));
     }
-    if (i < n) { const a = i * 2; idx.push(a, a + 2, a + 1, a + 1, a + 2, a + 3); }
+    if (i < n) { const a = i * 2; idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }   // wound to face up
   }
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
@@ -180,7 +180,7 @@ function pathRibbon(stage, curve, length, width, style) {
   // straight-up normals: on a tight bend the inner edge folds over itself, and computed normals there point down and shade black
   const nrm = new Float32Array(pos.length); for (let i = 1; i < nrm.length; i += 3) nrm[i] = 1;
   g.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
-  const m = new THREE.MeshStandardMaterial({ map: flourTexture(style), transparent: true, side: THREE.DoubleSide, roughness: style === 'wet' ? 0.15 : 0.95, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
+  const m = new THREE.MeshStandardMaterial({ map: flourTexture(style), transparent: true, roughness: style === 'wet' ? 0.15 : 0.95, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
   const mesh = new THREE.Mesh(g, m); mesh.receiveShadow = true; mesh.renderOrder = 1;
   return mesh;
 }
@@ -246,7 +246,7 @@ export async function buildWorld(scene, stage, renderer) {
     win.rotation.y = Math.PI / 2; win.position.set(-7.36, 3.3, -9.6); root.add(win);
     // upper cabinets: cream boxes on the wall, 5 m up
     const cab = new THREE.MeshStandardMaterial({ color: 0xf2ead8, roughness: 0.55 });
-    for (const [z0, z1] of [[-25.4, -15.0], [-4.2, 8]]) {
+    for (const [z0, z1] of [[-25.4, -15.0]]) {
       const b = new THREE.Mesh(new RoundedBoxGeometry(3.2, 7, z1 - z0, 2, 0.12), cab);
       b.position.set(-5.8, 9.5, (z0 + z1) / 2); root.add(b);
       for (let z = z0 + 2.6; z < z1 - 1; z += 2.6) { const hnd = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.9, 8), new THREE.MeshStandardMaterial({ color: 0xc8773e, metalness: 0.7, roughness: 0.35 })); hnd.position.set(-4.15, 6.6, z); root.add(hnd); }

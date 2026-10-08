@@ -36,8 +36,11 @@ function resize() {
   const w = innerWidth, h = innerHeight;
   renderer.setSize(w, h, false);
   camera.aspect = w / h;
-  camera.fov = w < h ? 56 : 44;          // portrait sees more width with a wider lens
+  camera.fov = w < h ? 56 : 40;          // portrait sees more width with a wider lens
   camera.updateProjectionMatrix();
+  // landscape: look across the counter at the backsplash, the long field running across the screen
+  rig.yaw = w > h * 1.1 ? Math.PI / 2 : 0;
+  rig.g.pitch = w > h * 1.1 ? 0.8 : 1.08;
   if (game) { rig.home(false); }
 }
 addEventListener('resize', resize);
@@ -209,10 +212,10 @@ function frame() {
   fpsN++; if (now - fpsT >= 1000) { fps = fpsN * 1000 / (now - fpsT); fpsN = 0; fpsT = now; }
   if (keys.size && !rig.cine) {
     const s = rig.dist * 0.9 * dt;
-    if (keys.has('ArrowUp') || keys.has('KeyW')) rig.g.tz -= s;
-    if (keys.has('ArrowDown') || keys.has('KeyS')) rig.g.tz += s;
-    if (keys.has('ArrowLeft') || keys.has('KeyA')) rig.g.tx -= s;
-    if (keys.has('ArrowRight') || keys.has('KeyD')) rig.g.tx += s;
+    if (keys.has('ArrowUp') || keys.has('KeyW')) rig.pan(0, s);
+    if (keys.has('ArrowDown') || keys.has('KeyS')) rig.pan(0, -s);
+    if (keys.has('ArrowLeft') || keys.has('KeyA')) rig.pan(-s, 0);
+    if (keys.has('ArrowRight') || keys.has('KeyD')) rig.pan(s, 0);
     if (keys.has('KeyQ')) rig.g.dist *= 1 + dt; if (keys.has('KeyE')) rig.g.dist *= 1 - dt;
   }
   rig.update(dt);

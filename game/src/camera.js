@@ -23,41 +23,50 @@ export class CounterCam {
 
   setBounds(b) { this.bounds = b; }
 
+  /** Pan by screen-aligned amounts: right, and up the screen (into the view). */
+  pan(r, f) {
+    // right = (cos, -sin), forward (up the screen) = (-sin, -cos)
+    const c = Math.cos(this.yaw), sn = Math.sin(this.yaw);
+    this.g.tx += r * c - f * sn;
+    this.g.tz += -r * sn - f * c;
+  }
+
   /** Find the distance and target that show the whole field with room for the HUD. */
   fit(pitch = this.g.pitch) {
     const [x0, z0, x1, z1] = this.bounds;
     const c = this.cam, save = { tx: this.tx, tz: this.tz, dist: this.dist, pitch: this.pitch };
     const pts = [[x0, z0], [x1, z0], [x0, z1], [x1, z1], [0, z0], [0, z1]];
     const v = new THREE.Vector3();
-    let tz = (z0 + z1) / 2, dist = 20;
+    let tz = (z0 + z1) / 2, dist = 20, tx0 = (x0 + x1) / 2;
     const portrait = c.aspect < 1;
-    const yTop = portrait ? 0.80 : 0.82, yBot = portrait ? -0.74 : -0.70, xLim = 0.97;
+    const yTop = portrait ? 0.80 : 0.52, yBot = portrait ? -0.74 : -0.6, xLim = portrait ? 0.97 : 0.9;
     for (let it = 0; it < 6; it++) {
       let lo = 4, hi = 90;
       for (let k = 0; k < 28; k++) {
         const mid = (lo + hi) / 2;
-        this._place(0, tz, mid, pitch); c.updateMatrixWorld(true);
+        this._place(tx0, tz, mid, pitch); c.updateMatrixWorld(true);
         let ok = true;
         for (const [x, z] of pts) { v.set(x, 0, z).project(c); if (v.z > 1 || Math.abs(v.x) > xLim || v.y > yTop || v.y < yBot) { ok = false; break; } }
         if (ok) hi = mid; else lo = mid;
       }
       dist = hi;
-      this._place(0, tz, dist, pitch); c.updateMatrixWorld(true);
+      this._place(tx0, tz, dist, pitch); c.updateMatrixWorld(true);
       let ymax = -9, ymin = 9;
       for (const [x, z] of pts) { v.set(x, 0, z).project(c); ymax = Math.max(ymax, v.y); ymin = Math.min(ymin, v.y); }
       const off = ((ymax - yTop) + (ymin - yBot)) / 2;   // >0: field sits high, move target forward
-      tz -= off * dist * 0.35;
+      // move the target along the view's forward axis to centre the field vertically
+      tz -= off * dist * 0.35 * Math.cos(this.yaw); tx0 -= off * dist * 0.35 * Math.sin(this.yaw);
     }
     Object.assign(this, save);
-    this.fitD = dist; this.fitTz = tz;
+    this.fitD = dist; this.fitTz = tz; this.fitTx = tx0;
     this.maxD = dist * 1.12; this.minD = Math.max(6, dist * 0.32);
-    return { dist, tz };
+    return { dist, tz, tx: tx0 };
   }
 
   home(instant = false) {
-    const { dist, tz } = this.fit(this.g.pitch);
-    Object.assign(this.g, { tx: 0, tz, dist });
-    if (instant) { this.tx = 0; this.tz = tz; this.dist = dist; this.pitch = this.g.pitch; }
+    const { dist, tz, tx } = this.fit(this.g.pitch);
+    Object.assign(this.g, { tx, tz, dist });
+    if (instant) { this.tx = tx; this.tz = tz; this.dist = dist; this.pitch = this.g.pitch; }
   }
 
   shake(a = 0.25, t = 0.3) { this.shakeA = Math.max(this.shakeA, a); this.shakeT = Math.max(this.shakeT, t); }
@@ -80,9 +89,9 @@ export class CounterCam {
     // the closer you zoom, the more you may pan
     const z = 1 - (g.dist - this.minD) / Math.max(1, this.maxD - this.minD);
     const [x0, z0, x1, z1] = this.bounds;
-    const fx = this.fitTz ?? (z0 + z1) / 2;
+    const fx = this.fitTz ?? (z0 + z1) / 2, fxx = this.fitTx ?? 0;
     const sl = 2.2;   // some give even at full zoom-out, so a drag always answers
-    g.tx = clamp(g.tx, x0 * z - sl, x1 * z + sl);
+    g.tx = clamp(g.tx, fxx + (x0 - fxx) * z - sl, fxx + (x1 - fxx) * z + sl);
     g.tz = clamp(g.tz, fx + (z0 - fx) * z - sl * 1.4, fx + (z1 - fx) * z + sl);
     this.tx += (g.tx - this.tx) * k; this.tz += (g.tz - this.tz) * k;
     this.dist += (g.dist - this.dist) * k; this.pitch += (g.pitch - this.pitch) * k;
@@ -124,15 +133,14 @@ export class CounterCam {
         if (p.button === 2) { this.g.pitch += dy * 0.006; return; }
         // pan in world units: one screen height is about the visible depth
         const s = this.dist * 1.6 / el.clientHeight;
-        this.g.tx -= dx * s;
-        this.g.tz -= dy * s / Math.max(0.5, Math.sin(this.pitch));
+        this.pan(-dx * s, dy * s / Math.max(0.5, Math.sin(this.pitch)));   // drag down pulls the far end toward you
       } else if (this.pointers.size === 2) {
         const now = this._pair();
         if (this.last) {
           this.g.dist *= this.last.d / Math.max(10, now.d);
           this.g.pitch += (now.cy - this.last.cy) * 0.005;
           const s = this.dist * 1.6 / el.clientHeight;
-          this.g.tx -= (now.cx - this.last.cx) * s;
+          this.pan(-(now.cx - this.last.cx) * s, 0);
         }
         this.last = now;
       }
