@@ -171,7 +171,7 @@ export class Game {
   startWave() {
     if (this.over || this.wave >= this.waveTotal) return;
     let bonus = 0;
-    if (this.countdown > 0 && this.wave > 0) { this.earlyCalls++; bonus = Math.ceil(this.countdown * 1.5); this.crumbs += bonus; this.score += bonus * 10; this.earlyBonus += bonus; this.fx.text3(this.sandPos.x, 3.2, this.sandPos.z, `+${bonus} early!`, '#ffe066'); }
+    if (this.countdown > 0 && this.wave > 0) { this.earlyCalls++; bonus = Math.ceil(this.countdown * 1.1); this.crumbs += bonus; this.score += bonus * 10; this.earlyBonus += bonus; this.fx.text3(this.sandPos.x, 3.2, this.sandPos.z, `+${bonus} early!`, '#ffe066'); }
     const groups = this.endless ? endlessWave(this.wave + 1) : this.stage.waves[this.wave];
     this.wave++;
     this.spawnQ = [];

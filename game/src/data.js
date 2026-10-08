@@ -28,17 +28,17 @@ export const SELL_BACK = 0.7;
 
 // hp, speed m/s, bites taken from the sandwich, crumbs dropped, display height (m, before ENEMY_SCALE)
 export const OLIVES = {
-  green:   { name: 'Green Olive',   model: 'olive_green',    hp: 30,  speed: 0.95, bites: 1, reward: 4,  h: 0.35 },
+  green:   { name: 'Green Olive',   model: 'olive_green',    hp: 30,  speed: 0.95, bites: 1, reward: 3,  h: 0.35 },
   kalamata:{ name: 'Kalamata',      model: 'olive_kalamata', hp: 18,  speed: 1.55, bites: 1, reward: 3,  h: 0.30 },
-  stuffed: { name: 'Stuffed Olive', model: 'olive_stuffed',  hp: 42,  speed: 0.9,  bites: 1, reward: 5,  h: 0.36, split: 'pimento' },
+  stuffed: { name: 'Stuffed Olive', model: 'olive_stuffed',  hp: 42,  speed: 0.9,  bites: 1, reward: 4,  h: 0.36, split: 'pimento' },
   pimento: { name: 'Pimento',       model: 'pimento_runner', hp: 12,  speed: 1.8,  bites: 1, reward: 2,  h: 0.18 },
-  ring:    { name: 'Olive Ring',    model: 'olive_ring',     hp: 22,  speed: 2.1,  bites: 1, reward: 4,  h: 0.32, roll: true, dodge: 0.25 },
-  knight:  { name: 'Martini Knight',model: 'olive_knight',   hp: 70,  speed: 0.8,  bites: 2, reward: 10, h: 0.9,  armor: 0.5 },
-  brute:   { name: 'Castelvetrano', model: 'olive_brute',    hp: 240, speed: 0.55, bites: 3, reward: 18, h: 0.55 },
-  greaser: { name: 'Greaser',       model: 'olive_greaser',  hp: 48,  speed: 0.95, bites: 1, reward: 6,  h: 0.36, slick: true },
-  jar:     { name: 'THE JAR',       model: 'boss_jar',       hp: 1300, speed: 0.3, bites: 6, reward: 150, h: 2.4, boss: true, spawn: 'green', spawnEvery: 4.5 },
-  bottle:  { name: 'THE OIL BOTTLE',model: 'boss_oil_bottle',hp: 2300, speed: 0.3,  bites: 8, reward: 220, h: 3.2, boss: true, slick: true, spawn: 'greaser', spawnEvery: 5 },
-  martini: { name: 'THE MARTINI',   model: 'boss_martini',   hp: 4200, speed: 0.28, bites: 15, reward: 400, h: 3.6, boss: true, spawn: 'knight', spawnEvery: 4.5 },
+  ring:    { name: 'Olive Ring',    model: 'olive_ring',     hp: 22,  speed: 2.1,  bites: 1, reward: 3,  h: 0.32, roll: true, dodge: 0.25 },
+  knight:  { name: 'Martini Knight',model: 'olive_knight',   hp: 70,  speed: 0.8,  bites: 2, reward: 8, h: 0.9,  armor: 0.5 },
+  brute:   { name: 'Castelvetrano', model: 'olive_brute',    hp: 240, speed: 0.55, bites: 3, reward: 15, h: 0.55 },
+  greaser: { name: 'Greaser',       model: 'olive_greaser',  hp: 48,  speed: 0.95, bites: 1, reward: 5,  h: 0.36, slick: true },
+  jar:     { name: 'THE JAR',       model: 'boss_jar',       hp: 1300, speed: 0.3, bites: 6, reward: 128, h: 2.4, boss: true, spawn: 'green', spawnEvery: 4.5 },
+  bottle:  { name: 'THE OIL BOTTLE',model: 'boss_oil_bottle',hp: 2300, speed: 0.3,  bites: 8, reward: 187, h: 3.2, boss: true, slick: true, spawn: 'greaser', spawnEvery: 5 },
+  martini: { name: 'THE MARTINI',   model: 'boss_martini',   hp: 4200, speed: 0.28, bites: 15, reward: 340, h: 3.6, boss: true, spawn: 'knight', spawnEvery: 4.5 },
 };
 
 // First time an olive type appears, the game introduces it.
@@ -114,7 +114,7 @@ export const STAGES = [
     tap: [0.4, -10.8],
     pads: [[-2.4, -18.0], [-0.4, -16.6], [0.0, -11.4], [2.0, -11.4], [6.0, -11.0], [2.0, -5.6], [-1.0, -5.6], [-0.6, -10.2], [-5.8, -9.4], [0.4, -1.2]],
     sandwich: [0.4, 2.0],
-    start: 270, lives: 20,
+    start: 320, lives: 20,
     gadget: 'tap',
     waves: [
       [W('green', 14, 0.8)],
@@ -138,7 +138,7 @@ export const STAGES = [
     plat: [],
     pads: [[-2.0, -18.8], [2.0, -18.8], [-1.8, -14.2], [-6.0, -14.0], [2.0, -14.2], [2.2, -9.4], [-1.6, -9.4], [6.0, -9.6], [-1.6, -4.6], [1.0, -4.4], [-6.0, -5.2]],
     sandwich: [0.4, 2.0],
-    start: 260, lives: 20,
+    start: 360, lives: 20,
     gadget: 'pepper',
     waves: [
       [W('green', 16, 0.7), W('kalamata', 8, 0.5, 6)],
@@ -164,7 +164,7 @@ export const STAGES = [
     plat: [],
     pads: [[-1.8, -19.2], [2.0, -18.6], [0.0, -13.6], [-2.0, -13.8], [6.0, -14.8], [2.4, -13.2], [-1.6, -9.0], [1.6, -8.6], [-6.0, -9.8], [6.0, -5.2], [1.6, -4.6], [-1.0, -4.4]],
     sandwich: [0.4, 2.0],
-    start: 320, lives: 20,
+    start: 400, lives: 20,
     gadget: 'ice',
     waves: [
       [W('green', 20, 0.5), W('kalamata', 14, 0.35, 5)],

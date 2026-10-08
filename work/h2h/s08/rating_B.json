@@ -1,0 +1,22 @@
+{
+ "label": "Game B",
+ "persona": "indie",
+ "play_seconds": 543.6,
+ "fun": 5,
+ "nuance": 5,
+ "nuance_found": "Mostly the stock tower-defense template: ballista, pickle cannon (splash), mustard (slow), pepper mill (cloud) on fixed pads, with tomato/lettuce/cheese/bacon upgrades and an Aim setting. Small real choices: the per-map active ability (Flame a burner on the Stovetop, Rinse a lane back in the Sink, Swat) is worth timing against the boss; calling waves early gives a bonus but cost me lives; slow towers near the plate helped. Economy never pushed back (I sat on 800 coins with nothing to buy), so the best line was always 'build the next thing, add toppings'.",
+ "pace": 6,
+ "pace_word": "right",
+ "feedback_juice": 8,
+ "looks": 8,
+ "audio": "Music tracks per stage with alt loops, a boss track, victory/defeat stingers, and distinct sample sfx for ballista, cannon, pops and splurts, a jar-lid sound on the boss.",
+ "would_replay": "maybe",
+ "would_quit_at_s": 270,
+ "understood_goal_by_s": 12,
+ "furthest_progress": "Stage 1 The Cutting Board cleared with 3 stars (score 11,140); stage 2 The Stovetop lost to the Jar boss with 1 bite left, then replayed and beat The Jar with 5 bites left (1 star, 25,680, 2 of 3 orders); stage 3 The Sink reached wave 3 of 10 (knights appearing) at the 540 s mark.",
+ "used_movement_assist": "not offered",
+ "control_trouble": "Menu taps sometimes did not register right after closing a panel, so I built blind a couple of times and had to repeat. Otherwise tapping pads and abilities was fine.",
+ "best_moment": "Beating The Jar on the retry with a perfectly timed Flame on the burner and a swat for the last sliver of health.",
+ "worst_moment": "Sitting on 800 unspendable coins while the Jar boss walked to the plate and ate 16 bites; the game gave me nothing to spend them on.",
+ "verdict": "A nicely produced lunch-themed tower defense, good-looking and loud in the right way. But it is the template: build on pads, add toppings, press the ability. The first level is a walkover, the economy floods you, and the one surprise (the Jar boss) is a damage-sponge that I lost to because I had nothing to buy, not because I decided wrong. The ability timing on burners and the sink rinse are the only things that made me think. Fine, I would try the next stage, but it would not stay on my phone."
+}
