@@ -1,0 +1,2 @@
+{"size": 500, "scenes": [
+ {"el":45,"az":20,"dist":7,"target":[0,0.4,0],"items":[{"src":"game/assets/plate_stack.js","x":-1.5},{"src":"game/assets/dish_rack.js","x":2.5}]}]}

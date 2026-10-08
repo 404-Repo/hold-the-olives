@@ -1,6 +1,6 @@
   // PROFILES: lathe body (base bead, straight wall, rolled rim), lathe lid (flange, dome, collar, knob), handle = extruded side profile with a hang hole
   const body = grp(g);
-  const cu = M(C.copper, { r: 0.3, m: 0.85, name: 'metal' }), dk = M(0xa85f30, { r: 0.35, m: 0.85, name: 'metal' });
+  const cu = M(C.copper, { r: 0.3, m: 0.5, name: 'metal' }), dk = M(0xa85f30, { r: 0.35, m: 0.5, name: 'metal' });
   add(lathe([[0, 0], [0.72, 0], [0.8, 0.03], [0.83, 0.1], [0.82, 0.88], [0.86, 0.93], [0.86, 0.97], [0.8, 0.97], [0, 0.97]], 36), cu, [0, 0, 0], body);
   add(lathe([[0.83, 0.12], [0.845, 0.14], [0.845, 0.19], [0.83, 0.21]], 36), dk, [0, 0, 0], body);
   add(lathe([[0, 0.97], [0.88, 0.97], [0.9, 1.0], [0.82, 1.03], [0.6, 1.14], [0.3, 1.19], [0.12, 1.2], [0.1, 1.24], [0.08, 1.27], [0.15, 1.3], [0.17, 1.35], [0.12, 1.4], [0, 1.41]], 32), cu, [0, 0, 0], body);

@@ -100,6 +100,9 @@ const DRESS = {
     ['fork', -2.0, -0.8, 1.5708, 0.12], ['table_knife', 2.0, -20.0, 1.2, 0.12],
     ['salad_bowl', -6.0, -18.2, 0, 1.2], ['napkin_folded', -1.8, -6.6, 0.3, 0.5],
     ['roast_chicken', 0.0, -24.0, 0, 2.6],
+    ['flower_vase', -4.4, -24.2, 0, 4.2],
+    ['dining_chair', 9.0, -18.0, -1.5708, 10.0, -9.4], ['dining_chair', 9.0, -6.0, -1.5708, 10.0, -9.4],
+    ['dining_chair', -9.8, -14.0, 1.5708, 10.0, -9.4], ['dining_chair', -9.8, -2.0, 1.5708, 10.0, -9.4],
   ],
   bar: [
     ['olive_jar_spill', -4.2, -22.6, 0.2, 1.5],
@@ -109,6 +112,7 @@ const DRESS = {
     ['coupe_glass', 1.4, -16.8, 0, 1.8], ['coupe_glass', 6.2, -12.0, 0, 1.8],
     ['lemon', -1.6, -16.4, 0.4, 0.55], ['olive_bowl', 2.0, -2.8, 0, 0.7],
     ['cocktail_napkin', -2.0, -6.0, 0.3, 0.05],
+    ['bar_shelf', 0.0, -30.0, 0, 16.0, -9.4],
   ],
 };
 
@@ -128,7 +132,7 @@ function flourTexture(style) {
   const W = 256, H = 512;
   const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
   const c = cv.getContext('2d');
-  const col = { flour: [250, 244, 230], runner: [242, 236, 222], wet: [190, 214, 222], sugar: [252, 250, 246] }[style] || [250, 244, 230];
+  const col = { flour: [250, 244, 230], runner: [242, 236, 222], wet: [150, 190, 210], sugar: [252, 250, 246], oil: [214, 150, 40] }[style] || [250, 244, 230];
   const img = c.createImageData(W, H);
   let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
   const n1 = new Float32Array(H); for (let y = 0; y < H; y++) n1[y] = Math.sin(y * 0.05) * 0.06 + Math.sin(y * 0.13 + 1) * 0.04;
@@ -140,7 +144,7 @@ function flourTexture(style) {
     if (style === 'runner') a = edge > 0.1 ? 1 : 0;
     const g = (rnd() - 0.5) * 18;
     const i = (y * W + x) * 4;
-    img.data[i] = col[0] + g; img.data[i + 1] = col[1] + g; img.data[i + 2] = col[2] + g; img.data[i + 3] = a * (style === 'wet' ? 120 : 235);
+    img.data[i] = col[0] + g; img.data[i + 1] = col[1] + g; img.data[i + 2] = col[2] + g; img.data[i + 3] = a * (style === 'wet' ? 150 : style === 'oil' ? 200 : 235);
   }
   c.putImageData(img, 0, 0);
   if (style === 'runner') {
@@ -180,7 +184,7 @@ function pathRibbon(stage, curve, length, width, style) {
   // straight-up normals: on a tight bend the inner edge folds over itself, and computed normals there point down and shade black
   const nrm = new Float32Array(pos.length); for (let i = 1; i < nrm.length; i += 3) nrm[i] = 1;
   g.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
-  const m = new THREE.MeshStandardMaterial({ map: flourTexture(style), transparent: true, roughness: style === 'wet' ? 0.15 : 0.95, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
+  const m = new THREE.MeshStandardMaterial({ map: flourTexture(style), transparent: true, roughness: style === 'wet' || style === 'oil' ? 0.15 : 0.95, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
   const mesh = new THREE.Mesh(g, m); mesh.receiveShadow = true; mesh.renderOrder = 1;
   return mesh;
 }
@@ -191,6 +195,7 @@ export async function buildWorld(scene, stage, renderer) {
   scene.background = new THREE.Color(look.bg);
   scene.fog = new THREE.Fog(look.fog, 60, 140);
   renderer.toneMappingExposure = look.exp;
+  scene.environmentIntensity = look.lamps || look.fridge ? 0.18 : 0.3;
 
   // --- light
   const hemi = new THREE.HemisphereLight(look.sky, look.gnd, look.hemi); root.add(hemi);
@@ -247,7 +252,7 @@ export async function buildWorld(scene, stage, renderer) {
     // upper cabinets: cream boxes on the wall, 5 m up
     const cab = new THREE.MeshStandardMaterial({ color: 0xf2ead8, roughness: 0.55 });
     if (hasAsset('upper_cabinet')) {
-      for (let z = -23.4; z <= -15.5; z += 4) { const c = await model('upper_cabinet', { height: 7 }); c.rotation.y = Math.PI / 2; c.position.set(-7.4 + 1.6, 5.4, z); root.add(c); }
+      for (let z = -23.4; z <= -15.5; z += 4) { const c = await model('upper_cabinet', { height: 7 }); c.rotation.y = Math.PI / 2; c.position.set(-7.4 + 1.6, 5.4, z); c.traverse((m) => { if (m.isMesh) { m.castShadow = false; m.receiveShadow = true; } }); root.add(c); }
     }
     if (hasAsset('window_frame')) { const w = await model('window_frame', { height: 5 }); w.rotation.y = Math.PI / 2; w.position.set(-7.4 + 0.3, 0.85, -9.6); w.traverse((m) => { if (m.isMesh) m.castShadow = true; }); root.add(w); }
     for (const [z0, z1] of hasAsset('upper_cabinet') ? [] : [[-25.4, -15.0]]) {
@@ -296,7 +301,7 @@ export async function buildWorld(scene, stage, renderer) {
   const pts = stage.path.map(([x, z]) => new THREE.Vector3(x, heightAt(stage, x, z), z));
   const curve = new THREE.CatmullRomCurve3(pts, false, 'centripetal', 0.5);
   const length = curve.getLength();
-  const style = isTable ? 'runner' : isSink ? 'wet' : isBar ? 'sugar' : 'flour';
+  const style = isTable ? 'runner' : isSink ? 'wet' : isBar ? 'sugar' : isStove ? 'oil' : 'flour';
   root.add(pathRibbon(stage, curve, length, isTable ? 1.7 : 1.5, style));
 
   // dressing: every object is a 404 asset; anything not made yet is skipped

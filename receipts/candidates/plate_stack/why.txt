@@ -1,0 +1,1 @@
+pick plate_stack_b: dinner_plate cross-section x5 so it matches dinner_plate.js; profile order REVERSED because the original faces point inward and render see-through; 28 segments for 5.0k tris.

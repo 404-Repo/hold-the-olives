@@ -1,0 +1,16 @@
+{"size": 760, "scenes": [
+ {"title":"stove","el":40,"az":20,"dist":17,"target":[0,1.2,-1],"items":[
+  {"src":"game/assets/stove_burner.js","x":-2,"z":0},{"src":"game/assets/stove_burner.js","x":2,"z":0},{"src":"game/assets/stove_burner.js","x":-2,"z":-3.5},{"src":"game/assets/stove_burner.js","x":2,"z":-3.5},
+  {"src":"game/assets/frying_pan.js","x":-2.2,"y":0.3,"z":0,"rotY":0.6},{"src":"game/assets/saucepan.js","x":2.6,"y":0.3,"z":-3.5,"rotY":-0.4},
+  {"src":"game/assets/stove_knob.js","x":-3,"z":2.6},{"src":"game/assets/stove_knob.js","x":-1,"z":2.6},{"src":"game/assets/stove_knob.js","x":1,"z":2.6},{"src":"game/assets/stove_knob.js","x":3,"z":2.6},
+  {"src":"game/assets/wooden_spoon.js","x":4.6,"z":0.5,"rotY":0.3},{"src":"game/assets/oven_mitt.js","x":-5,"z":1,"rotY":-0.5},{"src":"game/assets/pepper_shaker.js","x":5,"z":-2},
+  {"src":"game/assets/range_hood.js","x":0,"y":5,"z":-4.5},{"src":"game/assets/head_pickle.js","x":0,"z":1.2},{"src":"game/assets/dinner_plate.js","x":0,"z":4.5}]},
+ {"title":"sink","el":40,"az":-25,"dist":20,"target":[0,2,-1],"items":[
+  {"src":"game/assets/faucet.js","x":0,"z":-3.5},{"src":"game/assets/dish_rack.js","x":-5,"z":-2},{"src":"game/assets/sponge.js","x":2,"z":-3},{"src":"game/assets/dish_soap.js","x":3.2,"z":-3.6},
+  {"src":"game/assets/plate_stack.js","x":4.5,"z":0.5},{"src":"game/assets/drying_glass.js","x":-1.5,"z":1.5},{"src":"game/assets/drying_glass.js","x":-2.6,"z":1.2},
+  {"src":"game/assets/window_frame.js","x":0,"y":6,"z":-5.2},{"src":"game/assets/upper_cabinet.js","x":-7.2,"y":7,"z":-3.6},{"src":"game/assets/upper_cabinet.js","x":7.2,"y":7,"z":-3.6},
+  {"src":"game/assets/head_pickle.js","x":1,"z":2},{"src":"game/assets/dinner_plate.js","x":-4,"z":3}]},
+ {"title":"close","el":35,"az":35,"dist":7,"target":[0,0.5,0],"items":[
+  {"src":"game/assets/stove_burner.js","x":-1.4,"z":-1},{"src":"game/assets/stove_knob.js","x":1.6,"z":1.6},{"src":"game/assets/pepper_shaker.js","x":1.4,"z":-1.5},{"src":"game/assets/sponge.js","x":-0.2,"z":2},
+  {"src":"game/assets/drying_glass.js","x":2.6,"z":0},{"src":"game/assets/head_pickle.js","x":0.3,"z":0.6},{"src":"game/assets/oven_mitt.js","x":-2.6,"z":1.5,"rotY":0.4}]}
+]}

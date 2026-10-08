@@ -1,6 +1,6 @@
   // PRIMITIVES: open tapered cylinder wall + base disc + rim torus, handle = rod with an end ring, rivets; egg = squashed sphere white + yolk dome
   const body = grp(g);
-  const cu = M(C.copper, { r: 0.3, m: 0.85, name: 'metal', ds: true });
+  const cu = M(C.copper, { r: 0.3, m: 0.5, name: 'metal', ds: true });
   const R1 = 1.05, R2 = 1.3, H = 0.42;
   add(new THREE.CylinderGeometry(R2, R1, H, 40, 1, true), cu, [0, H / 2, 0], body);
   add(new THREE.CylinderGeometry(R1, R1 - 0.03, 0.05, 40), cu, [0, 0.025, 0], body);

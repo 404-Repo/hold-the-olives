@@ -1,6 +1,6 @@
   // PRIMITIVES: closed copper cylinder body, base and rim tori, domed sphere-cap lid with a flange, ball knob on a stem, rounded-box handle, rivets
   const body = grp(g);
-  const cu = M(C.copper, { r: 0.3, m: 0.85, name: 'metal' }), dk = M(0xa85f30, { r: 0.35, m: 0.85, name: 'metal' });
+  const cu = M(C.copper, { r: 0.3, m: 0.5, name: 'metal' }), dk = M(0xa85f30, { r: 0.35, m: 0.5, name: 'metal' });
   const R = 0.82, H = 0.95;
   add(new THREE.CylinderGeometry(R, R, H, 36), cu, [0, H / 2, 0], body);
   add(new THREE.TorusGeometry(R, 0.04, 6, 36), dk, [0, 0.04, 0], body, [PI / 2, 0, 0]);

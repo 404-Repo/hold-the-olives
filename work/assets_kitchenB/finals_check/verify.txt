@@ -1,0 +1,17 @@
+ok    dish_rack                5320 tris  100 meshes  4.945x2.4x3.503m
+ok    dish_soap                 984 tris  4 meshes  1.111x2.2x0.908m
+ok    drying_glass             1156 tris  9 meshes  1.079x1.6x1.039m
+ok    faucet                   2308 tris  8 meshes  1.644x6x3.653m
+ok    frying_pan               1998 tris  10 meshes  4.267x0.6x2.407m
+ok    oven_mitt                2796 tris  32 meshes  1.541x0.3x2.685m
+ok    pepper_shaker             996 tris  34 meshes  0.603x0.9x0.603m
+ok    plate_stack              5040 tris  10 meshes  2.822x1x2.802m
+ok    range_hood               1028 tris  12 meshes  6.056x7x4.697m  [flat by declaration: back]
+ok    saucepan                 2068 tris  6 meshes  4.107x1.4x1.787m
+ok    sponge                    448 tris  2 meshes  0.701x0.45x1.078m
+ok    stove_burner             2932 tris  27 meshes  2.4x0.3x2.4m
+ok    stove_knob                788 tris  4 meshes  0.794x0.35x0.794m
+ok    upper_cabinet            3028 tris  21 meshes  4x7x3.2m  [flat by declaration: back]
+ok    window_frame             2076 tris  15 meshes  9.5x5x0.6m  [flat by declaration: back]
+ok    wooden_spoon              740 tris  3 meshes  0.72x0.2x3m
+16/16 clean
