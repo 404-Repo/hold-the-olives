@@ -44,7 +44,7 @@ export const LOOKS = {
   noon:      { bg: 0xeef0ea, sky: 0xffffff, gnd: 0x9a8a72, hemi: 1.25, sun: 0xfff3dc, sunI: 3.0, sunDir: [-0.4, 1.8, -0.3], exp: 1.0, fog: 0xe8ece6, window: 0xffffff },
   afternoon: { bg: 0xf0d2a8, sky: 0xffe6c0, gnd: 0x8f6a4a, hemi: 1.05, sun: 0xffc887, sunI: 3.6, sunDir: [1.0, 1.05, -0.7], exp: 1.05, fog: 0xeac8a0, window: 0xffe2b0 },
   evening:   { bg: 0x2a1c22, sky: 0x8a6a90, gnd: 0x3a2418, hemi: 0.55, sun: 0xffb070, sunI: 1.3, sunDir: [0.8, 1.2, 0.6], exp: 1.15, fog: 0x2a1c22, window: 0x5a4a8a, lamps: true },
-  night:     { bg: 0x141a2a, sky: 0x8aa6d8, gnd: 0x2a2018, hemi: 0.5, sun: 0xbcd4ff, sunI: 1.6, sunDir: [1.0, 0.9, 0.9], exp: 1.15, fog: 0x141a2a, window: 0x1d2a4a, fridge: true },
+  night:     { bg: 0x0d1220, sky: 0x5a74b0, gnd: 0x1a1410, hemi: 0.22, sun: 0x9fb8ff, sunI: 0.9, sunDir: [1.0, 0.9, 0.9], exp: 1.1, fog: 0x0d1220, window: 0x1d2a4a, fridge: true },
 };
 
 // Dressing per stage: [asset, x, z, rotY, height, y?]. Heights are world metres (10x).
@@ -280,8 +280,10 @@ export async function buildWorld(scene, stage, renderer) {
     for (const [x, z] of [[5.6, -22], [-6, -8.6], [3, 1]]) { const l = new THREE.PointLight(0xffb062, 60, 26, 1.6); l.position.set(x, 7, z); root.add(l); }
   }
   if (look.fridge) {
-    const f = new THREE.SpotLight(0xcfe2ff, 260, 60, 0.7, 0.5, 1.2); f.position.set(14, 10, -6); f.target.position.set(0, 0, -9); root.add(f, f.target);
-    const strip = new THREE.PointLight(0xffc27a, 40, 18, 1.5); strip.position.set(-5.5, 5.2, -10); root.add(strip);
+    // the fridge door is open off to the right: a cold wedge of light across the counter
+    const f = new THREE.SpotLight(0xd8e8ff, 70, 70, 0.55, 0.6, 1.3); f.position.set(16, 7, -7); f.target.position.set(-1, 0, -8); f.castShadow = true; f.shadow.mapSize.set(1024, 1024); root.add(f, f.target);
+    // warm under-cabinet strips along the wall
+    for (const z of [-18, -11, -4]) { const strip = new THREE.PointLight(0xffb060, 9, 12, 1.6); strip.position.set(-5.8, 4.6, z); root.add(strip); }
   }
 
   // dust motes in the light: the air of a sunny kitchen

@@ -184,7 +184,7 @@ export const STAGES = [
 ];
 
 // Endless: the Midnight Snack. Plays on the first stage's counter by fridge light.
-export const ENDLESS = { ...STAGES[0], id: 'night', num: 'E', name: 'Midnight Snack', time: 'Night', look: 'night', music: 'stage_b', blurb: 'Endless. The fridge light is on. How long can lunch last?', start: 220, gadget: 'burner', burners: [[-1.0, -14.6], [3.6, -9.8], [-3.0, -4.6]], waves: null };
+export const ENDLESS = { ...STAGES[0], id: 'night', num: 'E', name: 'Midnight Snack', time: 'Night', look: 'night', music: 'stage_b', blurb: 'Endless. The fridge light is on. How long can lunch last?', start: 220, gadget: 'pepper', burners: [], waves: null };
 
 export function endlessWave(n) {
   // n from 1. Escalates forever; a boss every 10th wave.
