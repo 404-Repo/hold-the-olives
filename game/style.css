@@ -125,7 +125,8 @@ h2 { margin: 0 0 6px; font-size: 30px; color: #ffe9a8; letter-spacing: 2px; }
   #menu { left: auto; width: 420px; right: 8px; }
   .mi { min-height: 92px; }
   .mi img { width: 46px; height: 46px; }
-  #banner { top: 16%; }
+  #banner { top: calc(54px + var(--safe-t)); font-size: 18px; padding: 5px 14px 6px; }
+  #banner small { font-size: 11px; }
 }
 
 .orders { margin-top: 10px; text-align: left; display: inline-block; background: rgba(255,244,220,.08); border: 1px solid rgba(255,244,220,.25); border-radius: 12px; padding: 8px 12px; }

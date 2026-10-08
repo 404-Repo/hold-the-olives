@@ -37,7 +37,7 @@ export const OLIVES = {
   brute:   { name: 'Castelvetrano', model: 'olive_brute',    hp: 240, speed: 0.55, bites: 3, reward: 18, h: 0.55 },
   greaser: { name: 'Greaser',       model: 'olive_greaser',  hp: 48,  speed: 0.95, bites: 1, reward: 6,  h: 0.36, slick: true },
   jar:     { name: 'THE JAR',       model: 'boss_jar',       hp: 1700, speed: 0.32, bites: 8, reward: 150, h: 2.4, boss: true, spawn: 'green', spawnEvery: 3.5 },
-  bottle:  { name: 'THE OIL BOTTLE',model: 'boss_oil_bottle',hp: 2800, speed: 0.3,  bites: 10, reward: 220, h: 3.2, boss: true, slick: true, spawn: 'greaser', spawnEvery: 5 },
+  bottle:  { name: 'THE OIL BOTTLE',model: 'boss_oil_bottle',hp: 2300, speed: 0.3,  bites: 8, reward: 220, h: 3.2, boss: true, slick: true, spawn: 'greaser', spawnEvery: 5 },
   martini: { name: 'THE MARTINI',   model: 'boss_martini',   hp: 4200, speed: 0.28, bites: 15, reward: 400, h: 3.6, boss: true, spawn: 'knight', spawnEvery: 4.5 },
 };
 
@@ -151,8 +151,8 @@ export const STAGES = [
       [W('knight', 14, 0.7), W('ring', 16, 0.4, 5)],
       [W('greaser', 12, 0.7), W('green', 30, 0.28, 2), W('brute', 3, 2.5, 8)],
       [W('stuffed', 24, 0.4), W('knight', 12, 0.7, 4), W('ring', 20, 0.3, 10)],
-      [W('brute', 6, 1.8), W('greaser', 14, 0.6, 3), W('kalamata', 30, 0.25, 8)],
-      [W('bottle', 1, 1), W('greaser', 10, 0.9, 8), W('brute', 3, 3, 18)],
+      [W('brute', 4, 2.2), W('greaser', 12, 0.65, 3), W('kalamata', 24, 0.28, 8)],
+      [W('bottle', 1, 1), W('greaser', 8, 1.0, 8), W('brute', 2, 3, 18)],
     ],
   },
   {
