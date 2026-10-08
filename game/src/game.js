@@ -696,8 +696,9 @@ export class Game {
       } else {
         const pool = this.pools[e.type]; if (!pool) continue;
         if (def.roll) {
-          E.set(0, e.yaw, 0, 'YXZ'); Q.setFromEuler(E);
-          const q2 = new THREE.Quaternion().setFromAxisAngle(V.set(1, 0, 0), e.d / (e.h * 0.5));
+          // the ring's face looks along +Z, so its axle is local Z: turn it side-on to the road and spin about Z
+          E.set(0, e.yaw - Math.PI / 2, 0, 'YXZ'); Q.setFromEuler(E);
+          const q2 = new THREE.Quaternion().setFromAxisAngle(V.set(0, 0, 1), -e.d / (e.h * 0.5));
           Q.multiply(q2);
           S.setScalar(age);
           M.compose(V2.set(e.pos.x, e.pos.y, e.pos.z), Q, S);

@@ -109,7 +109,7 @@
     red: 0xd5473a, copper: 0xc8773e, steel: 0xbcc3c9, pick: 0xe8cfa0, frill: 0xe23a3a, sage: 0x86b8a8, cork: 0xb98a5a, ink: 0x1e1e1e };
   const timber = (c = C.wood, r = 0.6) => M(c, { r, name: 'timber' });
   // kitchenB: metalness 0.5 not 0.85: the game has no environment map, and at 0.85 steel rendered near-black (faucet looked black in the set render)
-  const metal = (c = C.steel, r = 0.3) => M(c, { r, m: 0.5, name: 'metal' });
+  const metal = (c = C.steel, r = 0.28) => M(c, { r, m: 0.55, name: 'metal' }); // kitchenC: env map now, metalness capped at 0.6
   // measure the vertex bounds of everything under root (instance-aware)
   function bounds(root = g) {
     const box = new THREE.Box3(), v = new THREE.Vector3(), m = new THREE.Matrix4(), im = new THREE.Matrix4();
@@ -140,3 +140,35 @@
   const enamel = (c = C.cream, r = 0.3) => M(c, { r });
   const glass = (t = 0.4) => M(0xd8eef0, { r: 0.05, t });
   function fitWHD(body, W, H, D) { const b = bounds(g); body.scale.set(body.scale.x * W / (b.max.x - b.min.x), body.scale.y * H / (b.max.y - b.min.y), body.scale.z * D / (b.max.z - b.min.z)); }
+  // ---- kitchenC additions ----
+  const brass = (r = 0.3) => M(0xc9a04a, { r, m: 0.55, name: 'metal' });
+  const linen = (c = 0xe9e2d0) => M(c, { r: 0.85, name: 'fabric' });
+  const stripe = () => M(0x3f6fae, { r: 0.85, name: 'fabric' });
+  const ceramic = (c = C.cream, r = 0.25) => M(c, { r });
+  const glassDS = (t = 0.4) => M(0xd8eef0, { r: 0.05, t, ds: true });
+  const liquid = (c, t = 0.85, r = 0.08) => M(c, { r, t });
+  const glow = (c = 0xffc46b, ei = 1.6) => M(c, { r: 0.6, e: c, ei });
+  // outer radius of a wall profile [[r,y],...] (y ascending) at height y
+  function rAt(pts, y) {
+    if (y <= pts[0][1]) return pts[0][0];
+    for (let i = 1; i < pts.length; i++) if (y <= pts[i][1]) { const a = pts[i - 1], b = pts[i], t = (y - a[1]) / Math.max(1e-6, b[1] - a[1]); return a[0] + (b[0] - a[0]) * t; }
+    return pts[pts.length - 1][0];
+  }
+  // a closed vessel profile, wound so every face points out of the solid (base centre -> out -> up -> rim -> down inside -> floor centre)
+  // wall: outer wall points [r,y] bottom to rim (y ascending, not including the centre); t wall thickness; floor floor top height
+  function vesselPts(wall, t, floor) {
+    const top = wall[wall.length - 1], out = [[0, wall[0][1]], ...wall, [top[0] - t * 0.5, top[1] + t * 0.35]];
+    const inner = wall.filter((p) => p[1] > floor + 1e-3).map((p) => [Math.max(0.001, p[0] - t), p[1]]).reverse();
+    inner[0] = [top[0] - t, top[1]];
+    return [...out, ...inner, [Math.max(0.001, rAt(wall, floor) - t), floor], [0, floor]];
+  }
+  function vessel(wall, t, floor, seg = 24) { return lathe(vesselPts(wall, t, floor), seg); }
+  // the liquid that fills a vessel from its floor up to level (a solid, wound outward, slightly inside the inner wall)
+  function fillPts(wall, t, floor, level, n = 6, gap = 0.012) {
+    const pts = [[0, floor + 0.004]];
+    for (let i = 0; i <= n; i++) { const y = floor + 0.004 + (level - floor - 0.004) * i / n; pts.push([Math.max(0.002, rAt(wall, y) - t - gap), y]); }
+    pts.push([0, level]); return pts;
+  }
+  function fill(wall, t, floor, level, seg = 24, n = 6) { return lathe(fillPts(wall, t, floor, level, n), seg); }
+  // a thin flat leaf/petal outline (shape space), length L, width W, pointed tip at +y
+  function leafShape(L, W) { const s = new THREE.Shape(); s.moveTo(0, 0); s.quadraticCurveTo(W, L * 0.35, 0, L); s.quadraticCurveTo(-W, L * 0.35, 0, 0); return s; }

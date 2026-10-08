@@ -1,0 +1,21 @@
+  // DIFFERENT READING, PRIMITIVES: a chamberstick: wide brass dish (cylinders + torus rim) with a ring finger loop, a short column of stacked cylinders and spheres, a stout candle, flame = stretched sphere + cone tip
+  const body = grp(g);
+  const b = brass();
+  add(new THREE.CylinderGeometry(1.0, 1.05, 0.14, 28), b, [0, 0.07, 0], body);
+  add(new THREE.TorusGeometry(1.0, 0.08, 8, 28), b, [0, 0.16, 0], body, [PI / 2, 0, 0]);
+  add(new THREE.TorusGeometry(0.32, 0.07, 8, 16), b, [1.18, 0.3, 0], body);
+  add(new THREE.CylinderGeometry(0.42, 0.5, 0.12, 20), b, [0, 0.2, 0], body);
+  add(new THREE.SphereGeometry(0.3, 16, 10), b, [0, 0.45, 0], body, null, [1, 0.75, 1]);
+  add(new THREE.CylinderGeometry(0.16, 0.2, 0.55, 14), b, [0, 0.8, 0], body);
+  add(new THREE.SphereGeometry(0.24, 16, 10), b, [0, 1.12, 0], body);
+  add(new THREE.CylinderGeometry(0.45, 0.28, 0.24, 20), b, [0, 1.38, 0], body);
+  add(new THREE.TorusGeometry(0.45, 0.05, 6, 20), b, [0, 1.5, 0], body, [PI / 2, 0, 0]);
+  const wax = M(0xf4ead0, { r: 0.55 });
+  add(new THREE.CylinderGeometry(0.34, 0.34, 1.35, 20), wax, [0, 2.15, 0], body);
+  add(new THREE.SphereGeometry(0.34, 20, 6, 0, TAU, 0, 0.5), wax, [0, 2.53, 0], body);
+  add(new THREE.CapsuleGeometry(0.065, 0.4, 3, 6), wax, [0.33, 2.55, 0.08], body);
+  add(new THREE.CylinderGeometry(0.02, 0.02, 0.1, 5), M(0x2a2420, { r: 0.8 }), [0, 2.9, 0], body);
+  add(new THREE.SphereGeometry(0.13, 12, 8), glow(0xffb347, 1.8), [0, 3.04, 0], body, null, [1, 1.2, 1]);
+  add(new THREE.ConeGeometry(0.12, 0.26, 12), glow(0xffb347, 1.8), [0, 3.24, 0], body);
+  add(new THREE.SphereGeometry(0.07, 10, 6), glow(0xfff2c0, 2.0), [0, 3.04, 0], body);
+  fitAll(body, 3.4);
