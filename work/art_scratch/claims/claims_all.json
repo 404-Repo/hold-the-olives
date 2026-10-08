@@ -1,0 +1,375 @@
+{
+ "size": [
+  390,
+  844
+ ],
+ "band": [
+  0.06,
+  0.86
+ ],
+ "claims": {
+  "C1_saturated_share": {
+   "dir": ">=",
+   "threshold": 0.3,
+   "what": "share of band pixels with HSV saturation >= 0.35 and value >= 0.25"
+  },
+  "C2_flat_share": {
+   "dir": "<=",
+   "threshold": 0.4,
+   "what": "share of band pixels in flat patches (7x7 luma std < 2.0 at 390 px)"
+  },
+  "C3_food_warmth": {
+   "dir": ">=",
+   "threshold": 0.13,
+   "what": "share of band pixels in saturated warm food hues (hue 0-60 deg, S >= 0.45, V >= 0.35)"
+  },
+  "C4_value_range": {
+   "dir": ">=",
+   "threshold": 178,
+   "what": "luma p98 minus p2 in the band (0..255): real highlights and real shadows"
+  },
+  "C5_median_luma": {
+   "dir": "<=",
+   "threshold": 155,
+   "what": "median luma in the band (0..255): the frame is not washed out pale"
+  }
+ },
+ "frames": {
+  "ref/concept/01_cutting_board.png": {
+   "C1_saturated_share": 0.848338081671415,
+   "C2_flat_share": 0.24021652421652423,
+   "C3_food_warmth": 0.6648471035137702,
+   "C4_value_range": 206.6861114501953,
+   "C5_median_luma": 112.17900085449219,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/concept/02_stovetop.png": {
+   "C1_saturated_share": 0.8091168091168092,
+   "C2_flat_share": 0.3049230769230769,
+   "C3_food_warmth": 0.40938651471984805,
+   "C4_value_range": 192.7526092529297,
+   "C5_median_luma": 111.46099853515625,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/concept/03_sink.png": {
+   "C1_saturated_share": 0.21883760683760684,
+   "C2_flat_share": 0.1283988603988604,
+   "C3_food_warmth": 0.14607407407407408,
+   "C4_value_range": 210.74966430664062,
+   "C5_median_luma": 134.33180236816406,
+   "pass": {
+    "C1_saturated_share": false,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/concept/04_sunday_lunch.png": {
+   "C1_saturated_share": 0.5019563152896486,
+   "C2_flat_share": 0.1350693257359924,
+   "C3_food_warmth": 0.32176258309591643,
+   "C4_value_range": 207.88259887695312,
+   "C5_median_luma": 147.44920349121094,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/concept/05_cocktail_hour.png": {
+   "C1_saturated_share": 0.7851813865147198,
+   "C2_flat_share": 0.10806457739791073,
+   "C3_food_warmth": 0.6265223171889839,
+   "C4_value_range": 183.9454803466797,
+   "C5_median_luma": 73.62439727783203,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/concept/06_boss_jar.png": {
+   "C1_saturated_share": 0.6227768281101614,
+   "C2_flat_share": 0.13548717948717948,
+   "C3_food_warmth": 0.43182146248812914,
+   "C4_value_range": 218.52239990234375,
+   "C5_median_luma": 137.1276092529297,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "floor/_frames/f1.png": {
+   "C1_saturated_share": 0.13294586894586893,
+   "C2_flat_share": 0.5424425451092117,
+   "C3_food_warmth": 0.09553276353276353,
+   "C4_value_range": 167.4462890625,
+   "C5_median_luma": 166.25160217285156,
+   "pass": {
+    "C1_saturated_share": false,
+    "C2_flat_share": false,
+    "C3_food_warmth": false,
+    "C4_value_range": false,
+    "C5_median_luma": false
+   }
+  },
+  "floor/_frames/f2.png": {
+   "C1_saturated_share": 0.1327445394112061,
+   "C2_flat_share": 0.5478366571699905,
+   "C3_food_warmth": 0.09553656220322887,
+   "C4_value_range": 167.51300048828125,
+   "C5_median_luma": 166.18861389160156,
+   "pass": {
+    "C1_saturated_share": false,
+    "C2_flat_share": false,
+    "C3_food_warmth": false,
+    "C4_value_range": false,
+    "C5_median_luma": false
+   }
+  },
+  "floor/_frames/f3.png": {
+   "C1_saturated_share": 0.1280607787274454,
+   "C2_flat_share": 0.5378043684710352,
+   "C3_food_warmth": 0.09089078822412155,
+   "C4_value_range": 169.87400817871094,
+   "C5_median_luma": 165.46420288085938,
+   "pass": {
+    "C1_saturated_share": false,
+    "C2_flat_share": false,
+    "C3_food_warmth": false,
+    "C4_value_range": false,
+    "C5_median_luma": false
+   }
+  },
+  "floor/_frames/f4.png": {
+   "C1_saturated_share": 0.12842545109211775,
+   "C2_flat_share": 0.5375156695156695,
+   "C3_food_warmth": 0.08985375118708452,
+   "C4_value_range": 169.87400817871094,
+   "C5_median_luma": 165.46420288085938,
+   "pass": {
+    "C1_saturated_share": false,
+    "C2_flat_share": false,
+    "C3_food_warmth": false,
+    "C4_value_range": false,
+    "C5_median_luma": false
+   }
+  },
+  "floor/_frames/f5.png": {
+   "C1_saturated_share": 0.1282165242165242,
+   "C2_flat_share": 0.542309591642925,
+   "C3_food_warmth": 0.09114529914529915,
+   "C4_value_range": 166.4407958984375,
+   "C5_median_luma": 164.68601989746094,
+   "pass": {
+    "C1_saturated_share": false,
+    "C2_flat_share": false,
+    "C3_food_warmth": false,
+    "C4_value_range": false,
+    "C5_median_luma": false
+   }
+  },
+  "floor/_frames/f6.png": {
+   "C1_saturated_share": 0.12910921177587845,
+   "C2_flat_share": 0.5400721747388414,
+   "C3_food_warmth": 0.08967521367521368,
+   "C4_value_range": 166.44598388671875,
+   "C5_median_luma": 164.53640747070312,
+   "pass": {
+    "C1_saturated_share": false,
+    "C2_flat_share": false,
+    "C3_food_warmth": false,
+    "C4_value_range": false,
+    "C5_median_luma": false
+   }
+  },
+  "ref/bar/moonpull_1.png": {
+   "C1_saturated_share": 0.5443988603988604,
+   "C2_flat_share": 0.0721747388414055,
+   "C3_food_warmth": 0.3061348528015195,
+   "C4_value_range": 147.3354949951172,
+   "C5_median_luma": 110.78839874267578,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": false,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/moonpull_2.png": {
+   "C1_saturated_share": 0.5908338081671415,
+   "C2_flat_share": 0.0552934472934473,
+   "C3_food_warmth": 0.4598480531813865,
+   "C4_value_range": 138.8133544921875,
+   "C5_median_luma": 125.23960876464844,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": false,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/moonpull_3.png": {
+   "C1_saturated_share": 0.5978727445394112,
+   "C2_flat_share": 0.2024653371320038,
+   "C3_food_warmth": 0.27252421652421654,
+   "C4_value_range": 125.45426177978516,
+   "C5_median_luma": 127.07440185546875,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": false,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/moonpull_4.png": {
+   "C1_saturated_share": 0.3670807217473884,
+   "C2_flat_share": 0.25979107312440647,
+   "C3_food_warmth": 0.1414207027540361,
+   "C4_value_range": 164.44261169433594,
+   "C5_median_luma": 128.38040161132812,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": false,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/podium_bellkeeper_1.png": {
+   "C1_saturated_share": 0.5924064577397911,
+   "C2_flat_share": 0.15753086419753087,
+   "C3_food_warmth": 0.41647483380816713,
+   "C4_value_range": 179.80369567871094,
+   "C5_median_luma": 87.8875961303711,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/podium_bellkeeper_2.png": {
+   "C1_saturated_share": 0.060258309591642925,
+   "C2_flat_share": 0.45885280151946817,
+   "C3_food_warmth": 0.011582146248812916,
+   "C4_value_range": 201.16700744628906,
+   "C5_median_luma": 93.9425048828125,
+   "pass": {
+    "C1_saturated_share": false,
+    "C2_flat_share": false,
+    "C3_food_warmth": false,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/podium_bellkeeper_3.png": {
+   "C1_saturated_share": 0.16818993352326686,
+   "C2_flat_share": 0.43400949667616334,
+   "C3_food_warmth": 0.11804748338081672,
+   "C4_value_range": 183.5301055908203,
+   "C5_median_luma": 107.44759368896484,
+   "pass": {
+    "C1_saturated_share": false,
+    "C2_flat_share": false,
+    "C3_food_warmth": false,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/podium_farseek_1.png": {
+   "C1_saturated_share": 0.36633998100664766,
+   "C2_flat_share": 0.1501272554605888,
+   "C3_food_warmth": 0.18805698005698004,
+   "C4_value_range": 188.6822052001953,
+   "C5_median_luma": 126.81200408935547,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/podium_farseek_2.png": {
+   "C1_saturated_share": 0.4148414055080722,
+   "C2_flat_share": 0.20101044634377968,
+   "C3_food_warmth": 0.23452231718898386,
+   "C4_value_range": 188.89064025878906,
+   "C5_median_luma": 130.0928192138672,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/podium_sundrift_1.png": {
+   "C1_saturated_share": 0.25289268755935423,
+   "C2_flat_share": 0.015426400759734093,
+   "C3_food_warmth": 0.11909591642924976,
+   "C4_value_range": 207.63182067871094,
+   "C5_median_luma": 70.39240264892578,
+   "pass": {
+    "C1_saturated_share": false,
+    "C2_flat_share": true,
+    "C3_food_warmth": false,
+    "C4_value_range": true,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/podium_sundrift_2.png": {
+   "C1_saturated_share": 0.3998746438746439,
+   "C2_flat_share": 0.036250712250712254,
+   "C3_food_warmth": 0.16580436847103514,
+   "C4_value_range": 173.45680236816406,
+   "C5_median_luma": 61.90800094604492,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": true,
+    "C4_value_range": false,
+    "C5_median_luma": true
+   }
+  },
+  "ref/bar/podium_sundrift_3.png": {
+   "C1_saturated_share": 0.3436999050332384,
+   "C2_flat_share": 0.06081671415004748,
+   "C3_food_warmth": 0.050070275403608734,
+   "C4_value_range": 146.3660125732422,
+   "C5_median_luma": 38.64099884033203,
+   "pass": {
+    "C1_saturated_share": true,
+    "C2_flat_share": true,
+    "C3_food_warmth": false,
+    "C4_value_range": false,
+    "C5_median_luma": true
+   }
+  }
+ }
+}

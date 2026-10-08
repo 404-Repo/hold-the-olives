@@ -1,1 +1,85 @@
-<!doctype html><title>HOLD THE OLIVES</title>wip
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#2a1d14">
+<title>Hold the Olives</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='34' rx='20' ry='24' fill='%238aa52e'/%3E%3Ccircle cx='25' cy='30' r='7' fill='white'/%3E%3Ccircle cx='39' cy='30' r='7' fill='white'/%3E%3Ccircle cx='26' cy='31' r='3.5' fill='%23161616'/%3E%3Ccircle cx='40' cy='31' r='3.5' fill='%23161616'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="look"><canvas id="c"></canvas></div>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+  <div id="topbar">
+    <div class="pill" id="h-crumbs"><span class="ico crumb"></span><b id="crumbs">0</b></div>
+    <div class="pill" id="h-bites"><span class="ico sand"></span><b id="bites">20</b></div>
+    <div class="pill" id="h-wave">WAVE <b id="wave">1</b>/<span id="waves">8</span></div>
+    <div class="pill" id="h-score"><b id="score">0</b></div>
+    <button id="b-pause" class="round" aria-label="pause">II</button>
+  </div>
+  <div id="banner"></div>
+  <div id="toast"></div>
+  <div id="bossbar" class="hidden"><div id="bossname">THE JAR</div><div class="bar"><i id="bossfill"></i></div></div>
+  <div id="bottombar">
+    <button id="b-gadget1" class="gadget"><span class="gi"></span><span class="gl">SWAT</span><i class="cd"></i></button>
+    <button id="b-gadget2" class="gadget hidden"><span class="gi"></span><span class="gl">FIRE</span><i class="cd"></i></button>
+    <button id="b-next" class="big">NEXT WAVE<small id="next-bonus"></small></button>
+    <button id="b-speed" class="round">1x</button>
+  </div>
+  <div id="hint"></div>
+</div>
+
+<!-- tower menus -->
+<div id="menu" class="hidden"><div id="menu-title"></div><div id="menu-items"></div><button id="menu-close" class="ghost">close</button></div>
+
+<!-- title -->
+<div id="title" class="screen">
+  <div id="title-art"></div>
+  <div class="title-inner">
+    <h1><span>HOLD</span><span class="the">THE</span><span>OLIVES</span></h1>
+    <p class="tag">The olives are out of the jar. Lunch is on the counter.</p>
+    <button id="startb" class="big">PLAY</button>
+    <p class="small" id="loadmsg">Loading the kitchen...</p>
+  </div>
+</div>
+
+<!-- stage select -->
+<div id="select" class="screen hidden">
+  <h2>THE HOUSE</h2>
+  <div id="stages"></div>
+  <p class="small" id="stars-total"></p>
+</div>
+
+<!-- pause -->
+<div id="pause" class="screen hidden dim">
+  <h2>PAUSED</h2>
+  <button id="b-resume" class="big">RESUME</button>
+  <button id="b-restart" class="ghost">restart stage</button>
+  <button id="b-quit" class="ghost">back to the house</button>
+  <button id="b-sound" class="ghost">sound: on</button>
+</div>
+
+<!-- end card -->
+<div id="end" class="screen hidden dim">
+  <h2 id="end-title">LUNCH IS SAVED</h2>
+  <div id="end-stars"></div>
+  <div id="end-stats"></div>
+  <div id="end-best"></div>
+  <button id="b-endnext" class="big">NEXT</button>
+  <button id="b-endretry" class="ghost">play again</button>
+  <button id="b-endhouse" class="ghost">the house</button>
+</div>
+
+<div id="fade"></div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

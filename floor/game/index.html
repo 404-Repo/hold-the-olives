@@ -106,10 +106,10 @@ const runnerMat = new THREE.MeshStandardMaterial({color:0xc0392b,roughness:0.9})
 const checkTex = canvasTex(64,64,(g)=>{g.fillStyle='#c94a3a';g.fillRect(0,0,64,64);g.fillStyle='#f3e9dc';g.fillRect(0,0,32,32);g.fillRect(32,32,32,32);},[1,1]);
 for(let i=0;i<pathPts.length-1;i++){
   const a=pathPts[i],b=pathPts[i+1];const len=a.distanceTo(b)+2.2;
-  const t=checkTex.clone();t.needsUpdate=true;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(len/1.1,2);
+  const t=checkTex.clone();t.needsUpdate=true;t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(2,len/1.1);
   const m=new THREE.Mesh(new THREE.PlaneGeometry(2.2,len), new THREE.MeshStandardMaterial({map:t,roughness:0.95}));
   m.rotation.x=-Math.PI/2; m.position.set((a.x+b.x)/2,0.01+i*0.002,(a.z+b.z)/2);
-  if(Math.abs(a.x-b.x)>0.1){m.rotation.z=Math.PI/2; t.repeat.set(len/1.1,2);}
+  if(Math.abs(a.x-b.x)>0.1){m.rotation.z=Math.PI/2;}
   m.receiveShadow=true; scene.add(m);
 }
 
@@ -122,7 +122,7 @@ for(const [c,h] of layers){
   const geo=isBread?new THREE.BoxGeometry(2.6,h,2.6):new THREE.BoxGeometry(2.75,h,2.75);
   const mesh=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:c,roughness:0.8}));
   mesh.position.y=y+h/2; mesh.rotation.y=(Math.random()-0.5)*0.15; mesh.castShadow=true; mesh.receiveShadow=true;
-  if(isBread){const crust=new THREE.Mesh(new THREE.BoxGeometry(2.66,h*0.9,2.66),new THREE.MeshStandardMaterial({color:0x9a5a24,roughness:0.9}));crust.scale.set(1,1,1);mesh.add(crust);crust.material.transparent=false;crust.scale.set(1.0,0.98,1.0);mesh.material.color.set(0xf2dcae);crust.position.y=0;crust.renderOrder=-1;crust.material.side=THREE.BackSide;}
+  if(isBread)mesh.material.color.set(0xd9a35f);
   sandwich.add(mesh); y+=h;
 }
 const pick=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,2.2,6),new THREE.MeshStandardMaterial({color:0xe8c27a}));
@@ -279,7 +279,7 @@ renderer.domElement.addEventListener('pointerdown',e=>{
 function fit(){
   const a=innerWidth/innerHeight;camera.aspect=a;
   if(a<1){camera.fov=50;camera.position.set(0,34,15);camera.lookAt(0,0,0.5);}
-  else{camera.fov=40;camera.position.set(0,22,24);camera.lookAt(0,0,-0.5);}
+  else{camera.fov=64;camera.position.set(0,34,9);camera.lookAt(0,0,2.2);}
   // ensure board width fits in portrait
   if(a<1){const need=24;const dist=camera.position.length();const hf=2*Math.atan(need/2/dist/a)*180/Math.PI;camera.fov=Math.max(50,Math.min(hf,75));}
   camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);
@@ -355,6 +355,7 @@ function loop(){
   window.__GAME__={pos:lead?[+lead.g.position.x.toFixed(2),+lead.g.position.z.toFixed(2)]:[lastTap[0],lastTap[1]],fps:+fps.toFixed(1),speed:lead?lead.spd:0,score:state.score,over:state.over,draws:renderer.info.render.calls,tris:renderer.info.render.triangles,wave:state.wave,hp:state.hp,cash:state.cash,towers:towers.length,olives:olives.length};
 }
 loop();
+window.__PADS__=()=>pads.map(p=>{const v=p.position.clone().project(camera);return [(v.x+1)/2*innerWidth,(1-v.y)/2*innerHeight,!!p.userData.tower];});
 window.__READY__=true;
 </script>
 </body>

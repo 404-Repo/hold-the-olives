@@ -1,0 +1,34 @@
+export const AVAILABLE = [
+];
+export const TEX = [
+  'butcher_block',
+  'cutting_board',
+  'marble',
+  'sage_tile',
+  'stove_enamel',
+  'table_linen',
+  'tile_floor',
+  'walnut',
+];
+export const AUDIO = [
+  'music_boss',
+  'music_boss_alt',
+  'music_menu',
+  'music_stage_a',
+  'music_stage_a_alt',
+  'music_stage_b',
+  'music_victory',
+  'sfx_cannon',
+  'sfx_chomp',
+  'sfx_collect',
+  'sfx_defeat',
+  'sfx_grinder',
+  'sfx_jar_lid',
+  'sfx_layer_plop',
+  'sfx_place',
+  'sfx_pop',
+  'sfx_splurt',
+  'sfx_thwip',
+  'sfx_toaster',
+  'sfx_wave_ding',
+];

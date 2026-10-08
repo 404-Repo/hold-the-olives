@@ -1,0 +1,1 @@
+{"utc": "2026-10-08T02:19:11Z", "game": "game6", "what": "sfx_slap", "kind": "audio", "api_id": "80849a63-5c15-4b4b-af04-ef0ecd3e47e6", "credits_max_hold": 43, "sfx_seconds": 0.5, "music_seconds": 1.0, "result_ids": {"music": "63c725c0-e8ec-40c0-b87e-485f4e85bb10", "sfx": "5e401f44-39ee-4e67-a54d-193ae1d92cdb"}, "ok": true, "music_bytes": 42884, "sfx_bytes": 8821, "secs": 12.1}
