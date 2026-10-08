@@ -1,4 +1,20 @@
 export const AVAILABLE = [
+  'club_sandwich',
+  'dinner_plate',
+  'flag_club',
+  'head_ballista',
+  'head_grater',
+  'head_mustard',
+  'head_pepper',
+  'head_pickle',
+  'head_toaster',
+  'layer_bacon',
+  'layer_bread',
+  'layer_cheese',
+  'layer_lettuce',
+  'layer_tomato',
+  'pad_coaster',
+  'spatula',
 ];
 export const TEX = [
   'butcher_block',

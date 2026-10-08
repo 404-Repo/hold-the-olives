@@ -10,6 +10,7 @@ const V = new THREE.Vector3(), V2 = new THREE.Vector3(), Q = new THREE.Quaternio
 const COL = new THREE.Color();
 const WHITE = new THREE.Color(1, 1, 1);
 const rand = (a, b) => a + Math.random() * (b - a);
+const TS = 1.2;   // tower stacks read bigger than life at the overview zoom
 
 export class Game {
   constructor(ctx) {
@@ -250,7 +251,7 @@ export class Game {
     this.crumbs -= w.cost;
     const t = { pad, weapon, layers: [], spent: w.cost, cd: 0.3, yaw: Math.PI, priority: 'first', club: false, group: new THREE.Group(), stack: [], head: null, recoil: 0, built: this.time, pulse: 0 };
     pad.tower = t; pad.ring.visible = false;
-    t.group.position.set(pad.x, pad.y + 0.09, pad.z);
+    t.group.position.set(pad.x, pad.y + 0.09, pad.z); t.group.scale.setScalar(TS);
     this.group.add(t.group);
     this.towers.push(t); this.maxTowers = Math.max(this.maxTowers, this.towers.length);
     this.layout(t, null);
@@ -280,7 +281,7 @@ export class Game {
     if (t.layers.length) put('layer_bread', dropped !== null);
     t.head = put(WEAPONS[t.weapon].head, false);
     t.headY = t.head.position.y;
-    t.height = y;
+    t.height = y * TS;
     if (t.club) {
       // a frilled pick through the stack, standing proud beside the weapon
       const f = this.parts.flag_club.clone();
@@ -734,7 +735,7 @@ export class Game {
       for (const o of t.group.children) if (o.userData.drop > 0) {
         o.userData.drop = Math.max(0, o.userData.drop - dt * 6);
         o.position.y = o.userData.baseY + o.userData.drop;
-        if (o.userData.drop === 0) { this.fx.burst(t.pad.x, o.position.y + 0.1, t.pad.z, 0xf3ddb0, 6, 1.5); }
+        if (o.userData.drop === 0) { this.fx.burst(t.pad.x, o.position.y * TS + 0.1, t.pad.z, 0xf3ddb0, 6, 1.5); }
       }
     }
     // projectiles face their flight

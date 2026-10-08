@@ -248,3 +248,5 @@ function frame() {
 })();
 
 window.__START__ = () => $('startb').click();
+// dev only: framing for screenshots and critic captures; gates drive the game with real input
+window.__DEV__ = { rig, get game() { return game; } };
