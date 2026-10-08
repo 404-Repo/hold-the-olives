@@ -10,7 +10,7 @@ const V = new THREE.Vector3(), V2 = new THREE.Vector3(), Q = new THREE.Quaternio
 const COL = new THREE.Color();
 const WHITE = new THREE.Color(1, 1, 1);
 const rand = (a, b) => a + Math.random() * (b - a);
-const TS = 1.2;   // tower stacks read bigger than life at the overview zoom
+const TS = 1.45;  // tower stacks read bigger than life at the overview zoom (critic round 1: towers too small)
 
 export class Game {
   constructor(ctx) {

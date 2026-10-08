@@ -8,8 +8,8 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 export class CounterCam {
   constructor(camera, dom) {
     this.cam = camera; this.dom = dom;
-    this.tx = 0; this.tz = -8; this.dist = 24; this.pitch = 1.08; this.yaw = 0;
-    this.g = { tx: 0, tz: -8, dist: 24, pitch: 1.08 };       // goals
+    this.tx = 0; this.tz = -8; this.dist = 24; this.pitch = 0.96; this.yaw = 0;
+    this.g = { tx: 0, tz: -8, dist: 24, pitch: 0.96 };       // goals
     this.bounds = [-6, -20, 6, 3];
     this.minD = 7; this.maxD = 40; this.fitD = 24;
     this.shakeT = 0; this.shakeA = 0;

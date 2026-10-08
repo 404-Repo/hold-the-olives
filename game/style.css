@@ -32,9 +32,9 @@ button { font-family: var(--f); border: 0; cursor: pointer; touch-action: manipu
 .round { pointer-events: auto; width: 42px; height: 42px; border-radius: 50%; background: rgba(42,29,20,.7); color: var(--cream); font-size: 15px; font-weight: 900; border: 2px solid rgba(255,244,220,.35); }
 #b-pause { flex: 0 0 auto; }
 
-#banner { position: absolute; top: 22%; left: 0; right: 0; text-align: center; font-size: 30px; font-weight: 900; letter-spacing: 1px; opacity: 0; transform: scale(.9); transition: opacity .25s, transform .25s; padding: 0 16px; }
-#banner.on { opacity: 1; transform: scale(1); }
-#banner small { display: block; font-size: 15px; font-weight: 700; margin-top: 4px; }
+#banner { position: absolute; top: calc(64px + var(--safe-t)); left: 50%; transform: translateX(-50%) scale(.9); max-width: min(92vw, 420px); text-align: center; font-size: 24px; font-weight: 900; letter-spacing: 1px; opacity: 0; transition: opacity .25s, transform .25s; padding: 8px 18px 9px; background: rgba(42,29,20,.92); border: 2px solid rgba(255,233,168,.55); border-radius: 18px; color: #ffe9a8; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+#banner.on { opacity: 1; transform: translateX(-50%) scale(1); }
+#banner small { display: block; font-size: 13px; font-weight: 700; margin-top: 3px; color: var(--cream); text-shadow: none; }
 #toast { position: absolute; top: calc(62px + var(--safe-t)); left: 0; right: 0; text-align: center; font-size: 16px; opacity: 0; transition: opacity .3s; }
 #toast.on { opacity: 1; }
 #hint { position: absolute; bottom: calc(96px + var(--safe-b)); left: 12px; right: 12px; text-align: center; font-size: 15px; color: var(--cream); text-shadow: 0 2px 0 var(--ink), 0 0 6px var(--ink); opacity: 0; transition: opacity .3s; }

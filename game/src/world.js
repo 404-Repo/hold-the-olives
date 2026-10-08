@@ -39,10 +39,10 @@ function surfMat(name, repeat, opts = {}) {
 
 // Light and colour for each time of day.
 export const LOOKS = {
-  morning:   { bg: 0xf3e2c4, sky: 0xfff2dc, gnd: 0xa77b52, hemi: 1.15, sun: 0xffd9a0, sunI: 3.4, sunDir: [-0.9, 1.25, -0.55], exp: 1.05, fog: 0xf0dcc0, window: 0xfff3d6 },
-  stove:     { bg: 0xf1dcc0, sky: 0xfff0d8, gnd: 0xa8805a, hemi: 1.1, sun: 0xffe0b0, sunI: 3.2, sunDir: [-0.8, 1.4, 0.2], exp: 1.05, fog: 0xeed9bd, window: 0xfff6e0 },
-  noon:      { bg: 0xeef0ea, sky: 0xffffff, gnd: 0x9a8a72, hemi: 1.25, sun: 0xfff3dc, sunI: 3.0, sunDir: [-0.4, 1.8, -0.3], exp: 1.0, fog: 0xe8ece6, window: 0xffffff },
-  afternoon: { bg: 0xf0d2a8, sky: 0xffe6c0, gnd: 0x8f6a4a, hemi: 1.05, sun: 0xffc887, sunI: 3.6, sunDir: [1.0, 1.05, -0.7], exp: 1.05, fog: 0xeac8a0, window: 0xffe2b0 },
+  morning:   { bg: 0x3a2a1e, sky: 0xffe8c8, gnd: 0x6b4a30, hemi: 0.62, sun: 0xffd090, sunI: 4.2, sunDir: [-0.9, 0.95, -0.45], exp: 0.92, fog: 0x3a2a1e, window: 0xfff3d6 },
+  stove:     { bg: 0x2e2620, sky: 0xffe6c4, gnd: 0x5a4030, hemi: 0.6, sun: 0xffd29a, sunI: 4.0, sunDir: [-0.8, 1.0, 0.3], exp: 0.95, fog: 0x2e2620, window: 0xfff6e0 },
+  noon:      { bg: 0x2c302e, sky: 0xf4f8ff, gnd: 0x5a5448, hemi: 0.62, sun: 0xfff0d8, sunI: 3.8, sunDir: [-0.6, 1.2, -0.5], exp: 0.92, fog: 0x2c302e, window: 0xffffff },
+  afternoon: { bg: 0x3a2618, sky: 0xffe0b0, gnd: 0x5a3a24, hemi: 0.55, sun: 0xffbf78, sunI: 4.4, sunDir: [1.0, 0.85, -0.6], exp: 0.92, fog: 0x3a2618, window: 0xffe2b0 },
   evening:   { bg: 0x2a1c22, sky: 0x8a6a90, gnd: 0x3a2418, hemi: 0.55, sun: 0xffb070, sunI: 1.3, sunDir: [0.8, 1.2, 0.6], exp: 1.15, fog: 0x2a1c22, window: 0x5a4a8a, lamps: true },
   night:     { bg: 0x0d1220, sky: 0x5a74b0, gnd: 0x1a1410, hemi: 0.22, sun: 0x9fb8ff, sunI: 0.9, sunDir: [1.0, 0.9, 0.9], exp: 1.1, fog: 0x0d1220, window: 0x1d2a4a, fridge: true },
 };
@@ -54,7 +54,7 @@ const DRESS = {
     ['bread_bin', -5.6, -22.8, 0.0, 2.2],
     ['knife_block', 4.8, -22.6, -0.4, 2.6],
     ['coffee_maker', 1.4, -23.2, 0.0, 3.4],
-    ['kettle', -6.2, -2.4, 0.6, 2.4],
+    ['kettle', -6.3, -19.5, 0.6, 2.4],
     ['toaster', -6.0, -15.8, 1.5708, 2.0],
     ['utensil_crock', -6.4, 0.6, 0.0, 2.6],
     ['herb_pot', -6.6, -12.4, 0.2, 1.8],
@@ -73,7 +73,7 @@ const DRESS = {
     ['stove_burner', 0.2, -16.4, 0, 0.3], ['stove_burner', 3.9, -8.4, 0.3, 0.3], ['stove_burner', -3.7, -3.2, 0.6, 0.3],
     ['frying_pan', -4.6, -19.6, 0.8, 0.6],
     ['saucepan', -1.2, -7.6, 0.2, 1.4],
-    ['kettle', 5.8, -2.0, -0.6, 2.4],
+    ['kettle', 6.6, -21.0, -0.6, 2.4],
     ['wooden_spoon', 2.4, -3.2, 1.2, 0.2],
     ['oven_mitt', 1.0, -19.6, 0.4, 0.3],
     ['salt_shaker', -6.2, -10.6, 0, 0.9], ['pepper_shaker', -6.2, -9.4, 0, 0.9],
@@ -213,6 +213,9 @@ export async function buildWorld(scene, stage, renderer) {
   const isTable = stage.id === 'lunch', isBar = stage.id === 'bar', isStove = stage.id === 'stove', isSink = stage.id === 'sink';
   const topName = isTable ? 'table_linen' : isBar ? 'walnut' : isStove ? 'stove_enamel' : isSink ? 'marble' : 'butcher_block';
   const top = new THREE.Mesh(new THREE.BoxGeometry(15, 0.5, 34), surfMat(topName, isTable ? 5 : 3, { roughness: isStove ? 0.35 : isSink ? 0.25 : 0.65 }));
+  // round 1 critic: bleached boards flatten everything, so every surface sits in the mid values
+  const tint = { stove_enamel: 0x5d6168, marble: 0x8c9a94, table_linen: 0xc9b89c, walnut: 0xffffff, butcher_block: 0xe0c4a0 }[topName];
+  if (tint && top.material.map) top.material.color.set(tint);
   top.position.set(-0.4, -0.25, -8.5); top.receiveShadow = true; root.add(top);
   const topMap = top.material.map; if (topMap) topMap.repeat.set(isTable ? 4 : 2.2, isTable ? 9 : 5);
   // the drop: cabinet fronts below the counter edge, the floor far below
